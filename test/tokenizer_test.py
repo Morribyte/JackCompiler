@@ -1,7 +1,7 @@
 """
 The test suite for the Jack tokenizer
 """
-
+from pathlib import Path
 import pytest
 
 from src.tokenizer import Tokenizer
@@ -11,7 +11,8 @@ def setup_resources():
     """
     Sets up the resources necessary for the tokenizer
     """
-    tokenizer = Tokenizer()
+    jack_file: Path = Path("F:\Programming\Hack and ASM Projects\JackCompiler\input\ArrayTest\Main.jack")
+    tokenizer = Tokenizer(jack_file)
     yield {
         "tokenizer": tokenizer,
     }
@@ -28,5 +29,5 @@ def test_open_file(setup_resources):
     """
     Test that we can open our file when an object is instantiated
     """
-    tokenizer2 = Tokenizer()
-    assert tokenizer2.open_file is not None
+    tokenizer = setup_resources["tokenizer"]
+    assert tokenizer.jack_file is not None
