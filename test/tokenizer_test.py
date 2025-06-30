@@ -30,4 +30,4 @@ def test_open_file(setup_resources):
     Test that we can open our file when an object is instantiated
     """
     tokenizer = setup_resources["tokenizer"]
-    assert tokenizer.jack_file is not None
+    assert tokenizer.open_file is not None
