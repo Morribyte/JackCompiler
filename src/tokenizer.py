@@ -8,3 +8,8 @@ class Tokenizer:
         self.jack_file = jack_file
         with open(self.jack_file, "r") as file:
             self.open_file = file.read()
+
+    def has_more_tokens(self):
+        """
+        Checks to see if there are more tokens.
+        """

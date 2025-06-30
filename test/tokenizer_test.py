@@ -38,6 +38,7 @@ def test_has_more_tokens(setup_resources):
     """
     Test that we're able to check that there's more tokens.
     """
-    tokenizer = setup_resources["tokenzier"]
+
+    tokenizer = setup_resources["tokenizer"]
     more_tokens: bool = tokenizer.has_more_tokens()
     assert more_tokens is True
