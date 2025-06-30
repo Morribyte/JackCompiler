@@ -17,12 +17,24 @@ class Tokenizer:
         """
         i: int = self.current_index
         while i < len(self.open_file):
-            ch: str = self.open_file[i]
-            if ch.isspace():
+            peek: str = self.open_file[i:i+2]
+            if self.open_file[i].isspace():
                 i += 1
                 continue
+            elif peek == '//':
+                i += 2
+                while i < len(self.open_file) and self.open_file[i] != '\n':
+                    i += 1
+                i += 1
+            elif peek == "/*":
+                i += 2
+                while i < len(self.open_file) - 1:
+                    if self.open_file[i] == "*" and self.open_file[i+1] == "/":
+                        i += 2
+                        break
+                    i += 1
             else:
-                print(ch)
+                print(self.open_file[i])
                 i += 1
                 # return True
         #return False

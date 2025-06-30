@@ -34,11 +34,41 @@ def test_open_file(setup_resources):
     assert tokenizer.open_file is not None
 
 
-def test_has_more_tokens(setup_resources):
+def test_has_more_tokens_space(setup_resources):
     """
-    Test that we're able to check that there's more tokens.
+    Test that we're able to check whitespaces in has_more_tokens
     """
     tokenizer = setup_resources["tokenizer"]
     tokenizer.open_file = "Here is some text"
+    more_tokens: bool = tokenizer.has_more_tokens()
+    assert more_tokens is True
+
+
+def test_has_more_tokens_inline_comments(setup_resources):
+    """
+    Test that we're able to check in line comments in has_more_tokens
+    """
+    tokenizer = setup_resources["tokenizer"]
+    tokenizer.open_file = "//Here is a comment And some more\nNon Comment"
+    more_tokens: bool = tokenizer.has_more_tokens()
+    assert more_tokens is True
+
+
+def test_has_more_tokens_blocked_comments(setup_resources):
+    """
+    Test that we're able to check blocked comments in has_more_tokens
+    """
+    tokenizer = setup_resources["tokenizer"]
+    tokenizer.open_file = "/* Here is a comment And some more */\n And some more text"
+    more_tokens: bool = tokenizer.has_more_tokens()
+    assert more_tokens is True
+
+
+def test_has_more_tokens_blocked_two_asterisk_comments(setup_resources):
+    """
+    Test that we're able to check blocked comments in has_more_tokens
+    """
+    tokenizer = setup_resources["tokenizer"]
+    tokenizer.open_file = "/** Here is a comment And some more */\n Non comment"
     more_tokens: bool = tokenizer.has_more_tokens()
     assert more_tokens is True
