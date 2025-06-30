@@ -4,5 +4,5 @@ Handles tokenizing the input
 """
 
 class Tokenizer:
-    def __init__(self):
-        pass
+    def __init__(self, jack_file):
+        self.jack_file = jack_file
