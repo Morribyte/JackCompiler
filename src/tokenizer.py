@@ -37,7 +37,7 @@ class Tokenizer:
             elif peek == "/*":
                 i += 2
                 while i < len(self.open_file) - 1:
-                    if self.open_file[i] == "*" and self.open_file[i+2] == "/":
+                    if self.open_file[i] == "*" and self.open_file[i+1] == "/":
                         i += 2
                         break
                     i += 1
@@ -53,6 +53,9 @@ class Tokenizer:
         The return should never be hit, so we pragma no cover it for the coverage tester.
         """
         self._skip_whitespace_and_comments()
+
+        if self.current_index >= len(self.open_file):
+            return None
 
         token = self.open_file[self.current_index]
 
@@ -153,12 +156,12 @@ class Tokenizer:
         raise ValueError("Current token is not an identifier")
 
 
-    def int_val(self) -> str:
+    def int_val(self) -> int:
         """
         Returns the current integerConstant
         """
         if self.current_token_type == "integerConstant":
-            return self.current_token_value
+            return int(self.current_token_value)
         raise ValueError("Current token is not an integerConstant")
 
 

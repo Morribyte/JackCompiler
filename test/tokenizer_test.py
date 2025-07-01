@@ -256,8 +256,9 @@ def test_int_val_return(setup_resources):
     tokenizer.open_file = "31435"
     int_val: str = tokenizer.advance()
     print(int_val)
-    current_token: str = tokenizer.int_val()
-    assert current_token == "31435"
+    current_token: int = tokenizer.int_val()
+    assert current_token == int("31435")
+
 
 
 def test_int_val_not_int_val(setup_resources):
@@ -277,11 +278,11 @@ def test_string_constant_return(setup_resources):
     Test that string_constant returns the proper string_constant.
     """
     tokenizer = setup_resources["tokenizer"]
-    tokenizer.open_file = "31435"
+    tokenizer.open_file = '"Babouche"'
     string_constant: str = tokenizer.advance()
     print(string_constant)
-    current_token: str = tokenizer.int_val()
-    assert current_token == "31435"
+    current_token: str = tokenizer.string_constant()
+    assert current_token == "Babouche"
 
 
 def test_string_constant_not_string_constant(setup_resources):
@@ -293,4 +294,4 @@ def test_string_constant_not_string_constant(setup_resources):
     not_a_string_constant: str = tokenizer.advance()
     print(not_a_string_constant)
     with pytest.raises(ValueError):
-        tokenizer.int_val()
+        tokenizer.string_constant()
