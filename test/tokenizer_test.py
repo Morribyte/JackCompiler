@@ -81,6 +81,8 @@ def test_advance_keyword(setup_resources):
     tokenizer = setup_resources["tokenizer"]
     tokenizer.open_file = "class Paddle {}"
     current_token = tokenizer.advance()
+    print(tokenizer.current_token_value)
+
     assert current_token == ("keyword", "class")
 
 @pytest.mark.parametrize("keyword_list", ["class", "constructor", "function", "method", "field", "static", "var", "int", "char", "boolean",
@@ -92,6 +94,8 @@ def test_all_keywords(setup_resources, keyword_list):
     tokenizer = setup_resources["tokenizer"]
     tokenizer.open_file = f"{keyword_list} Paddle"
     current_token = tokenizer.advance()
+    print(tokenizer.current_token_value)
+
     assert current_token == ("keyword" or "identifier", keyword_list)
 
 
@@ -102,6 +106,7 @@ def test_advance_current_token(setup_resources):
     tokenizer = setup_resources["tokenizer"]
     tokenizer.open_file = "{item}"
     current_token = tokenizer.advance()
+    print(tokenizer.current_token_value)
     assert current_token == ("symbol", "{")
 
 
@@ -110,6 +115,7 @@ def test_full_symbol_list(setup_resources, symbol_list):
     tokenizer = setup_resources["tokenizer"]
     tokenizer.open_file = f"{symbol_list}"
     current_token = tokenizer.advance()
+    print(tokenizer.current_token_value)
     assert current_token == ("symbol", f"{symbol_list}")
 
 

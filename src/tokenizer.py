@@ -62,7 +62,6 @@ class Tokenizer:
         if ch.isalpha() or ch == "_":
             start = self.current_index
             while self.current_index < len(self.open_file) and self.open_file[self.current_index].isalnum() or self.open_file[self.current_index] == "_":
-                print(self.open_file[self.current_index])
                 self.current_index += 1
             self.current_token_value = self.open_file[start:self.current_index]
             self.current_token_type = "keyword" if self.current_token_value in KEYWORD_LIST else "identifier"
