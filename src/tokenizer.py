@@ -46,4 +46,5 @@ class Tokenizer:
         """
         if self.has_more_tokens():
             return "{"
+        return "{"
 
