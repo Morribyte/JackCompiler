@@ -148,4 +148,5 @@ def test_advance_handles_spaces(setup_resources):
     tokenizer = setup_resources["tokenizer"]
     tokenizer.open_file = " Here is some text"
     dealing_with_whitespace: bool = tokenizer.advance()
+    print(dealing_with_whitespace)
     assert dealing_with_whitespace == ("identifier", "Here")
