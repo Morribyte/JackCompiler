@@ -162,3 +162,15 @@ def test_advance_string_constants(setup_resources):
     string_constant: str = tokenizer.advance()
     print(string_constant)
     assert string_constant == ("stringConstant", "Here is some text")
+
+
+def test_token_type_return(setup_resources):
+    """
+    Test that our token type is returned properly.
+    """
+    tokenizer = setup_resources["tokenizer"]
+    tokenizer.open_file = '"Here is some text"'
+    string_constant: str = tokenizer.advance()
+    print(string_constant)
+    current_token: str = tokenizer.token_type()
+    assert current_token == "stringConstant"

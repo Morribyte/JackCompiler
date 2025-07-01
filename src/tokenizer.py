@@ -117,3 +117,10 @@ class Tokenizer:
                     self.current_index += 1
             else:
                 break
+
+
+    def token_type(self) -> str:
+        """
+        Returns the current value of self.current_token_type
+        """
+        return self.current_token_type
