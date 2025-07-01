@@ -74,11 +74,32 @@ def test_has_more_tokens_blocked_two_asterisk_comments(setup_resources):
     assert more_tokens is True
 
 
+
+def test_advance_keyword(setup_resources):
+    """
+    Test that advance can parse a keyword.
+    """
+    tokenizer = setup_resources["tokenizer"]
+    tokenizer.open_file = "class Paddle {}"
+    current_token = tokenizer.advance()
+    assert current_token == ("keyword", "class")
+
+
 def test_advance_current_token(setup_resources):
     """
-    Test that we can advance a token.
+    Test that we can advance a token and it's a symbol.
     """
     tokenizer = setup_resources["tokenizer"]
     tokenizer.open_file = "{item}"
     current_token = tokenizer.advance()
     assert current_token == ("symbol", "{")
+
+
+@pytest.mark.parametrize("symbol_list", ["{", "}", "(", ")", "[", "]", ".", ",", ";", "+", "-", "*", "/", "&", "|", "<", ">", "=", "~"])
+def test_full_symbol_list(setup_resources, symbol_list):
+    tokenizer = setup_resources["tokenizer"]
+    tokenizer.open_file = f"{symbol_list}"
+    current_token = tokenizer.advance()
+    assert current_token == ("symbol", f"{symbol_list}")
+
+
