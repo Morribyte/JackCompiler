@@ -54,8 +54,8 @@ class Tokenizer:
         self._skip_whitespace_and_comments()
 
         ch = self.open_file[self.current_index]
-        # Symbols
 
+        # Symbols
         if ch in SYMBOL_LIST:
             self.current_index += 1
             self.current_token_type = "symbol"
@@ -79,6 +79,8 @@ class Tokenizer:
             self.current_token_value = self.open_file[start:self.current_index]
             self.current_token_type = "integerConstant"
             return self.current_token_type, self.current_token_value
+
+        # String constant
         return None  # pragma: no cover
 
     def _skip_whitespace_and_comments(self):

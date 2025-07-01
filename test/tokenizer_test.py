@@ -147,46 +147,18 @@ def test_advance_handles_spaces(setup_resources):
     """
     tokenizer = setup_resources["tokenizer"]
     tokenizer.open_file = " Here is some text"
-    dealing_with_whitespace: bool = tokenizer.advance()
+    dealing_with_whitespace = tokenizer.advance()
     print(dealing_with_whitespace)
     assert dealing_with_whitespace == ("identifier", "Here")
 
 
-def test_advance_space(setup_resources):
+def test_advance_string_constants(setup_resources):
     """
-    Test that we're able to check whitespaces in has_more_tokens
-    """
-    tokenizer = setup_resources["tokenizer"]
-    tokenizer.open_file = "Here is some text"
-    more_tokens: bool = tokenizer.advance()
-    assert True is True
-
-
-def test_advance_inline_comments(setup_resources):
-    """
-    Test that we're able to check in line comments in has_more_tokens
+    Test the tokenizer's ability to parse string constants.
+    They should be returned without any quotes.
     """
     tokenizer = setup_resources["tokenizer"]
-    tokenizer.open_file = "//Here is a comment And some more\nNon Comment"
-    more_tokens: bool = tokenizer.advance()
-    assert True is True
-
-
-def test_advance_blocked_comments(setup_resources):
-    """
-    Test that we're able to check blocked comments in has_more_tokens
-    """
-    tokenizer = setup_resources["tokenizer"]
-    tokenizer.open_file = "/* Here is a comment And some more */\n And some more text"
-    more_tokens: bool = tokenizer.advance()
-    assert True is True
-
-
-def test_advance_blocked_two_asterisk_comments(setup_resources):
-    """
-    Test that we're able to check blocked comments in has_more_tokens
-    """
-    tokenizer = setup_resources["tokenizer"]
-    tokenizer.open_file = "/** Here is a comment And some more */\n Non comment"
-    more_tokens: bool = tokenizer.advance()
-    assert True is True
+    tokenizer.open_file = '"Here is some text"'
+    string_constant: str = tokenizer.advance()
+    print(string_constant)
+    assert string_constant == ("stringConstant", "Here is some text")
