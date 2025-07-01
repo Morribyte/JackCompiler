@@ -50,6 +50,7 @@ class Tokenizer:
         After checking if we have more tokens, we advance and save the token.
         """
         ch = self.open_file[self.current_index]
+        self.has_more_tokens()
         # Symbols
 
         if ch in SYMBOL_LIST:
@@ -78,7 +79,34 @@ class Tokenizer:
 
         return None
 
+    def _skip_whitespace_and_comments(self):
+        """
+        Skips whitespace and comments for the tokenizer
+        """
 
-
-
-
+        def has_more_tokens(self) -> bool:
+            """
+            Checks to see if there are more tokens.
+            """
+            while self.current_index < len(self.open_file):
+                peek: str = self.open_file[self.current_index:self.current_index + 2]
+                if self.open_file[self.current_index].isspace():
+                    self.current_index += 1
+                    continue
+                elif peek == '//':
+                    self.current_index += 2
+                    while self.current_index < len(self.open_file) and self.open_file[self.current_index] != '\n':
+                        self.current_index += 1
+                    self.current_index += 1
+                elif peek == "/*":
+                    self.current_index += 2
+                    while self.current_index < len(self.open_file) - 1:
+                        if self.open_file[self.current_index] == "*" and self.open_file[self.current_index + 1] == "/":
+                            self.current_index += 2
+                            break
+                        self.current_index += 1
+                else:
+                    print(self.open_file[self.current_index])
+                    self.current_index += 1
+                    return True
+            return False

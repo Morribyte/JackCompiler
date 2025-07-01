@@ -140,3 +140,12 @@ def test_advance_integer_constant(setup_resources):
     print(tokenizer.current_token_value)
     assert current_token == ("integerConstant", "38512")
 
+
+def test_advance_handles_spaces(setup_resources):
+    """
+    Test that we're able to check whitespaces in has_more_tokens
+    """
+    tokenizer = setup_resources["tokenizer"]
+    tokenizer.open_file = " Here is some text"
+    dealing_with_whitespace: bool = tokenizer.advance()
+    assert dealing_with_whitespace == ("identifier", "Here")
