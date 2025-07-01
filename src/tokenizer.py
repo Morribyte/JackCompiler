@@ -2,7 +2,9 @@
 src/tokenizer.py
 Handles tokenizing the input
 """
-KEYWORD_LIST: list = ["class"]
+KEYWORD_LIST: list = ["class", "constructor", "function", "method", "field", "static", "var", "int", "char", "boolean",
+                      "void", "true", "false", "null", "this", "let", "do", "if", "else", "while", "return"]
+
 SYMBOL_LIST: list = ["{", "}", "(", ")", "[", "]", ".", ",", ";", "+", "-", "*", "/", "&", "|", "<", ">", "=", "~"]
 
 class Tokenizer:

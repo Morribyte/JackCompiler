@@ -74,7 +74,6 @@ def test_has_more_tokens_blocked_two_asterisk_comments(setup_resources):
     assert more_tokens is True
 
 
-
 def test_advance_keyword(setup_resources):
     """
     Test that advance can parse a keyword.
@@ -83,6 +82,17 @@ def test_advance_keyword(setup_resources):
     tokenizer.open_file = "class Paddle {}"
     current_token = tokenizer.advance()
     assert current_token == ("keyword", "class")
+
+@pytest.mark.parametrize("keyword_list", ["class", "constructor", "function", "method", "field", "static", "var", "int", "char", "boolean",
+                      "void", "true", "false", "null", "this", "let", "do", "if", "else", "while", "return"])
+def test_all_keywords(setup_resources, keyword_list):
+    """
+    Test that advance can read all keywords
+    """
+    tokenizer = setup_resources["tokenizer"]
+    tokenizer.open_file = f"{keyword_list} Paddle"
+    current_token = tokenizer.advance()
+    assert current_token == ("keyword" or "identifier", keyword_list)
 
 
 def test_advance_current_token(setup_resources):
