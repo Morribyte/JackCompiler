@@ -10,6 +10,7 @@ class Tokenizer:
             self.open_file = file.read()
 
         self.current_index = 0
+        self.current_token = ""
 
     def has_more_tokens(self) -> bool:
         """

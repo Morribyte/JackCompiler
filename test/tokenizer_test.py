@@ -72,3 +72,12 @@ def test_has_more_tokens_blocked_two_asterisk_comments(setup_resources):
     tokenizer.open_file = "/** Here is a comment And some more */\n Non comment"
     more_tokens: bool = tokenizer.has_more_tokens()
     assert more_tokens is True
+
+
+def test_advance_current_token(setup_resources):
+    """
+    Test that we can advance a token.
+    """
+    tokenizer = setup_resources["tokenizer"]
+    current_token = tokenizer.advance()
+    assert current_token == "{"
