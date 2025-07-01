@@ -161,3 +161,11 @@ class Tokenizer:
             return self.current_token_value
         raise ValueError("Current token is not an integerConstant")
 
+
+    def string_constant(self) -> str:
+        """
+        Returns the current stringConstant
+        """
+        if self.current_token_type == "stringConstant":
+            return self.current_token_value
+        raise ValueError("Current token is not a stringConstant")
