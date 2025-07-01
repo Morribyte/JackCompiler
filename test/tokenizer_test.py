@@ -174,3 +174,64 @@ def test_token_type_return(setup_resources):
     print(string_constant)
     current_token: str = tokenizer.token_type()
     assert current_token == "stringConstant"
+
+
+def test_keyword_return(setup_resources):
+    """
+    Test that keyword returns the proper keyword.
+    """
+    tokenizer = setup_resources["tokenizer"]
+    tokenizer.open_file = "class Paddle"
+    string_constant: str = tokenizer.advance()
+    print(string_constant)
+    current_token: str = tokenizer.keyword()
+    assert current_token == "class"
+
+
+def test_keyword_not_a_keyword(setup_resources):
+    """
+    Test that keyword errors when not using the proper keyword
+    """
+    tokenizer = setup_resources["tokenizer"]
+    tokenizer.open_file = "34182"
+    not_a_string_constant: str = tokenizer.advance()
+    print(not_a_string_constant)
+    with pytest.raises(ValueError):
+        current_token: str = tokenizer.keyword()
+
+
+def test_symbol_return(setup_resources):
+    """
+    Test that symbol returns the proper symbol.
+    """
+    tokenizer = setup_resources["tokenizer"]
+    tokenizer.open_file = "{an item}"
+    string_constant: str = tokenizer.advance()
+    print(string_constant)
+    current_token: str = tokenizer.symbol()
+    assert current_token == "{"
+
+
+def test_symbol_not_a_symbol(setup_resources):
+    """
+    Test that symbol errors when not using the proper symbol
+    """
+    tokenizer = setup_resources["tokenizer"]
+    tokenizer.open_file = "34182"
+    not_a_string_constant: str = tokenizer.advance()
+    print(not_a_string_constant)
+    with pytest.raises(ValueError):
+        print()
+        current_token: str = tokenizer.symbol()
+
+
+def test_identifier_return(setup_resources):
+    """
+    Test that identifier returns the proper identifier.
+    """
+    tokenizer = setup_resources["tokenizer"]
+    tokenizer.open_file = "Paddle "
+    string_constant: str = tokenizer.advance()
+    print(string_constant)
+    current_token: str = tokenizer.identifier()
+    assert current_token == "Paddle"

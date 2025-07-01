@@ -124,3 +124,30 @@ class Tokenizer:
         Returns the current value of self.current_token_type
         """
         return self.current_token_type
+
+
+    def keyword(self) -> str:
+        """
+        Returns the current keyword.
+        """
+        if self.current_token_type == "keyword":
+            return self.current_token_value
+        raise ValueError("Current token is not a keyword")
+
+
+    def symbol(self) -> str:
+        """
+        Returns the current symbol.
+        """
+        if self.current_token_type == "symbol":
+            return self.current_token_value
+        raise ValueError("Current token is not a symbol")
+
+
+    def identifier(self) -> str:
+        """
+        Returns the current identifier
+        """
+        if self.current_token_type == "identifier":
+            return self.current_token_value
+        raise ValueError("Current token is not an identifier")
