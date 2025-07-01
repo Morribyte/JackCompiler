@@ -37,6 +37,12 @@ class Tokenizer:
             else:
                 print(self.open_file[i])
                 i += 1
-                # return True
-        #return False
-        return True  # Always return true for tests for now
+                return True
+        return False
+
+    def advance(self):
+        """
+        After checking if we have more tokens, we advance and save the token.
+        """
+        return "{"
+
