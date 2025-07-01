@@ -99,6 +99,17 @@ def test_all_keywords(setup_resources, keyword_list):
     assert current_token == ("keyword" or "identifier", keyword_list)
 
 
+def test_advance_identifier(setup_resources):
+    """
+    Test that when we get an identifier, it works and returns it properly
+    """
+    tokenizer = setup_resources["tokenizer"]
+    tokenizer.open_file = "Paddle\n"
+    current_token = tokenizer.advance()
+    print(tokenizer.current_token_value)
+    assert current_token == ("identifier", "Paddle")
+
+
 def test_advance_current_token(setup_resources):
     """
     Test that we can advance a token and it's a symbol.
@@ -118,4 +129,14 @@ def test_full_symbol_list(setup_resources, symbol_list):
     print(tokenizer.current_token_value)
     assert current_token == ("symbol", f"{symbol_list}")
 
+
+def test_advance_integer_constant(setup_resources):
+    """
+    Test that the tokenizer can detect integer constants.
+    """
+    tokenizer = setup_resources["tokenizer"]
+    tokenizer.open_file = "38512"
+    current_token = tokenizer.advance()
+    print(tokenizer.current_token_value)
+    assert current_token == ("integerConstant", "38512")
 

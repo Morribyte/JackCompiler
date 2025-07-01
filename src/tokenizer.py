@@ -67,6 +67,15 @@ class Tokenizer:
             self.current_token_type = "keyword" if self.current_token_value in KEYWORD_LIST else "identifier"
             return self.current_token_type, self.current_token_value
 
+        # Ints / digits
+        if ch.isdigit():
+            start = self.current_index
+            while self.current_index < len(self.open_file) and self.open_file[self.current_index].isdigit():
+                self.current_index += 1
+            self.current_token_value = self.open_file[start:self.current_index]
+            self.current_token_type = "integerConstant"
+            return self.current_token_type, self.current_token_value
+
         return None
 
 
