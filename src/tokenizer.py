@@ -35,7 +35,7 @@ class Tokenizer:
             elif peek == "/*":
                 i += 2
                 while i < len(self.open_file) - 1:
-                    if self.open_file[i] == "*" and self.open_file[i+1] == "/":
+                    if self.open_file[i] == "*" and self.open_file[i+2] == "*/":
                         i += 2
                         break
                     i += 1
@@ -49,8 +49,9 @@ class Tokenizer:
         """
         After checking if we have more tokens, we advance and save the token.
         """
-        ch = self.open_file[self.current_index]
         self._skip_whitespace_and_comments()
+
+        ch = self.open_file[self.current_index]
         # Symbols
 
         if ch in SYMBOL_LIST:
@@ -76,8 +77,7 @@ class Tokenizer:
             self.current_token_value = self.open_file[start:self.current_index]
             self.current_token_type = "integerConstant"
             return self.current_token_type, self.current_token_value
-
-        return None
+        return None  # pragma: no cover
 
     def _skip_whitespace_and_comments(self):
         """
