@@ -81,6 +81,16 @@ class Tokenizer:
             return self.current_token_type, self.current_token_value
 
         # String constant
+        if ch == '"':
+            self.current_index += 1
+            start = self.current_index
+            while self.current_index < len(self.open_file) and self.open_file[self.current_index] != '"':
+                self.current_index += 1
+            self.current_token_value = self.open_file[start:self.current_index]
+            self.current_token_type = "stringConstant"
+            self.current_index += 1
+            return self.current_token_type, self.current_token_value
+
         return None  # pragma: no cover
 
     def _skip_whitespace_and_comments(self):
