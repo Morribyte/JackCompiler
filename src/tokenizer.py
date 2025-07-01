@@ -69,7 +69,8 @@ class Tokenizer:
         # Keywords and Identifiers
         if token.isalpha() or token == "_":
             start = self.current_index
-            while self.current_index < len(self.open_file) and self.open_file[self.current_index].isalnum() or self.open_file[self.current_index] == "_":
+            # noinspection PyRedundantParentheses
+            while (self.current_index < len(self.open_file) and (self.open_file[self.current_index].isalnum() or self.open_file[self.current_index] == "_")):
                 self.current_index += 1
             self.current_token_value = self.open_file[start:self.current_index]
             self.current_token_type = "keyword" if self.current_token_value in KEYWORD_LIST else "identifier"
