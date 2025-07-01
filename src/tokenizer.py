@@ -49,7 +49,7 @@ class Tokenizer:
 
     def advance(self):
         """
-        After checking if we have more tokens, we advance and save the token.
+        After checking if we have more tokens, we advance and save the ch.
         The return should never be hit, so we pragma no cover it for the coverage tester.
         """
         self._skip_whitespace_and_comments()
@@ -57,17 +57,17 @@ class Tokenizer:
         if self.current_index >= len(self.open_file):
             return None
 
-        token = self.open_file[self.current_index]
+        ch = self.open_file[self.current_index]
 
         # Symbols
-        if token in SYMBOL_LIST:
+        if ch in SYMBOL_LIST:
             self.current_index += 1
             self.current_token_type = "symbol"
-            self.current_token_value = token
+            self.current_token_value = ch
             return self.current_token_type, self.current_token_value
 
         # Keywords and Identifiers
-        if token.isalpha() or token == "_":
+        if ch.isalpha() or ch == "_":
             start = self.current_index
             # noinspection PyRedundantParentheses
             while (self.current_index < len(self.open_file) and (self.open_file[self.current_index].isalnum() or self.open_file[self.current_index] == "_")):
@@ -77,7 +77,7 @@ class Tokenizer:
             return self.current_token_type, self.current_token_value
 
         # Ints / digits
-        if token.isdigit():
+        if ch.isdigit():
             start = self.current_index
             while self.current_index < len(self.open_file) and self.open_file[self.current_index].isdigit():
                 self.current_index += 1
@@ -86,7 +86,7 @@ class Tokenizer:
             return self.current_token_type, self.current_token_value
 
         # String constant
-        if token == '"':
+        if ch == '"':
             self.current_index += 1
             start = self.current_index
             while self.current_index < len(self.open_file) and self.open_file[self.current_index] != '"':
