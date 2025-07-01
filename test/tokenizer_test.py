@@ -197,7 +197,7 @@ def test_keyword_not_a_keyword(setup_resources):
     not_a_string_constant: str = tokenizer.advance()
     print(not_a_string_constant)
     with pytest.raises(ValueError):
-        current_token: str = tokenizer.keyword()
+        tokenizer.keyword()
 
 
 def test_symbol_return(setup_resources):
@@ -218,11 +218,10 @@ def test_symbol_not_a_symbol(setup_resources):
     """
     tokenizer = setup_resources["tokenizer"]
     tokenizer.open_file = "34182"
-    not_a_string_constant: str = tokenizer.advance()
-    print(not_a_string_constant)
+    not_a_symbol: str = tokenizer.advance()
+    print(not_a_symbol)
     with pytest.raises(ValueError):
-        print()
-        current_token: str = tokenizer.symbol()
+        tokenizer.symbol()
 
 
 def test_identifier_return(setup_resources):
@@ -231,7 +230,43 @@ def test_identifier_return(setup_resources):
     """
     tokenizer = setup_resources["tokenizer"]
     tokenizer.open_file = "Paddle "
-    string_constant: str = tokenizer.advance()
-    print(string_constant)
+    identifier: str = tokenizer.advance()
+    print(identifier)
     current_token: str = tokenizer.identifier()
     assert current_token == "Paddle"
+
+
+def test_identifier_not_a_identifier(setup_resources):
+    """
+    Test that identifier errors when not using the proper identifier
+    """
+    tokenizer = setup_resources["tokenizer"]
+    tokenizer.open_file = "34182"
+    not_an_identifier: str = tokenizer.advance()
+    print(not_an_identifier)
+    with pytest.raises(ValueError):
+        tokenizer.identifier()
+
+
+def test_int_val_return(setup_resources):
+    """
+    Test that int_val returns the proper int_val.
+    """
+    tokenizer = setup_resources["tokenizer"]
+    tokenizer.open_file = "31435"
+    int_val: str = tokenizer.advance()
+    print(int_val)
+    current_token: str = tokenizer.int_val()
+    assert current_token == "31435"
+
+
+def test_int_val_not_int_val(setup_resources):
+    """
+    Test that int_val errors when not using the proper int_val
+    """
+    tokenizer = setup_resources["tokenizer"]
+    tokenizer.open_file = "babouche "
+    not_an_int_val: str = tokenizer.advance()
+    print(not_an_int_val)
+    with pytest.raises(ValueError):
+        tokenizer.int_val()

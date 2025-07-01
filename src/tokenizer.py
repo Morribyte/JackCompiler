@@ -151,3 +151,13 @@ class Tokenizer:
         if self.current_token_type == "identifier":
             return self.current_token_value
         raise ValueError("Current token is not an identifier")
+
+
+    def int_val(self) -> str:
+        """
+        Returns the current integerConstant
+        """
+        if self.current_token_type == "integerConstant":
+            return self.current_token_value
+        raise ValueError("Current token is not an integerConstant")
+
