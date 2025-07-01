@@ -10,7 +10,8 @@ class Tokenizer:
             self.open_file = file.read()
 
         self.current_index = 0
-        self.current_token = ""
+        self.current_token_type = ""
+        self.current_token_value = ""
 
     def has_more_tokens(self) -> bool:
         """
@@ -44,7 +45,5 @@ class Tokenizer:
         """
         After checking if we have more tokens, we advance and save the token.
         """
-        if self.has_more_tokens():
-            return "{"
-        return "{"
+
 
