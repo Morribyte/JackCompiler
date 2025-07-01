@@ -79,5 +79,6 @@ def test_advance_current_token(setup_resources):
     Test that we can advance a token.
     """
     tokenizer = setup_resources["tokenizer"]
+    tokenizer.open_file = "{item}"
     current_token = tokenizer.advance()
-    assert current_token == "{"
+    assert current_token == ("symbol", "{")

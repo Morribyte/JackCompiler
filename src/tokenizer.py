@@ -3,6 +3,8 @@ src/tokenizer.py
 Handles tokenizing the input
 """
 
+SYMBOL_LIST: list = ["{"]
+
 class Tokenizer:
     def __init__(self, jack_file):
         self.jack_file = jack_file
@@ -45,5 +47,12 @@ class Tokenizer:
         """
         After checking if we have more tokens, we advance and save the token.
         """
+        ch = self.open_file[self.current_index]
+
+        if ch in SYMBOL_LIST:
+            self.current_index += 1
+            return "symbol", ch
+        return None
+
 
 
