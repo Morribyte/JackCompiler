@@ -44,5 +44,6 @@ class Tokenizer:
         """
         After checking if we have more tokens, we advance and save the token.
         """
-        return "{"
+        if self.has_more_tokens():
+            return "{"
 
