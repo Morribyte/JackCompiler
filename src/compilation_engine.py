@@ -12,4 +12,4 @@ class CompilationEngine:
     Represents a compilation engine object.
     """
     def __init__(self, tokenizer: Tokenizer):
-        pass
+        self.tokenizer = tokenizer
