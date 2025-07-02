@@ -48,3 +48,4 @@ def test_compile_class(setup_resources):
     print(compilation.tokenizer.open_file)
     value = compilation.compile_class()
     assert value is True
+

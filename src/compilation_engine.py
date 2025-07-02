@@ -23,7 +23,7 @@ class CompilationEngine:
         """
         while self.tokenizer.has_more_tokens():
             self.tokenizer.advance()
-            element_tree.SubElement(self.root, self.tokenizer.token_type()).text = self.tokenizer.current_token_value
+            element_tree.SubElement(self.root, self.tokenizer.token_type()).text = f" {self.tokenizer.current_token_value} "
         tree = element_tree.ElementTree(self.root)
         tree.write("output.xml", encoding="utf-8", xml_declaration=True)
 
