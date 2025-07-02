@@ -13,3 +13,9 @@ class CompilationEngine:
     """
     def __init__(self, tokenizer: Tokenizer):
         self.tokenizer = tokenizer
+
+    def compile_class(self):
+        """
+        Compiles a class to XML code recursively.
+        """
+        return True

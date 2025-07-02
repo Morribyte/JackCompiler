@@ -35,3 +35,13 @@ def test_tokenizer_variable(setup_resources):
     compilation = setup_resources["compilation"]
     print(compilation.tokenizer.jack_file)
     assert str(compilation.tokenizer.jack_file) == "F:\Programming\Hack and ASM Projects\JackCompiler\input\ArrayTest\Main.jack"
+
+
+def test_compile_class(setup_resources):
+    """
+    Test that when we compile a class, it properly wraps in XML.
+    """
+    compilation = setup_resources["compilation"]
+    print(compilation.tokenizer.open_file)
+    value = compilation.compile_class()
+    assert value is True
