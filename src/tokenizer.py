@@ -42,7 +42,6 @@ class Tokenizer:
                         break
                     i += 1
             else:
-                print(self.open_file[i])
                 i += 1
                 return True
         return False  # pragma: no cover

@@ -295,3 +295,50 @@ def test_string_constant_not_string_constant(setup_resources):
     print(not_a_string_constant)
     with pytest.raises(ValueError):
         tokenizer.string_constant()
+
+
+def test_multiple_tokens(setup_resources):
+    """
+    Test that running multiple advances lets us parse multiple tokens
+    """
+    tokenizer = setup_resources["tokenizer"]
+    tokenizer.open_file = "class Paddle {\nfield int x_position\nmethod int getValue() {\n var int Value = 30;\n}\n}"
+    tokenizer.current_index = 0
+
+    tokens = []
+    while tokenizer.has_more_tokens():
+        tokenizer.advance()
+
+        print(f"Current Token: {tokenizer.current_token_value} | {tokenizer.current_token_type}")
+
+        tokens.append((tokenizer.token_type(), tokenizer.current_token_value))
+
+    expected = [
+    ("keyword", "class"),
+    ("identifier", "Paddle"),
+    ("symbol", "{"),
+    ("keyword", "field"),
+    ("keyword", "int"),
+    ("identifier", "x_position"),
+    ("keyword", "method"),
+    ("keyword", "int"),
+    ("identifier", "getValue"),
+    ("symbol", "("),
+    ("symbol", ")"),
+    ("symbol", "{"),
+    ("keyword", "var"),
+    ("keyword", "int"),
+    ("identifier", "Value"),
+    ("symbol", "="),
+    ("integerConstant", "30"),
+    ("symbol", ";"),
+    ("symbol", "}"),
+    ("symbol", "}")
+]
+
+    print(tokens)
+    assert tokens == expected
+
+
+
+
