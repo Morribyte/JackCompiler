@@ -3,6 +3,8 @@ Testing document for the compilation engine
 """
 from pathlib import Path
 import pytest
+import xml.dom.minidom
+
 
 from src.compilation_engine import CompilationEngine
 from src.tokenizer import Tokenizer
@@ -18,7 +20,6 @@ def setup_resources():
     yield {
         "compilation": compilation,
     }
-
 
 def test_object_creation(setup_resources):
     """
@@ -42,6 +43,8 @@ def test_compile_class(setup_resources):
     Test that when we compile a class, it properly wraps in XML.
     """
     compilation = setup_resources["compilation"]
+    compilation.tokenizer.current_token_type = "keyword"
+    compilation.tokenizer.current_token_value = "class"
     print(compilation.tokenizer.open_file)
     value = compilation.compile_class()
     assert value is True
