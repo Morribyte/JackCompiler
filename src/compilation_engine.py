@@ -29,6 +29,18 @@ class CompilationEngine:
                 print(f"Token found: {self.tokenizer.current_token_type} | {self.tokenizer.current_token_value}")
                 self.write_token()
 
+                if self.tokenizer.current_token_value == "static" or "field":
+                    self.compile_var_dec(self.root)
+
+    def compile_var_dec(self, parent):
+        """
+        Compiles a class's variable declaration.
+        """
+        class_var_dec_element = element_tree.SubElement(parent, "classVarDec")
+        print(f"Found variable declaration: {self.tokenizer.current_token_value}")
+        if not self.tokenizer.current_token_value == ";":
+            print(self.tokenizer.current_token_value)
+
     def write_token(self):
         """
         Writes a token to the XML.
@@ -42,9 +54,8 @@ class CompilationEngine:
         while self.tokenizer.has_more_tokens():
             self.tokenizer.advance()
             element_tree.SubElement(self.tokens_root, self.tokenizer.token_type()).text = f" {self.tokenizer.current_token_value} "
-            print(f"{repr(self.tokenizer.current_token_value)}")
 
-        tree = element_tree.ElementTree(self.root)
+        tree = element_tree.ElementTree(self.tokens_root)
         tree.write("output.xml", encoding="utf-8", xml_declaration=True)
 
         with open("output.xml", "r", encoding="utf-8") as f:

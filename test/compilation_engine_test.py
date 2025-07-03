@@ -75,7 +75,6 @@ class TestCompile:
 
         assert "Token found: " in captured.out
 
-
     def test_write_token(self, setup_resources, capsys):
         """
         Test that the write_token helper method properly writes to the XML file.
@@ -84,7 +83,6 @@ class TestCompile:
         compilation.tokenizer.current_token_type = "legume"
         compilation.tokenizer.current_token_value = "Main"
         compilation.compile_class()
-
 
     def test_compile_var_dec(self, setup_resources):
         """

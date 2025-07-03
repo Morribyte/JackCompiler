@@ -1,127 +1,251 @@
 <?xml version="1.0" ?>
 <class>
   <keyword>class</keyword>
+  <classVarDec/>
   <identifier>Main</identifier>
+  <classVarDec/>
   <symbol>{</symbol>
+  <classVarDec/>
   <keyword>static</keyword>
+  <classVarDec/>
   <keyword>boolean</keyword>
+  <classVarDec/>
   <identifier>test</identifier>
+  <classVarDec/>
   <symbol>;</symbol>
+  <classVarDec/>
   <keyword>function</keyword>
+  <classVarDec/>
   <keyword>void</keyword>
+  <classVarDec/>
   <identifier>main</identifier>
+  <classVarDec/>
   <symbol>(</symbol>
+  <classVarDec/>
   <symbol>)</symbol>
+  <classVarDec/>
   <symbol>{</symbol>
+  <classVarDec/>
   <keyword>var</keyword>
+  <classVarDec/>
   <identifier>SquareGame</identifier>
+  <classVarDec/>
   <identifier>game</identifier>
+  <classVarDec/>
   <symbol>;</symbol>
+  <classVarDec/>
   <keyword>let</keyword>
+  <classVarDec/>
   <identifier>game</identifier>
+  <classVarDec/>
   <symbol>=</symbol>
+  <classVarDec/>
   <identifier>SquareGame</identifier>
+  <classVarDec/>
   <symbol>.</symbol>
+  <classVarDec/>
   <identifier>new</identifier>
+  <classVarDec/>
   <symbol>(</symbol>
+  <classVarDec/>
   <symbol>)</symbol>
+  <classVarDec/>
   <symbol>;</symbol>
+  <classVarDec/>
   <keyword>do</keyword>
+  <classVarDec/>
   <identifier>game</identifier>
+  <classVarDec/>
   <symbol>.</symbol>
+  <classVarDec/>
   <identifier>run</identifier>
+  <classVarDec/>
   <symbol>(</symbol>
+  <classVarDec/>
   <symbol>)</symbol>
+  <classVarDec/>
   <symbol>;</symbol>
+  <classVarDec/>
   <keyword>do</keyword>
+  <classVarDec/>
   <identifier>game</identifier>
+  <classVarDec/>
   <symbol>.</symbol>
+  <classVarDec/>
   <identifier>dispose</identifier>
+  <classVarDec/>
   <symbol>(</symbol>
+  <classVarDec/>
   <symbol>)</symbol>
+  <classVarDec/>
   <symbol>;</symbol>
+  <classVarDec/>
   <keyword>return</keyword>
+  <classVarDec/>
   <symbol>;</symbol>
+  <classVarDec/>
   <symbol>}</symbol>
+  <classVarDec/>
   <keyword>function</keyword>
+  <classVarDec/>
   <keyword>void</keyword>
+  <classVarDec/>
   <identifier>more</identifier>
+  <classVarDec/>
   <symbol>(</symbol>
+  <classVarDec/>
   <symbol>)</symbol>
+  <classVarDec/>
   <symbol>{</symbol>
+  <classVarDec/>
   <keyword>var</keyword>
+  <classVarDec/>
   <keyword>int</keyword>
+  <classVarDec/>
   <identifier>i</identifier>
+  <classVarDec/>
   <symbol>,</symbol>
+  <classVarDec/>
   <identifier>j</identifier>
+  <classVarDec/>
   <symbol>;</symbol>
+  <classVarDec/>
   <keyword>var</keyword>
+  <classVarDec/>
   <identifier>String</identifier>
+  <classVarDec/>
   <identifier>s</identifier>
+  <classVarDec/>
   <symbol>;</symbol>
+  <classVarDec/>
   <keyword>var</keyword>
+  <classVarDec/>
   <identifier>Array</identifier>
+  <classVarDec/>
   <identifier>a</identifier>
+  <classVarDec/>
   <symbol>;</symbol>
+  <classVarDec/>
   <keyword>if</keyword>
+  <classVarDec/>
   <symbol>(</symbol>
+  <classVarDec/>
   <keyword>false</keyword>
+  <classVarDec/>
   <symbol>)</symbol>
+  <classVarDec/>
   <symbol>{</symbol>
+  <classVarDec/>
   <keyword>let</keyword>
+  <classVarDec/>
   <identifier>s</identifier>
+  <classVarDec/>
   <symbol>=</symbol>
+  <classVarDec/>
   <stringConstant>string constant</stringConstant>
+  <classVarDec/>
   <symbol>;</symbol>
+  <classVarDec/>
   <keyword>let</keyword>
+  <classVarDec/>
   <identifier>s</identifier>
+  <classVarDec/>
   <symbol>=</symbol>
+  <classVarDec/>
   <keyword>null</keyword>
+  <classVarDec/>
   <symbol>;</symbol>
+  <classVarDec/>
   <keyword>let</keyword>
+  <classVarDec/>
   <identifier>a</identifier>
+  <classVarDec/>
   <symbol>[</symbol>
+  <classVarDec/>
   <integerConstant>1</integerConstant>
+  <classVarDec/>
   <symbol>]</symbol>
+  <classVarDec/>
   <symbol>=</symbol>
+  <classVarDec/>
   <identifier>a</identifier>
+  <classVarDec/>
   <symbol>[</symbol>
+  <classVarDec/>
   <integerConstant>2</integerConstant>
+  <classVarDec/>
   <symbol>]</symbol>
+  <classVarDec/>
   <symbol>;</symbol>
+  <classVarDec/>
   <symbol>}</symbol>
+  <classVarDec/>
   <keyword>else</keyword>
+  <classVarDec/>
   <symbol>{</symbol>
+  <classVarDec/>
   <keyword>let</keyword>
+  <classVarDec/>
   <identifier>i</identifier>
+  <classVarDec/>
   <symbol>=</symbol>
+  <classVarDec/>
   <identifier>i</identifier>
+  <classVarDec/>
   <symbol>*</symbol>
+  <classVarDec/>
   <symbol>(</symbol>
+  <classVarDec/>
   <symbol>-</symbol>
+  <classVarDec/>
   <identifier>j</identifier>
+  <classVarDec/>
   <symbol>)</symbol>
+  <classVarDec/>
   <symbol>;</symbol>
+  <classVarDec/>
   <keyword>let</keyword>
+  <classVarDec/>
   <identifier>j</identifier>
+  <classVarDec/>
   <symbol>=</symbol>
+  <classVarDec/>
   <identifier>j</identifier>
+  <classVarDec/>
   <symbol>/</symbol>
+  <classVarDec/>
   <symbol>(</symbol>
+  <classVarDec/>
   <symbol>-</symbol>
+  <classVarDec/>
   <integerConstant>2</integerConstant>
+  <classVarDec/>
   <symbol>)</symbol>
+  <classVarDec/>
   <symbol>;</symbol>
+  <classVarDec/>
   <keyword>let</keyword>
+  <classVarDec/>
   <identifier>i</identifier>
+  <classVarDec/>
   <symbol>=</symbol>
+  <classVarDec/>
   <identifier>i</identifier>
+  <classVarDec/>
   <symbol>|</symbol>
+  <classVarDec/>
   <identifier>j</identifier>
+  <classVarDec/>
   <symbol>;</symbol>
+  <classVarDec/>
   <symbol>}</symbol>
+  <classVarDec/>
   <keyword>return</keyword>
+  <classVarDec/>
   <symbol>;</symbol>
+  <classVarDec/>
   <symbol>}</symbol>
+  <classVarDec/>
   <symbol>}</symbol>
+  <classVarDec/>
 </class>
