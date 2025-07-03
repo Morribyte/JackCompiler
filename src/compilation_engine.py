@@ -14,7 +14,8 @@ class CompilationEngine:
     """
     def __init__(self, tokenizer: Tokenizer):
         self.tokenizer = tokenizer
-        self.root = element_tree.Element("tokens")
+        self.tokens_root = element_tree.Element("tokens")
+        self.root = element_tree.Element("class")
 
     def compile_class(self, token_mode=False):
         """
@@ -24,16 +25,15 @@ class CompilationEngine:
             self._token_mode()
         else:
             while self.tokenizer.has_more_tokens():
-                print(f"Token found: {self.tokenizer.current_token_type} | {self.tokenizer.current_token_value}")
-                self.write_token(self.tokenizer.current_token_type)
                 self.tokenizer.advance()
+                print(f"Token found: {self.tokenizer.current_token_type} | {self.tokenizer.current_token_value}")
+                self.write_token()
 
-    def write_token(self, token_type):
+    def write_token(self):
         """
         Writes a token to the XML.
         """
-        token = element_tree.SubElement(self.root, token_type).text = "Main"
-        return token
+        element_tree.SubElement(self.root, self.tokenizer.current_token_type).text = f"{self.tokenizer.current_token_value}"
 
     def _token_mode(self):
         """
@@ -41,7 +41,7 @@ class CompilationEngine:
         """
         while self.tokenizer.has_more_tokens():
             self.tokenizer.advance()
-            element_tree.SubElement(self.root, self.tokenizer.token_type()).text = f" {self.tokenizer.current_token_value} "
+            element_tree.SubElement(self.tokens_root, self.tokenizer.token_type()).text = f" {self.tokenizer.current_token_value} "
             print(f"{repr(self.tokenizer.current_token_value)}")
 
         tree = element_tree.ElementTree(self.root)
