@@ -65,11 +65,21 @@ class TestCompile:
     """
     Class that handles testing an entire compiler suite
     """
-    def test_write_token(self, setup_resources):
+    def test_compile_class_token_mode_off(self, setup_resources, capsys):
+        """
+        Test that when we turn off token mode explicitly, it runs the normal cycle.
+        """
+        compilation = setup_resources["compilation"]
+        compilation.compile_class(token_mode=False)
+        captured = capsys.readouterr()
+
+        assert "Token found: " in captured.out
+
+
+    def test_write_token(self, setup_resources, capsys):
         """
         Test that the write_token helper method properly writes to the XML file.
         """
         compilation = setup_resources["compilation"]
-        value = compilation.write_token()
-        print(value)
-        assert True is True
+        compilation.write_token()
+
