@@ -47,3 +47,5 @@ def test_compile_class(setup_resources):
     value = compilation.compile_class()
     assert value is True
 
+
+

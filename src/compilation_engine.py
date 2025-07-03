@@ -28,6 +28,7 @@ class CompilationEngine:
                 print(f"Token found: {self.tokenizer.current_token_type} | {self.tokenizer.current_token_value}")
                 self.tokenizer.advance()
             return True
+        return None  # pragma: no cover
 
     def _token_mode(self):
         """
