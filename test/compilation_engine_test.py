@@ -43,8 +43,6 @@ def test_compile_class(setup_resources):
     Test that when we compile a class, it properly wraps in XML.
     """
     compilation = setup_resources["compilation"]
-    compilation.tokenizer.current_token_type = "keyword"
-    compilation.tokenizer.current_token_value = "class"
     print(compilation.tokenizer.open_file)
     value = compilation.compile_class()
     assert value is True
