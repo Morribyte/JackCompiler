@@ -24,7 +24,7 @@ class CompilationEngine:
         if token_mode:
             self._token_mode()
         else:
-            if self.tokenizer.has_more_tokens():
+            while self.tokenizer.has_more_tokens():
                 print(f"Token found: {self.tokenizer.current_token_type} | {self.tokenizer.current_token_value}")
                 self.tokenizer.advance()
             return True
