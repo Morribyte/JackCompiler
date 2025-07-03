@@ -16,7 +16,7 @@ def setup_resources():
     """
     Sets up the necessary resources for each test.
     """
-    jack_file: Path = Path("F:\Programming\Hack and ASM Projects\JackCompiler\input\ArrayTest\Main.jack")
+    jack_file: Path = Path(r"F:\Programming\Hack and ASM Projects\JackCompiler\input\10\Square\Main.jack")
     tokenizer = Tokenizer(jack_file)
     compilation = CompilationEngine(tokenizer)
     yield {
@@ -49,7 +49,7 @@ def test_tokenizer_variable(setup_resources):
     """
     compilation = setup_resources["compilation"]
     print(compilation.tokenizer.jack_file)
-    assert str(compilation.tokenizer.jack_file) == "F:\Programming\Hack and ASM Projects\JackCompiler\input\ArrayTest\Main.jack"
+    assert str(compilation.tokenizer.jack_file) == r"F:\Programming\Hack and ASM Projects\JackCompiler\input\10\Square\Main.jack"
 
 
 def test_compile_class_token_mode_on(setup_resources):
@@ -83,4 +83,12 @@ class TestCompile:
         compilation = setup_resources["compilation"]
         compilation.tokenizer.current_token_type = "legume"
         compilation.tokenizer.current_token_value = "Main"
+        compilation.compile_class()
+
+
+    def test_compile_var_dec(self, setup_resources):
+        """
+        Test that when we compile a class variable declaration, we properly write it as recursive to the class
+        """
+        compilation = setup_resources["compilation"]
         compilation.compile_class()
