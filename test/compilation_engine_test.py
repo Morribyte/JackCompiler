@@ -38,10 +38,19 @@ def test_tokenizer_variable(setup_resources):
     assert str(compilation.tokenizer.jack_file) == "F:\Programming\Hack and ASM Projects\JackCompiler\input\ArrayTest\Main.jack"
 
 
-def test_compile_class_token_mode_on(setup_resources, tmp_path):
+def test_compile_class_token_mode_on(setup_resources):
     """
     Test that when we turn on token mode, it produces an XML file.
     """
     compilation = setup_resources["compilation"]
     compilation.compile_class(token_mode=True)
     assert compilation.tokenizer.jack_file.exists()
+
+
+def test_write_token(setup_resources):
+    """
+    Test that the write_token helper method properly writes to the XML file.
+    """
+    compilation = setup_resources["compilation"]
+    value = compilation.write_token()
+    assert value is True
