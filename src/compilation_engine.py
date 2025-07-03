@@ -27,31 +27,62 @@ class CompilationEngine:
             while self.tokenizer.has_more_tokens():
                 self.tokenizer.advance()
                 print(f"Token found: {self.tokenizer.current_token_type} | {self.tokenizer.current_token_value}")
-                self.write_token()
+                #
+                match self.tokenizer.current_token_value:
+                    case "static" | "field":
+                        self.compile_var_dec(self.root)
+                    case "constructor" | "function" | "method":
+                        self.compile_subroutine(self.root)
+                    case _:
+                        self.write_token(self.root)
 
-                if self.tokenizer.current_token_value == "static" or "field":
-                    self.compile_var_dec(self.root)
 
     def compile_var_dec(self, parent):
         """
         Compiles a class's variable declaration.
         """
         class_var_dec_element = element_tree.SubElement(parent, "classVarDec")
-        print(f"Found variable declaration: {self.tokenizer.current_token_value}")
-        if not self.tokenizer.current_token_value == ";":
-            print(self.tokenizer.current_token_value)
+        while True:
+            self.write_token(class_var_dec_element)
+            if self.tokenizer.current_token_value == ";":
+                break
+            self.tokenizer.advance()
 
-    def write_token(self):
+    def compile_subroutine(self, parent):
+        """
+        Compiles a method.
+        """
+        subroutine_element = element_tree.SubElement(parent, "subroutineDec")
+        while True:
+            self.write_token(subroutine_element)
+            if self.tokenizer.current_token_value == "(":
+                self.compile_parameter_list(subroutine_element)
+
+            self.tokenizer.advance()
+
+    def compile_parameter_list(self, parent):
+        """
+        Compile's a method's parameter list.
+        """
+        parameter_list = element_tree.SubElement(parent, "parameterList")
+        while True:
+            self.write_token(parameter_list)
+            if self.tokenizer.current_token_value == ")":
+                break
+            self.tokenizer.advance()
+
+    def write_token(self, parent_name):
         """
         Writes a token to the XML.
         """
-        element_tree.SubElement(self.root, self.tokenizer.current_token_type).text = f"{self.tokenizer.current_token_value}"
+        element_tree.SubElement(parent_name, self.tokenizer.current_token_type).text = f"{self.tokenizer.current_token_value}"
 
     def _token_mode(self):
         """
         Compiles to a basic XML for testing.
         """
         while self.tokenizer.has_more_tokens():
+            print(f"Has more tokens: {self.tokenizer.has_more_tokens()}")
             self.tokenizer.advance()
             element_tree.SubElement(self.tokens_root, self.tokenizer.token_type()).text = f" {self.tokenizer.current_token_value} "
 

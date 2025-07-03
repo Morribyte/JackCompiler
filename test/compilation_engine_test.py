@@ -11,7 +11,7 @@ import xml.dom.minidom
 from src.compilation_engine import CompilationEngine
 from src.tokenizer import Tokenizer
 
-@pytest.fixture(scope="class")
+@pytest.fixture
 def setup_resources():
     """
     Sets up the necessary resources for each test.
@@ -28,10 +28,11 @@ def setup_resources():
     with open("output.xml", "r", encoding="utf-8") as f:
         content = f.read()
         pretty = xml.dom.minidom.parseString(content).toprettyxml(indent="  ")
-        print("\n=== XML File Output ===")
-        print(pretty)
+        # print("\n=== XML File Output ===")
+        # print(pretty)
 
     with open("output.xml", "w", encoding="utf-8") as f:
+        pretty = xml.dom.minidom.parseString(content).toprettyxml(indent="  ")
         f.write(pretty)
 
 
@@ -61,32 +62,22 @@ def test_compile_class_token_mode_on(setup_resources):
     assert compilation.tokenizer.jack_file.exists()
 
 
-class TestCompile:
+def test_compile_class_token_mode_off(setup_resources, capsys):
     """
-    Class that handles testing an entire compiler suite
+    Test that when we turn off token mode explicitly, it runs the normal cycle.
     """
-    def test_compile_class_token_mode_off(self, setup_resources, capsys):
-        """
-        Test that when we turn off token mode explicitly, it runs the normal cycle.
-        """
-        compilation = setup_resources["compilation"]
-        compilation.compile_class(token_mode=False)
-        captured = capsys.readouterr()
+    compilation = setup_resources["compilation"]
+    compilation.compile_class(token_mode=False)
+    captured = capsys.readouterr()
 
-        assert "Token found: " in captured.out
+    assert "Token found: " in captured.out
 
-    def test_write_token(self, setup_resources, capsys):
-        """
-        Test that the write_token helper method properly writes to the XML file.
-        """
-        compilation = setup_resources["compilation"]
-        compilation.tokenizer.current_token_type = "legume"
-        compilation.tokenizer.current_token_value = "Main"
-        compilation.compile_class()
-
-    def test_compile_var_dec(self, setup_resources):
-        """
-        Test that when we compile a class variable declaration, we properly write it as recursive to the class
-        """
-        compilation = setup_resources["compilation"]
-        compilation.compile_class()
+def test_write_token(setup_resources):
+    """
+    Test that the write_token helper method properly writes to the XML file.
+    This test does not have any assertions in it because I can visually check it.
+    """
+    compilation = setup_resources["compilation"]
+    compilation.tokenizer.current_token_type = "legume"
+    compilation.tokenizer.current_token_value = "Main"
+    compilation.compile_class()
