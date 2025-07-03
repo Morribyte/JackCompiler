@@ -56,8 +56,7 @@ class CompilationEngine:
         while True:
             self.write_token(subroutine_element)
             if self.tokenizer.current_token_value == "(":
-                self.compile_parameter_list(subroutine_element)
-
+                break
             self.tokenizer.advance()
 
     def compile_parameter_list(self, parent):
@@ -70,6 +69,7 @@ class CompilationEngine:
             if self.tokenizer.current_token_value == ")":
                 break
             self.tokenizer.advance()
+
 
     def write_token(self, parent_name):
         """
