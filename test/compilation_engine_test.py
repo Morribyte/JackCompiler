@@ -81,5 +81,6 @@ class TestCompile:
         Test that the write_token helper method properly writes to the XML file.
         """
         compilation = setup_resources["compilation"]
-        compilation.write_token()
+        current_token_type = compilation.tokenizer.current_token_type = "legume"
+        compilation.write_token(current_token_type)
 

@@ -25,10 +25,10 @@ class CompilationEngine:
         else:
             while self.tokenizer.has_more_tokens():
                 print(f"Token found: {self.tokenizer.current_token_type} | {self.tokenizer.current_token_value}")
-                self.write_token()
+                self.write_token(self.tokenizer.current_token_type)
                 self.tokenizer.advance()
 
-    def write_token(self):
+    def write_token(self, token_type):
         """
         Writes a token to the XML.
         """
