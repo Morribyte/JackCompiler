@@ -3,7 +3,9 @@ Testing document for the compilation engine
 """
 from pathlib import Path
 import pytest
-# import xml.dom.minidom
+
+import xml.etree.ElementTree as element_tree
+import xml.dom.minidom
 
 
 from src.compilation_engine import CompilationEngine
@@ -20,6 +22,18 @@ def setup_resources():
     yield {
         "compilation": compilation,
     }
+    tree = element_tree.ElementTree(compilation.root)
+    tree.write("output.xml", encoding="utf-8", xml_declaration=True)
+
+    with open("output.xml", "r", encoding="utf-8") as f:
+        content = f.read()
+        pretty = xml.dom.minidom.parseString(content).toprettyxml(indent="  ")
+        print("\n=== XML File Output ===")
+        print(pretty)
+
+    with open("output.xml", "w", encoding="utf-8") as f:
+        f.write(pretty)
+
 
 def test_object_creation(setup_resources):
     """
