@@ -17,13 +17,24 @@ class CompilationEngine:
         self.root = element_tree.Element("tokens")
 
 
-    def compile_class(self):
+    def compile_class(self, token_mode=False):
         """
         Compiles a class to XML code recursively.
+        """
+        if token_mode:
+            self._token_mode()
+        else:
+            return True
+
+    def _token_mode(self):
+        """
+        Compiles to a basic XML for testing.
         """
         while self.tokenizer.has_more_tokens():
             self.tokenizer.advance()
             element_tree.SubElement(self.root, self.tokenizer.token_type()).text = f" {self.tokenizer.current_token_value} "
+            print(f"{repr(self.tokenizer.current_token_value)}")
+
         tree = element_tree.ElementTree(self.root)
         tree.write("output.xml", encoding="utf-8", xml_declaration=True)
 
@@ -32,5 +43,3 @@ class CompilationEngine:
             pretty = xml.dom.minidom.parseString(content).toprettyxml(indent="  ")
             print("\n=== XML File Output ===")
             print(pretty)
-
-        return True

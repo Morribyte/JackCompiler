@@ -90,7 +90,8 @@ class Tokenizer:
             start = self.current_index
             while self.current_index < len(self.open_file) and self.open_file[self.current_index] != '"':
                 self.current_index += 1
-            self.current_token_value = self.open_file[start:self.current_index]
+            #  The Jack tests expect a string without a trailing space
+            self.current_token_value = self.open_file[start:self.current_index].rstrip()
             self.current_token_type = "stringConstant"
             self.current_index += 1
             return self.current_token_type, self.current_token_value
