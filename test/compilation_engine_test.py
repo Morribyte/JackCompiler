@@ -82,5 +82,6 @@ class TestCompile:
         """
         compilation = setup_resources["compilation"]
         current_token_type = compilation.tokenizer.current_token_type = "legume"
+        print(current_token_type)
         compilation.write_token(current_token_type)
 

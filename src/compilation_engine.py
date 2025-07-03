@@ -32,7 +32,7 @@ class CompilationEngine:
         """
         Writes a token to the XML.
         """
-        token = element_tree.SubElement(self.root, "class").text = "Main"
+        token = element_tree.SubElement(self.root, token_type).text = "Main"
         return token
 
     def _token_mode(self):
