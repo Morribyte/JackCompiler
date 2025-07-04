@@ -30,14 +30,14 @@ class CompilationEngine:
                 #
                 match self.tokenizer.current_token_value:
                     case "static" | "field":
-                        self.compile_var_dec(self.root)
+                        self.compile_class_var_dec(self.root)
                     case "constructor" | "function" | "method":
                         self.compile_subroutine(self.root)
                     case _:
                         self.write_token(self.root)
 
 
-    def compile_var_dec(self, parent):
+    def compile_class_var_dec(self, parent):
         """
         Compiles a class's variable declaration.
         """
@@ -61,16 +61,43 @@ class CompilationEngine:
         self.tokenizer.advance()
         self.compile_parameter_list(subroutine_element)
         self.write_token(subroutine_element)
+        self.compile_subroutine_body(subroutine_element)
 
     def compile_parameter_list(self, parent):
         """
         Compile's a method's parameter list.
         """
-        parameter_list = element_tree.SubElement(parent, "parameterList")
-
+        parameter_list_element = element_tree.SubElement(parent, "parameterList")
         while self.tokenizer.current_token_value != ")":
-            self.write_token(parameter_list)
+            self.write_token(parameter_list_element)
             self.tokenizer.advance()
+
+    def compile_subroutine_body(self, parent):
+        """
+        Compile a method's subroutine body.
+        """
+        subroutine_body_element = element_tree.SubElement(parent, "subroutineBody")
+        while True:
+            if self.tokenizer.current_token_value == "var":
+                self.compile_var_dec(subroutine_body_element)
+            else:
+                self.write_token(subroutine_body_element)
+            if self.tokenizer.current_token_value == "}":
+                break
+            self.tokenizer.advance()
+
+    def compile_var_dec(self, parent):
+        """
+        Compile a method's variable declaration.
+        """
+        var_dec_element = element_tree.SubElement(parent, "varDec")
+        while True:
+            self.write_token(var_dec_element)
+            if self.tokenizer.current_token_value == ";":
+                break
+            self.tokenizer.advance()
+
+
 
     def write_token(self, parent_name):
         """
