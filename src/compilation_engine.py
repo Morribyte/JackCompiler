@@ -65,7 +65,6 @@ class CompilationEngine:
         self.tokenizer.advance()
 
         self.compile_subroutine_body(subroutine_element)
-        self.compile_statements(subroutine_element)
 
     def compile_parameter_list(self, parent):
         """
@@ -86,10 +85,11 @@ class CompilationEngine:
                 self.compile_var_dec(subroutine_body_element)
             else:
                 self.write_token(subroutine_body_element)
+            self.compile_statements(subroutine_body_element)
+
             if self.tokenizer.current_token_value == "}":
                 break
             self.tokenizer.advance()
-
 
     def compile_var_dec(self, parent):
         """
@@ -107,21 +107,22 @@ class CompilationEngine:
         Compile any statement.
         """
         statements_element = element_tree.SubElement(parent, "statements")
-        print(f"Current statement: ({self.tokenizer.current_token_value} | {self.tokenizer.current_token_type})")
-        match self.tokenizer.current_token_value:
-            case "let":
-                self.compile_let_statement(statements_element)
-            case "if":
-                pass
-            case "while":
-                pass
-            case "do":
-                pass
-            case "return":
-                pass
-            case _:
-                print(f"Unknown keyword pair: {self.tokenizer.current_token_type} | {self.tokenizer.current_token_type}")
-                return
+        print(f"Current statement: {self.tokenizer.current_token_value} | {self.tokenizer.current_token_type}")
+        while self.tokenizer.current_token_value in ("let", "if", "while", "do", "return"):
+            match (self.tokenizer.current_token_type, self.tokenizer.current_token_value):
+                case ("keyword", "let"):
+                    self.compile_let_statement(statements_element)
+                case ("keyword", "if"):
+                    pass
+                case ("keyword", "while"):
+                    pass
+                case ("keyword", "do"):
+                    pass
+                case ("keyword", "return"):
+                    pass
+                case _:
+                    print(f"Unknown keyword pair: {self.tokenizer.current_token_type} | {self.tokenizer.current_token_type}")
+                    return
 
     def compile_let_statement(self, parent):
         """
