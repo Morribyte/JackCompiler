@@ -59,9 +59,13 @@ class CompilationEngine:
                 break
             self.tokenizer.advance()
         self.tokenizer.advance()
+
         self.compile_parameter_list(subroutine_element)
         self.write_token(subroutine_element)
+        self.tokenizer.advance()
+
         self.compile_subroutine_body(subroutine_element)
+        self.compile_statements(subroutine_element)
 
     def compile_parameter_list(self, parent):
         """
@@ -80,7 +84,8 @@ class CompilationEngine:
         while True:
             if self.tokenizer.current_token_value == "var":
                 self.compile_var_dec(subroutine_body_element)
-
+            else:
+                self.write_token(subroutine_body_element)
             if self.tokenizer.current_token_value == "}":
                 break
             self.tokenizer.advance()
@@ -101,18 +106,18 @@ class CompilationEngine:
         """
         Compile any statement.
         """
-        statement_element = element_tree.SubElement(parent, "statements")
-
-        match (self.tokenizer.current_token_type, self.tokenizer.current_token_value):
-            case ("keyword", "let"):
-                self.compile_let_statement(statement_element)
-            case ("keyword", "if"):
+        statements_element = element_tree.SubElement(parent, "statements")
+        print(f"Current statement: ({self.tokenizer.current_token_value} | {self.tokenizer.current_token_type})")
+        match self.tokenizer.current_token_value:
+            case "let":
+                self.compile_let_statement(statements_element)
+            case "if":
                 pass
-            case ("keyword", "while"):
+            case "while":
                 pass
-            case ("keyword", "do"):
+            case "do":
                 pass
-            case ("keyword", "return"):
+            case "return":
                 pass
             case _:
                 print(f"Unknown keyword pair: {self.tokenizer.current_token_type} | {self.tokenizer.current_token_type}")
@@ -123,6 +128,11 @@ class CompilationEngine:
         Compiles a let statement.
         """
         let_statement_element = element_tree.SubElement(parent, "letStatement")
+        while True:
+            self.write_token(let_statement_element)
+            if self.tokenizer.current_token_value == ";":
+                break
+            self.tokenizer.advance()
 
     def write_token(self, parent_name):
         """
