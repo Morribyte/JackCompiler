@@ -58,18 +58,19 @@ class CompilationEngine:
             if self.tokenizer.current_token_value == "(":
                 break
             self.tokenizer.advance()
+        self.tokenizer.advance()
+        self.compile_parameter_list(subroutine_element)
+        self.write_token(subroutine_element)
 
     def compile_parameter_list(self, parent):
         """
         Compile's a method's parameter list.
         """
         parameter_list = element_tree.SubElement(parent, "parameterList")
-        while True:
-            self.write_token(parameter_list)
-            if self.tokenizer.current_token_value == ")":
-                break
-            self.tokenizer.advance()
 
+        while self.tokenizer.current_token_value != ")":
+            self.write_token(parameter_list)
+            self.tokenizer.advance()
 
     def write_token(self, parent_name):
         """
