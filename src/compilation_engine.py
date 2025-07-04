@@ -97,6 +97,25 @@ class CompilationEngine:
                 break
             self.tokenizer.advance()
 
+    def compile_statements(self, parent):
+        """
+        Compile any statement.
+        """
+        statement_element = element_tree.SubElement(parent, "statements")
+
+        match (self.tokenizer.current_token_type, self.tokenizer.current_token_value):
+            case ("keyword", "let"):
+                pass
+            case ("keyword", "if"):
+                pass
+            case ("keyword", "whileStatement"):
+                pass
+            case ("keyword", "doStatement"):
+                pass
+            case ("keyword", "returnStatement"):
+                pass
+            case _:
+                raise ValueError("Unknown error.")
 
 
     def write_token(self, parent_name):
