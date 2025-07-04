@@ -17,39 +17,12 @@
     <parameterList/>
     <symbol>)</symbol>
     <subroutineBody>
-      <symbol>)</symbol>
-      <symbol>{</symbol>
       <varDec>
         <keyword>var</keyword>
         <identifier>SquareGame</identifier>
         <identifier>game</identifier>
         <symbol>;</symbol>
       </varDec>
-      <keyword>let</keyword>
-      <identifier>game</identifier>
-      <symbol>=</symbol>
-      <identifier>SquareGame</identifier>
-      <symbol>.</symbol>
-      <identifier>new</identifier>
-      <symbol>(</symbol>
-      <symbol>)</symbol>
-      <symbol>;</symbol>
-      <keyword>do</keyword>
-      <identifier>game</identifier>
-      <symbol>.</symbol>
-      <identifier>run</identifier>
-      <symbol>(</symbol>
-      <symbol>)</symbol>
-      <symbol>;</symbol>
-      <keyword>do</keyword>
-      <identifier>game</identifier>
-      <symbol>.</symbol>
-      <identifier>dispose</identifier>
-      <symbol>(</symbol>
-      <symbol>)</symbol>
-      <symbol>;</symbol>
-      <keyword>return</keyword>
-      <symbol>;</symbol>
       <symbol>}</symbol>
     </subroutineBody>
   </subroutineDec>
@@ -61,8 +34,6 @@
     <parameterList/>
     <symbol>)</symbol>
     <subroutineBody>
-      <symbol>)</symbol>
-      <symbol>{</symbol>
       <varDec>
         <keyword>var</keyword>
         <keyword>int</keyword>
@@ -83,32 +54,6 @@
         <identifier>a</identifier>
         <symbol>;</symbol>
       </varDec>
-      <keyword>if</keyword>
-      <symbol>(</symbol>
-      <keyword>false</keyword>
-      <symbol>)</symbol>
-      <symbol>{</symbol>
-      <keyword>let</keyword>
-      <identifier>s</identifier>
-      <symbol>=</symbol>
-      <stringConstant>string constant</stringConstant>
-      <symbol>;</symbol>
-      <keyword>let</keyword>
-      <identifier>s</identifier>
-      <symbol>=</symbol>
-      <keyword>null</keyword>
-      <symbol>;</symbol>
-      <keyword>let</keyword>
-      <identifier>a</identifier>
-      <symbol>[</symbol>
-      <integerConstant>1</integerConstant>
-      <symbol>]</symbol>
-      <symbol>=</symbol>
-      <identifier>a</identifier>
-      <symbol>[</symbol>
-      <integerConstant>2</integerConstant>
-      <symbol>]</symbol>
-      <symbol>;</symbol>
       <symbol>}</symbol>
     </subroutineBody>
   </subroutineDec>

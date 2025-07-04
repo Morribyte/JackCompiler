@@ -78,6 +78,6 @@ def test_write_token(setup_resources):
     This test does not have any assertions in it because I can visually check it.
     """
     compilation = setup_resources["compilation"]
-    compilation.tokenizer.current_token_type = "legume"
+    compilation.tokenizer.current_token_type = "let"
     compilation.tokenizer.current_token_value = "Main"
     compilation.compile_class()

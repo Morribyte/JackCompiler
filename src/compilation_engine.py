@@ -80,11 +80,11 @@ class CompilationEngine:
         while True:
             if self.tokenizer.current_token_value == "var":
                 self.compile_var_dec(subroutine_body_element)
-            else:
-                self.write_token(subroutine_body_element)
+
             if self.tokenizer.current_token_value == "}":
                 break
             self.tokenizer.advance()
+
 
     def compile_var_dec(self, parent):
         """
@@ -105,7 +105,7 @@ class CompilationEngine:
 
         match (self.tokenizer.current_token_type, self.tokenizer.current_token_value):
             case ("keyword", "let"):
-                pass
+                self.compile_let_statement(statement_element)
             case ("keyword", "if"):
                 pass
             case ("keyword", "while"):
@@ -115,8 +115,14 @@ class CompilationEngine:
             case ("keyword", "return"):
                 pass
             case _:
-                raise ValueError("Could not compile statement: unknown keyword error.")
+                print(f"Unknown keyword pair: {self.tokenizer.current_token_type} | {self.tokenizer.current_token_type}")
+                return
 
+    def compile_let_statement(self, parent):
+        """
+        Compiles a let statement.
+        """
+        let_statement_element = element_tree.SubElement(parent, "letStatement")
 
     def write_token(self, parent_name):
         """
