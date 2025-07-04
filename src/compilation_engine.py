@@ -108,14 +108,14 @@ class CompilationEngine:
                 pass
             case ("keyword", "if"):
                 pass
-            case ("keyword", "whileStatement"):
+            case ("keyword", "while"):
                 pass
-            case ("keyword", "doStatement"):
+            case ("keyword", "do"):
                 pass
-            case ("keyword", "returnStatement"):
+            case ("keyword", "return"):
                 pass
             case _:
-                raise ValueError("Unknown error.")
+                raise ValueError("Could not compile statement: unknown keyword error.")
 
 
     def write_token(self, parent_name):
