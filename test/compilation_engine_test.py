@@ -106,7 +106,9 @@ def test_compile_class(setup_resources):
     compilation = setup_resources["compilation"]
     compilation.compile_class()
 
+    code = """<class />"""
+
     pretty = write_xml(setup_resources)
 
-    assert "<class>" in pretty
-
+    assert "class" in pretty
+    assert pretty == code

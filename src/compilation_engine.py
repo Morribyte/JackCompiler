@@ -22,6 +22,7 @@ class CompilationEngine:
         Compiles a class and starts the compilation process.
         Token_mode: if True, runs a basic parse in token mode so we can get a handle on the number of tokens.
         """
+        print(f"{self.tokenizer.current_token_type} | {self.tokenizer.current_token_value}")
         if token_mode:
             self._token_mode()
             return
