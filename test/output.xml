@@ -7,8 +7,8 @@
     <keyword>static</keyword>
     <keyword>boolean</keyword>
     <identifier>test</identifier>
+    <symbol>;</symbol>
   </classVarDec>
-  <symbol>;</symbol>
   <keyword>function</keyword>
   <keyword>void</keyword>
   <identifier>main</identifier>

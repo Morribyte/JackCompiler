@@ -35,12 +35,9 @@ class CompilationEngine:
                 case "static" | "field":
                     print("Printing field or static from case static")
                     self.compile_class_var_dec(self.root)
-                    continue
                 case _:
-                    print(f"Printing {self.tokenizer.current_token_value} from case _")
                     self.write_token(self.root)
                     self.tokenizer.advance()
-                    print(f"Printing newly advanced {self.tokenizer.current_token_value} from case _")
             #
             # if self.tokenizer.current_token_value in ("function", "method", "constructor"):
             #     print(f"\n~*~*~ Found subroutine declaration token: {self.tokenizer.current_token_value} ~*~*~\n")
@@ -54,9 +51,10 @@ class CompilationEngine:
 
         while True:
             self.write_token(class_var_dec_element)
-            self.tokenizer.advance()
             if self.tokenizer.current_token_value == ";":
+                self.tokenizer.advance()
                 break
+            self.tokenizer.advance()
 
 
 
