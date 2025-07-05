@@ -27,14 +27,17 @@ class CompilationEngine:
             self._token_mode()
             return
 
-        if not self.tokenizer.current_token_value or not self.tokenizer.current_token_type:
-            print("Empty token!")
-            return
+        while self.tokenizer.has_more_tokens():
+            print(f"Current token type: {self.tokenizer.current_token_type} | {self.tokenizer.current_token_value}")
+            self.tokenizer.advance()
+            self.write_token(self.root)
+            element_tree.SubElement(self.tokens_root, self.tokenizer.token_type()).text = f" {self.tokenizer.current_token_value} "
+
 
         print(f"Token found: {self.tokenizer.current_token_value}")
         print(f"Token type found: {self.tokenizer.current_token_type}")
 
-        self.write_token(self.root)
+
 
     def write_token(self, parent_name):
         """
@@ -49,6 +52,7 @@ class CompilationEngine:
         while self.tokenizer.has_more_tokens():
             print(f"Current token type: {self.tokenizer.current_token_type} | {self.tokenizer.current_token_value}")
             self.tokenizer.advance()
+            self.write_token(self.root)
             element_tree.SubElement(self.tokens_root, self.tokenizer.token_type()).text = f" {self.tokenizer.current_token_value} "
 
         tree = element_tree.ElementTree(self.tokens_root)
