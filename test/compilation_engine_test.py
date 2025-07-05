@@ -79,7 +79,7 @@ def test_compile_class_token_mode_off(setup_resources, capsys):
     compilation.compile_class(token_mode=False)
     captured = capsys.readouterr()
 
-    assert "Writing in token mode" in captured.out
+    assert "Compiling class" in captured.out
 
 
 def test_write_token(setup_resources):

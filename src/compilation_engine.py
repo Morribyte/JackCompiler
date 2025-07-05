@@ -22,15 +22,12 @@ class CompilationEngine:
         Compiles a class and starts the compilation process.
         Token_mode: if True, runs a basic parse in token mode so we can get a handle on the number of tokens.
         """
-        print(f"{self.tokenizer.current_token_type} | {self.tokenizer.current_token_value}")
         if token_mode:
             self._token_mode()
             return
 
         print("\n~*~*~ Compiling class ~*~*~\n")
         while self.tokenizer.has_more_tokens():
-            print(f"Current token: {self.tokenizer.current_token_type} | {self.tokenizer.current_token_value}")
-
             if self.tokenizer.current_token_value in ("static", "field"):
                 print("\n~*~*~ Found class variable declaration ~*~*~\n")
                 self.compile_class_var_dec(self.root)
