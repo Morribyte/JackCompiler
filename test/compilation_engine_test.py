@@ -19,9 +19,7 @@ def setup_resources():
     jack_file: Path = Path(r"F:\Programming\Hack and ASM Projects\JackCompiler\input\10\Square\Main.jack")
     tokenizer = Tokenizer(jack_file)
     compilation = CompilationEngine(tokenizer)
-    yield {
-        "compilation": compilation,
-    }
+
     tree = element_tree.ElementTree(compilation.root)
     tree.write("output.xml", encoding="utf-8", xml_declaration=True)
 
@@ -34,6 +32,13 @@ def setup_resources():
     with open("output.xml", "w", encoding="utf-8") as f:
         pretty = xml.dom.minidom.parseString(content).toprettyxml(indent="  ")
         f.write(pretty)
+
+    yield {
+        "compilation": compilation,
+        "tree": tree,
+        "xml_string": pretty,
+
+    }
 
 
 def test_object_creation(setup_resources):
@@ -72,12 +77,13 @@ def test_compile_class_token_mode_off(setup_resources, capsys):
 
     assert "Token found: " in captured.out
 
+
 def test_write_token(setup_resources):
     """
     Test that the write_token helper method properly writes to the XML file.
     This test does not have any assertions in it because I can visually check it.
     """
     compilation = setup_resources["compilation"]
-    compilation.tokenizer.current_token_type = "let"
+    compilation.tokenizer.current_token_type = "keyword"
     compilation.tokenizer.current_token_value = "Main"
     compilation.compile_class()

@@ -1,2 +1,4 @@
 <?xml version="1.0" ?>
-<class/>
+<class>
+  <class>Main</class>
+</class>

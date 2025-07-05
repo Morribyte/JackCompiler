@@ -24,9 +24,12 @@ class CompilationEngine:
         """
         if token_mode:
             self._token_mode()
-        else:
-            print(f"Token found: {self.tokenizer.current_token_value}")
-            print(f"Token type found: {self.tokenizer.current_token_type}")
+            return
+
+        print(f"Token found: {self.tokenizer.current_token_value}")
+        print(f"Token type found: {self.tokenizer.current_token_type}")
+
+        self.write_token(self.root)
 
     def write_token(self, parent_name):
         """
