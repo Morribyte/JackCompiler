@@ -3,9 +3,11 @@
   <keyword>class</keyword>
   <identifier>Main</identifier>
   <symbol>{</symbol>
-  <keyword>static</keyword>
-  <keyword>boolean</keyword>
-  <identifier>test</identifier>
+  <classVarDec>
+    <keyword>static</keyword>
+    <keyword>boolean</keyword>
+    <identifier>test</identifier>
+  </classVarDec>
   <symbol>;</symbol>
   <keyword>function</keyword>
   <keyword>void</keyword>
@@ -122,6 +124,5 @@
   <symbol>}</symbol>
   <keyword>return</keyword>
   <symbol>;</symbol>
-  <symbol>}</symbol>
   <symbol>}</symbol>
 </class>

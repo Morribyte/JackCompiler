@@ -134,9 +134,7 @@ def test_compile_class_var_dec(setup_resources):
     compilation = setup_resources["compilation"]
     compilation.compile_class()
 
-    code = """
-  <classVarDec>
-    <symbol>{</symbol>
+    code = """  <classVarDec>
     <keyword>static</keyword>
     <keyword>boolean</keyword>
     <identifier>test</identifier>
