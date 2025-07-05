@@ -24,12 +24,11 @@ def setup_resources():
     yield {
         "compilation": compilation,
     }
-    print("XML file parsed and formatted.")
 
 def write_xml(setup_resources):
     compilation = setup_resources["compilation"]
     tree = element_tree.ElementTree(compilation.root)
-    tree.write("output.xml", encoding="utf-8", xml_declaration=True)
+    tree.write("output.xml", encoding="utf-8", xml_declaration=False)
 
     with open("output.xml", "r", encoding="utf-8") as f:
         content = f.read()
@@ -40,6 +39,8 @@ def write_xml(setup_resources):
     with open("output.xml", "w", encoding="utf-8") as f:
         pretty = xml.dom.minidom.parseString(content).toprettyxml(indent="  ")
         f.write(pretty)
+
+    print("XML file parsed and formatted.")
 
     return pretty
 
@@ -95,3 +96,16 @@ def test_write_token(setup_resources):
 
     assert "<class>" in pretty
     assert "<keyword>" in pretty
+
+
+# Tests for compilation
+def test_compile_class(setup_resources):
+    """
+    Test that when we call compile_class, it properly handles the class keyword with its first token.
+    """
+    compilation = setup_resources["compilation"]
+    compilation.compile_class()
+
+    pretty = write_xml(setup_resources)
+
+    assert "<class>" in pretty

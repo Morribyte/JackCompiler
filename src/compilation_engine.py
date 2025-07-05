@@ -26,6 +26,10 @@ class CompilationEngine:
             self._token_mode()
             return
 
+        if self.tokenizer.current_token_value or self.tokenizer.current_token_type is None:
+            print("Emtpy token!")
+            return
+
         print(f"Token found: {self.tokenizer.current_token_value}")
         print(f"Token type found: {self.tokenizer.current_token_type}")
 
@@ -47,7 +51,7 @@ class CompilationEngine:
             element_tree.SubElement(self.tokens_root, self.tokenizer.token_type()).text = f" {self.tokenizer.current_token_value} "
 
         tree = element_tree.ElementTree(self.tokens_root)
-        tree.write("output.xml", encoding="utf-8", xml_declaration=True)
+        tree.write("output.xml", encoding="utf-8", xml_declaration=False)
 
         with open("output.xml", "r", encoding="utf-8") as f:
             content = f.read()
