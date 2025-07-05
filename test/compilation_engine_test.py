@@ -20,6 +20,14 @@ def setup_resources():
     tokenizer = Tokenizer(jack_file)
     compilation = CompilationEngine(tokenizer)
 
+
+    yield {
+        "compilation": compilation,
+    }
+    print("XML file parsed and formatted.")
+
+def write_xml(setup_resources):
+    compilation = setup_resources["compilation"]
     tree = element_tree.ElementTree(compilation.root)
     tree.write("output.xml", encoding="utf-8", xml_declaration=True)
 
@@ -33,13 +41,7 @@ def setup_resources():
         pretty = xml.dom.minidom.parseString(content).toprettyxml(indent="  ")
         f.write(pretty)
 
-    yield {
-        "compilation": compilation,
-        "tree": tree,
-        "xml_string": pretty,
-
-    }
-
+    return pretty
 
 def test_object_creation(setup_resources):
     """
@@ -84,6 +86,12 @@ def test_write_token(setup_resources):
     This test does not have any assertions in it because I can visually check it.
     """
     compilation = setup_resources["compilation"]
+
     compilation.tokenizer.current_token_type = "keyword"
     compilation.tokenizer.current_token_value = "Main"
     compilation.compile_class()
+
+    pretty = write_xml(setup_resources)
+
+    assert "<class>" in pretty
+    assert "<keyword>" in pretty
