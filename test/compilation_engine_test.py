@@ -125,3 +125,15 @@ def test_compile_first_keyword(setup_resources):
     pretty = write_xml(setup_resources)
 
     assert code in pretty
+
+
+def test_compile_class_var_dec(setup_resources):
+    """
+    Test that when we call compile_class, it handles class var dec.
+    """
+    compilation = setup_resources["compilation"]
+    compilation.compile_class()
+
+    pretty = write_xml(setup_resources)
+
+    assert "<classVarDec>" in pretty

@@ -31,18 +31,13 @@ class CompilationEngine:
         while self.tokenizer.has_more_tokens():
             print(f"Current token: {self.tokenizer.current_token_type} | {self.tokenizer.current_token_value}")
 
-            if self.tokenizer.current_token_value == "{":
-                print("\n~*~*~ Found class body ~*~*~\n")
+            if self.tokenizer.current_token_value in ("static", "field"):
+                print("\n~*~*~ Found class variable declaration ~*~*~\n")
             self.tokenizer.advance()
             self.write_token(self.root)
 
-
-
-
-
         print(f"Token found: {self.tokenizer.current_token_value}")
         print(f"Token type found: {self.tokenizer.current_token_type}")
-
 
 
     def write_token(self, parent_name):
