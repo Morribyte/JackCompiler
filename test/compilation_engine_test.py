@@ -145,3 +145,22 @@ def test_compile_class_var_dec(setup_resources):
 
     assert "<classVarDec>" in pretty
     assert code in pretty
+
+
+def test_subroutine_dec(setup_resources):
+    """
+    Test that when we call compile_class, it handles subroutine declarations.
+    """
+    compilation = setup_resources["compilation"]
+    compilation.compile_class()
+
+    code = """<subroutineDec>
+    <keyword> function </keyword>
+    <keyword> void </keyword>
+    <identifier> main </identifier>
+    <symbol> ( </symbol>"""
+    pretty = write_xml(setup_resources)
+
+    assert "<subroutineDec>" in pretty
+    assert code in pretty
+
