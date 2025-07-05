@@ -37,9 +37,6 @@ class CompilationEngine:
             self.tokenizer.advance()
             self.write_token(self.root)
 
-        print(f"Token found: {self.tokenizer.current_token_value}")
-        print(f"Token type found: {self.tokenizer.current_token_type}")
-
     def compile_class_var_dec(self, parent):
         """
         Compiles the variable declarations for a class.
@@ -52,8 +49,6 @@ class CompilationEngine:
             self.write_token(class_var_dec_element)
             self.tokenizer.advance()
 
-        print(f"Current token: {self.tokenizer.current_token_type} | {self.tokenizer.current_token_value}")
-
     def write_token(self, parent_name):
         """
         Writes a token to the XML.
@@ -64,8 +59,8 @@ class CompilationEngine:
         """
         Compiles to a basic XML for testing.
         """
+        print(f"Writing in token mode")
         while self.tokenizer.has_more_tokens():
-            print(f"Current token type: {self.tokenizer.current_token_type} | {self.tokenizer.current_token_value}")
             self.tokenizer.advance()
             self.write_token(self.root)
             element_tree.SubElement(self.tokens_root, self.tokenizer.token_type()).text = f" {self.tokenizer.current_token_value} "
