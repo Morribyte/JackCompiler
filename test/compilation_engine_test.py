@@ -109,3 +109,4 @@ def test_compile_class(setup_resources):
     pretty = write_xml(setup_resources)
 
     assert "<class>" in pretty
+
