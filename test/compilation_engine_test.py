@@ -108,4 +108,20 @@ def test_compile_class(setup_resources):
 
     pretty = write_xml(setup_resources)
 
-    assert "class" in pretty
+    assert "<class>" in pretty
+
+
+def test_compile_first_keyword(setup_resources):
+    """
+    Test that when we call compile_class, it properly handles everything up to the first keyword.
+    """
+    compilation = setup_resources["compilation"]
+    compilation.compile_class()
+
+    code = """<class>
+  <keyword>class</keyword>
+  <identifier>Main</identifier>
+  <symbol>{</symbol>"""
+    pretty = write_xml(setup_resources)
+
+    assert code in pretty
