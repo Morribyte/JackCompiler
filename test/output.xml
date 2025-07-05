@@ -17,16 +17,12 @@
     <parameterList/>
     <symbol>)</symbol>
     <subroutineBody>
-      <symbol>{</symbol>
-      <statements/>
       <varDec>
         <keyword>var</keyword>
         <identifier>SquareGame</identifier>
         <identifier>game</identifier>
         <symbol>;</symbol>
       </varDec>
-      <statements/>
-      <keyword>let</keyword>
       <statements>
         <letStatement>
           <keyword>let</keyword>
@@ -39,8 +35,11 @@
           <symbol>)</symbol>
           <symbol>;</symbol>
         </letStatement>
+        <doStatement/>
       </statements>
-      <keyword>do</keyword>
+      <statements>
+        <doStatement/>
+      </statements>
       <statements/>
     </subroutineBody>
   </subroutineDec>
