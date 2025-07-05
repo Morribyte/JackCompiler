@@ -27,17 +27,22 @@ class CompilationEngine:
             return
 
         print("\n~*~*~ Compiling class ~*~*~\n")
+
         while self.tokenizer.has_more_tokens():
-            if self.tokenizer.current_token_value in ("static", "field"):
-                print(f"\n~*~*~ Found class variable declaration: : {self.tokenizer.current_token_value} ~*~*~\n")
-                self.compile_class_var_dec(self.root)
-
-            if self.tokenizer.current_token_value in ("function", "method", "constructor"):
-                print(f"\n~*~*~ Found subroutine declaration token: {self.tokenizer.current_token_value} ~*~*~\n")
-                self.compile_subroutine(self.root)
-
             self.tokenizer.advance()
             self.write_token(self.root)
+
+            match self.tokenizer.current_token_value:
+                case "static" | "field":
+                    print(f"\n~*~*~ Found class variable declaration: : {self.tokenizer.current_token_value} ~*~*~\n")
+                # self.tokenizer.advance()
+                #
+                # self.compile_class_var_dec(self.root)
+            #
+            # if self.tokenizer.current_token_value in ("function", "method", "constructor"):
+            #     print(f"\n~*~*~ Found subroutine declaration token: {self.tokenizer.current_token_value} ~*~*~\n")
+            #     self.compile_subroutine(self.root)
+
 
     def compile_class_var_dec(self, parent):
         """
@@ -56,6 +61,13 @@ class CompilationEngine:
         """
         Compiles the start of a subroutine.
         """
+        subroutine_element = element_tree.SubElement(parent, "subroutineDec")
+        while True:
+            if self.tokenizer.current_token_value == "(":
+                self.write_token(subroutine_element)
+                break
+            self.write_token(subroutine_element)
+            self.tokenizer.advance()
     def write_token(self, parent_name):
         """
         Writes a token to the XML.

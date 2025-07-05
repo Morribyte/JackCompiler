@@ -136,6 +136,7 @@ def test_compile_class_var_dec(setup_resources):
 
     code = """
   <classVarDec>
+    <symbol>{</symbol>
     <keyword>static</keyword>
     <keyword>boolean</keyword>
     <identifier>test</identifier>
@@ -154,7 +155,8 @@ def test_subroutine_dec(setup_resources):
     compilation = setup_resources["compilation"]
     compilation.compile_class()
 
-    code = """<subroutineDec>
+    code = """  </classVarDec>
+  <subroutineDec>
     <keyword> function </keyword>
     <keyword> void </keyword>
     <identifier> main </identifier>
