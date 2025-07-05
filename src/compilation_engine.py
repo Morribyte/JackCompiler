@@ -17,6 +17,17 @@ class CompilationEngine:
         self.tokens_root = element_tree.Element("tokens")
         self.root = element_tree.Element("class")
 
+    def compile_class(self, token_mode=False):
+        """
+        Compiles a class and starts the compilation process.
+        Token_mode: if True, runs a basic parse in token mode so we can get a handle on the number of tokens.
+        """
+        if token_mode:
+            self._token_mode()
+        else:
+            print(f"Token found: {self.tokenizer.current_token_value}")
+            print(f"Token type found: {self.tokenizer.current_token_type}")
+
     def write_token(self, parent_name):
         """
         Writes a token to the XML.
@@ -28,7 +39,7 @@ class CompilationEngine:
         Compiles to a basic XML for testing.
         """
         while self.tokenizer.has_more_tokens():
-            print(f"Has more tokens: {self.tokenizer.has_more_tokens()}")
+            print(f"Current token type: {self.tokenizer.current_token_type} | {self.tokenizer.current_token_value}")
             self.tokenizer.advance()
             element_tree.SubElement(self.tokens_root, self.tokenizer.token_type()).text = f" {self.tokenizer.current_token_value} "
 
