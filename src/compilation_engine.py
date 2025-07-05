@@ -33,12 +33,26 @@ class CompilationEngine:
 
             if self.tokenizer.current_token_value in ("static", "field"):
                 print("\n~*~*~ Found class variable declaration ~*~*~\n")
+                self.compile_class_var_dec(self.root)
             self.tokenizer.advance()
             self.write_token(self.root)
 
         print(f"Token found: {self.tokenizer.current_token_value}")
         print(f"Token type found: {self.tokenizer.current_token_type}")
 
+    def compile_class_var_dec(self, parent):
+        """
+        Compiles the variable declarations for a class.
+        """
+        class_var_dec_element = element_tree.SubElement(parent, "classVarDec")
+        while True:
+            if self.tokenizer.current_token_value == ";":
+                self.write_token(class_var_dec_element)
+                break
+            self.write_token(class_var_dec_element)
+            self.tokenizer.advance()
+
+        print(f"Current token: {self.tokenizer.current_token_type} | {self.tokenizer.current_token_value}")
 
     def write_token(self, parent_name):
         """
@@ -64,4 +78,3 @@ class CompilationEngine:
             pretty = xml.dom.minidom.parseString(content).toprettyxml(indent="  ")
             print("\n=== XML File Output ===")
             print(pretty)
-

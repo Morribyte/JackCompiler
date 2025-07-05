@@ -134,6 +134,14 @@ def test_compile_class_var_dec(setup_resources):
     compilation = setup_resources["compilation"]
     compilation.compile_class()
 
+    code = """
+  <classVarDec>
+    <keyword>static</keyword>
+    <keyword>boolean</keyword>
+    <identifier>test</identifier>
+    <symbol>;</symbol>
+  </classVarDec>"""
     pretty = write_xml(setup_resources)
 
     assert "<classVarDec>" in pretty
+    assert code in pretty
