@@ -5,7 +5,6 @@ from pathlib import Path
 import pytest
 
 import xml.etree.ElementTree as element_tree
-import xml.dom.minidom
 
 
 from src.compilation_engine import CompilationEngine
@@ -28,23 +27,24 @@ def setup_resources():
 def write_xml(setup_resources):
     compilation = setup_resources["compilation"]
     tree = element_tree.ElementTree(compilation.root)
+    element_tree.indent(tree)
     tree.write("output.xml", encoding="utf-8", short_empty_elements=False)
     xml_str = element_tree.tostring(compilation.root, encoding="unicode", method="html")
-    pretty = xml.dom.minidom.parseString(xml_str).toprettyxml(indent="  ")
 
-    with open("output.xml", "w", encoding="utf-8") as f:
-        f.write(pretty)
+    print(xml_str)
+
+
+    # with open("output.xml", "w", encoding="utf-8") as f:
+    #     f.write(xml_str)
 
     # with open("output.xml", "r", encoding="utf-8") as f:
     #     content = f.read()
     #     # print("\n=== XML File Output ===")
     #     print(content)
 
-
-
     print("XML file parsed and formatted.")
 
-    return pretty
+   # return pretty
 
 def test_object_creation(setup_resources):
     """

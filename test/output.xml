@@ -1,4 +1,3 @@
-<?xml version="1.0" ?>
 <class>
   <keyword> class </keyword>
   <identifier> Main </identifier>
@@ -14,7 +13,8 @@
     <keyword> void </keyword>
     <identifier> main </identifier>
     <symbol> ( </symbol>
-    <parameterList/>
+    <parameterList>
+    </parameterList>
     <symbol> ) </symbol>
   </subroutineDec>
   <symbol> ) </symbol>
@@ -54,7 +54,7 @@
     <keyword> void </keyword>
     <identifier> more </identifier>
     <symbol> ( </symbol>
-    <parameterList/>
+    <parameterList></parameterList>
     <symbol> ) </symbol>
   </subroutineDec>
   <symbol> ) </symbol>
