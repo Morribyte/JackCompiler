@@ -118,11 +118,12 @@ class CompilationEngine:
 
         while True:
             if self.tokenizer.current_token_value == ";":
+                self.write_token(let_statement_element)
                 self.tokenizer.advance()
                 break
 
             if self.tokenizer.current_token_value == "=":
-                self.tokenizer.advance()
+                self.write_token(let_statement_element)
                 self.compile_expression(let_statement_element)
             self.write_token(let_statement_element)
             self.tokenizer.advance()
@@ -132,6 +133,8 @@ class CompilationEngine:
         Compiles an expression.
         """
         expression_element = element_tree.SubElement(parent, "expression")
+        self.tokenizer.advance()
+
         self.compile_term(expression_element)
 
     def compile_term(self, parent):
@@ -142,8 +145,6 @@ class CompilationEngine:
 
         while True:
             if self.tokenizer.current_token_value == ";":
-                self.write_token(term_element)
-                self.tokenizer.advance()
                 break
 
             if self.tokenizer.current_token_value == "(":
