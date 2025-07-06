@@ -28,13 +28,14 @@
           <keyword> let </keyword>
           <identifier> game </identifier>
           <expression>
-            <symbol> = </symbol>
-            <identifier> SquareGame </identifier>
-            <symbol> . </symbol>
-            <identifier> new </identifier>
-            <symbol> ( </symbol>
-            <symbol> ) </symbol>
-            <symbol> ; </symbol>
+            <term>
+              <identifier> SquareGame </identifier>
+              <symbol> . </symbol>
+              <identifier> new </identifier>
+              <symbol> ( </symbol>
+              <symbol> ) </symbol>
+              <symbol> ; </symbol>
+            </term>
           </expression>
           <keyword> do </keyword>
           <identifier> game </identifier>
@@ -94,16 +95,18 @@
           <keyword> let </keyword>
           <identifier> s </identifier>
           <expression>
-            <symbol> = </symbol>
-            <stringConstant> string constant </stringConstant>
-            <symbol> ; </symbol>
+            <term>
+              <stringConstant> string constant </stringConstant>
+              <symbol> ; </symbol>
+            </term>
           </expression>
           <keyword> let </keyword>
           <identifier> s </identifier>
           <expression>
-            <symbol> = </symbol>
-            <keyword> null </keyword>
-            <symbol> ; </symbol>
+            <term>
+              <keyword> null </keyword>
+              <symbol> ; </symbol>
+            </term>
           </expression>
           <keyword> let </keyword>
           <identifier> a </identifier>
@@ -111,12 +114,13 @@
           <integerConstant> 1 </integerConstant>
           <symbol> ] </symbol>
           <expression>
-            <symbol> = </symbol>
-            <identifier> a </identifier>
-            <symbol> [ </symbol>
-            <integerConstant> 2 </integerConstant>
-            <symbol> ] </symbol>
-            <symbol> ; </symbol>
+            <term>
+              <identifier> a </identifier>
+              <symbol> [ </symbol>
+              <integerConstant> 2 </integerConstant>
+              <symbol> ] </symbol>
+              <symbol> ; </symbol>
+            </term>
           </expression>
           <symbol> } </symbol>
           <keyword> else </keyword>
@@ -124,35 +128,38 @@
           <keyword> let </keyword>
           <identifier> i </identifier>
           <expression>
-            <symbol> = </symbol>
-            <identifier> i </identifier>
-            <symbol> * </symbol>
-            <symbol> ( </symbol>
-            <symbol> - </symbol>
-            <identifier> j </identifier>
-            <symbol> ) </symbol>
-            <symbol> ; </symbol>
+            <term>
+              <identifier> i </identifier>
+              <symbol> * </symbol>
+              <symbol> ( </symbol>
+              <symbol> - </symbol>
+              <identifier> j </identifier>
+              <symbol> ) </symbol>
+              <symbol> ; </symbol>
+            </term>
           </expression>
           <keyword> let </keyword>
           <identifier> j </identifier>
           <expression>
-            <symbol> = </symbol>
-            <identifier> j </identifier>
-            <symbol> / </symbol>
-            <symbol> ( </symbol>
-            <symbol> - </symbol>
-            <integerConstant> 2 </integerConstant>
-            <symbol> ) </symbol>
-            <symbol> ; </symbol>
+            <term>
+              <identifier> j </identifier>
+              <symbol> / </symbol>
+              <symbol> ( </symbol>
+              <symbol> - </symbol>
+              <integerConstant> 2 </integerConstant>
+              <symbol> ) </symbol>
+              <symbol> ; </symbol>
+            </term>
           </expression>
           <keyword> let </keyword>
           <identifier> i </identifier>
           <expression>
-            <symbol> = </symbol>
-            <identifier> i </identifier>
-            <symbol> | </symbol>
-            <identifier> j </identifier>
-            <symbol> ; </symbol>
+            <term>
+              <identifier> i </identifier>
+              <symbol> | </symbol>
+              <identifier> j </identifier>
+              <symbol> ; </symbol>
+            </term>
           </expression>
           <symbol> } </symbol>
           <keyword> return </keyword>

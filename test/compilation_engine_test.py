@@ -255,3 +255,26 @@ def test_compile_expression(setup_resources):
 
     assert "<expression>" in pretty
     assert "</expression>" in pretty
+
+
+def test_compile_term(setup_resources):
+    """
+    Test that when we run compile, an expression list is properly converted.
+    """
+    compilation = setup_resources["compilation"]
+    compilation.compile_class()
+
+    code = """          <expression>
+            <term>
+              <identifier> SquareGame </identifier>
+              <symbol> . </symbol>
+              <identifier> new </identifier>
+              <symbol> ( </symbol>
+"""
+
+    pretty = write_xml(setup_resources)
+
+    assert "<term>" in pretty
+    assert code in pretty
+
+
