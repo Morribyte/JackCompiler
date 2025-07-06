@@ -33,15 +33,12 @@ class CompilationEngine:
             print(f"Current token: {self.tokenizer.current_token_type} | {self.tokenizer.current_token_value} ")
             match self.tokenizer.current_token_value:
                 case "static" | "field":
-                    print("Printing field or static from case static")
                     self.compile_class_var_dec(self.root)
+                case "function" | "method" | "constructor":
+                    self.compile_subroutine(self.root)
                 case _:
                     self.write_token(self.root)
                     self.tokenizer.advance()
-            #
-            # if self.tokenizer.current_token_value in ("function", "method", "constructor"):
-            #     print(f"\n~*~*~ Found subroutine declaration token: {self.tokenizer.current_token_value} ~*~*~\n")
-            #     self.compile_subroutine(self.root)
 
     def compile_class_var_dec(self, parent):
         """
@@ -56,19 +53,19 @@ class CompilationEngine:
                 break
             self.tokenizer.advance()
 
-
-
     def compile_subroutine(self, parent):
         """
         Compiles the start of a subroutine.
         """
         subroutine_element = element_tree.SubElement(parent, "subroutineDec")
         while True:
-            self.tokenizer.advance()
             self.write_token(subroutine_element)
             if self.tokenizer.current_token_value == "(":
-                self.write_token(subroutine_element)
+                self.tokenizer.advance()
                 break
+            self.tokenizer.advance()
+
+
 
     def write_token(self, parent_name):
         """

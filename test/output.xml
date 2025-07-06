@@ -9,10 +9,12 @@
     <identifier>test</identifier>
     <symbol>;</symbol>
   </classVarDec>
-  <keyword>function</keyword>
-  <keyword>void</keyword>
-  <identifier>main</identifier>
-  <symbol>(</symbol>
+  <subroutineDec>
+    <keyword>function</keyword>
+    <keyword>void</keyword>
+    <identifier>main</identifier>
+    <symbol>(</symbol>
+  </subroutineDec>
   <symbol>)</symbol>
   <symbol>{</symbol>
   <keyword>var</keyword>
@@ -45,10 +47,12 @@
   <keyword>return</keyword>
   <symbol>;</symbol>
   <symbol>}</symbol>
-  <keyword>function</keyword>
-  <keyword>void</keyword>
-  <identifier>more</identifier>
-  <symbol>(</symbol>
+  <subroutineDec>
+    <keyword>function</keyword>
+    <keyword>void</keyword>
+    <identifier>more</identifier>
+    <symbol>(</symbol>
+  </subroutineDec>
   <symbol>)</symbol>
   <symbol>{</symbol>
   <keyword>var</keyword>
