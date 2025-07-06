@@ -99,7 +99,6 @@ class CompilationEngine:
 
             self.write_token(subroutine_body_element)
 
-
     def compile_statements(self, parent):
         """
         Compiles statements
@@ -109,6 +108,11 @@ class CompilationEngine:
         match self.tokenizer.current_token_value:
             case "let":
                 self.compile_let_statement(statements_element)
+            case "do":
+                pass
+            case _:
+                self.write_token(statements_element)
+                self.tokenizer.advance()
 
     def compile_let_statement(self, parent):
         """
@@ -119,11 +123,11 @@ class CompilationEngine:
         while True:
             if self.tokenizer.current_token_value == ";":
                 self.write_token(let_statement_element)
-                self.tokenizer.advance()
                 break
 
             if self.tokenizer.current_token_value == "=":
                 self.write_token(let_statement_element)
+                self.tokenizer.advance()
                 self.compile_expression(let_statement_element)
             self.write_token(let_statement_element)
             self.tokenizer.advance()
@@ -133,8 +137,6 @@ class CompilationEngine:
         Compiles an expression.
         """
         expression_element = element_tree.SubElement(parent, "expression")
-        self.tokenizer.advance()
-
         self.compile_term(expression_element)
 
     def compile_term(self, parent):
@@ -143,18 +145,11 @@ class CompilationEngine:
         """
         term_element = element_tree.SubElement(parent, "term")
 
-        while True:
-            if self.tokenizer.current_token_value == ";":
-                break
-
-            if self.tokenizer.current_token_value == "(":
+        match self.tokenizer.current_token_type:
+            case "identifier":
                 self.write_token(term_element)
                 self.tokenizer.advance()
 
-
-            self.write_token(term_element)
-
-            self.tokenizer.advance()
 
     def compile_var_dec(self, parent):
         """
