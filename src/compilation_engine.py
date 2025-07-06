@@ -33,8 +33,10 @@ class CompilationEngine:
             print(f"Current token: {self.tokenizer.current_token_type} | {self.tokenizer.current_token_value} ")
             match self.tokenizer.current_token_value:
                 case "static" | "field":
+                    print(f"~*~*~ Class variable declaration: {self.tokenizer.current_token_value} ~*~*~")
                     self.compile_class_var_dec(self.root)
                 case "function" | "method" | "constructor":
+                    print(f"~*~*~ Subroutine call: {self.tokenizer.current_token_value} ~*~*~")
                     self.compile_subroutine(self.root)
                 case _:
                     self.write_token(self.root)

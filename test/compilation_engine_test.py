@@ -31,17 +31,6 @@ def write_xml(setup_resources):
     tree.write("output.xml", encoding="utf-8", short_empty_elements=False)
     xml_str = element_tree.tostring(compilation.root, encoding="unicode", method="html")
 
-    print(xml_str)
-
-
-    # with open("output.xml", "w", encoding="utf-8") as f:
-    #     f.write(xml_str)
-
-    # with open("output.xml", "r", encoding="utf-8") as f:
-    #     content = f.read()
-    #     # print("\n=== XML File Output ===")
-    #     print(content)
-
     print("XML file parsed and formatted.")
 
     return xml_str
