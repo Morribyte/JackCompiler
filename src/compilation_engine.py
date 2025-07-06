@@ -74,6 +74,7 @@ class CompilationEngine:
         """
         parameter_list_element = element_tree.SubElement(parent, "parameterList")
 
+
         if self.tokenizer.current_token_value == ")":
             return
 
@@ -85,8 +86,8 @@ class CompilationEngine:
         """
         Writes a token to the XML.
         """
-        element_tree.SubElement(parent_name, self.tokenizer.current_token_type).text = f" {self.tokenizer.current_token_value} "
-        element_tree.ElementTree(parent_name).write("output.xml", encoding="utf-8", short_empty_elements=False)
+        token_tag = element_tree.SubElement(parent_name, self.tokenizer.current_token_type).text = f" {self.tokenizer.current_token_value} "
+
 
     def _token_mode(self):
         """

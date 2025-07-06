@@ -28,18 +28,19 @@ def setup_resources():
 def write_xml(setup_resources):
     compilation = setup_resources["compilation"]
     tree = element_tree.ElementTree(compilation.root)
-    tree.write("output.xml", encoding="utf-8")
-    pretty = element_tree.tostring(compilation.root, encoding="unicode")
-
-    with open("output.xml", "r", encoding="utf-8") as f:
-        content = f.read()
-        pretty = xml.dom.minidom.parseString(content).toprettyxml(indent="  ")
-        # print("\n=== XML File Output ===")
-        # print(pretty)
+    tree.write("output.xml", encoding="utf-8", short_empty_elements=False)
+    xml_str = element_tree.tostring(compilation.root, encoding="unicode", method="html")
+    pretty = xml.dom.minidom.parseString(xml_str).toprettyxml(indent="  ")
 
     with open("output.xml", "w", encoding="utf-8") as f:
-        pretty = xml.dom.minidom.parseString(content).toprettyxml(indent="  ")
         f.write(pretty)
+
+    # with open("output.xml", "r", encoding="utf-8") as f:
+    #     content = f.read()
+    #     # print("\n=== XML File Output ===")
+    #     print(content)
+
+
 
     print("XML file parsed and formatted.")
 
@@ -172,8 +173,13 @@ def test_compile_parameter_list(setup_resources):
     compilation = setup_resources["compilation"]
     compilation.compile_class()
 
-    code="""<symbol> ( </symbol>
-    <parameterList/>
+    code="""  <subroutineDec>
+    <keyword> function </keyword>
+    <keyword> void </keyword>
+    <identifier> main </identifier>
+    <symbol> ( </symbol>
+    <parameterList>
+    </parameterList>
     <symbol> ) </symbol>"""
 
     pretty = write_xml(setup_resources)
