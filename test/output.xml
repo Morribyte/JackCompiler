@@ -14,8 +14,10 @@
     <keyword> void </keyword>
     <identifier> main </identifier>
     <symbol> ( </symbol>
+    <parameterList/>
     <symbol> ) </symbol>
   </subroutineDec>
+  <symbol> ) </symbol>
   <symbol> { </symbol>
   <keyword> var </keyword>
   <identifier> SquareGame </identifier>
@@ -52,8 +54,10 @@
     <keyword> void </keyword>
     <identifier> more </identifier>
     <symbol> ( </symbol>
+    <parameterList/>
     <symbol> ) </symbol>
   </subroutineDec>
+  <symbol> ) </symbol>
   <symbol> { </symbol>
   <keyword> var </keyword>
   <keyword> int </keyword>

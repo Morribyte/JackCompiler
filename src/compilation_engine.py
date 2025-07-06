@@ -62,6 +62,9 @@ class CompilationEngine:
             self.write_token(subroutine_element)
             if self.tokenizer.current_token_value == "(":
                 self.tokenizer.advance()
+                print(self.tokenizer.current_token_value)
+                self.compile_parameter_list(subroutine_element)
+                self.write_token(subroutine_element)
                 break
             self.tokenizer.advance()
 
@@ -70,18 +73,20 @@ class CompilationEngine:
         Compiles the parameter list of a subroutine.
         """
         parameter_list_element = element_tree.SubElement(parent, "parameterList")
-        while True:
-            self.write_token(parameter_list_element)
-            if self.tokenizer.current_token_value == ")":
-                self.tokenizer.advance()
-                break
+
+        if self.tokenizer.current_token_value == ")":
+            return
+
+        while self.tokenizer.current_token_value != ")":
             self.tokenizer.advance()
+            self.write_token(parameter_list_element)
 
     def write_token(self, parent_name):
         """
         Writes a token to the XML.
         """
         element_tree.SubElement(parent_name, self.tokenizer.current_token_type).text = f" {self.tokenizer.current_token_value} "
+        element_tree.ElementTree(parent_name).write("output.xml", encoding="utf-8", short_empty_elements=False)
 
     def _token_mode(self):
         """

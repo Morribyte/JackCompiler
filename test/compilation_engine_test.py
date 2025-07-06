@@ -173,8 +173,7 @@ def test_compile_parameter_list(setup_resources):
     compilation.compile_class()
 
     code="""<symbol> ( </symbol>
-    <parameterList>
-    </parameterList>
+    <parameterList/>
     <symbol> ) </symbol>"""
 
     pretty = write_xml(setup_resources)
