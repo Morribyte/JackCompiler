@@ -94,8 +94,34 @@ class CompilationEngine:
             self.tokenizer.advance()
             if self.tokenizer.current_token_value == "var":
                 self.compile_var_dec(subroutine_body_element)
+
+            if self.tokenizer.current_token_value in "let":
+                self.compile_statements(subroutine_body_element)
+
             self.write_token(subroutine_body_element)
 
+
+    def compile_statements(self, parent):
+        """
+        Compiles statements
+        """
+        statements_element = element_tree.SubElement(parent, "statements")
+
+        match self.tokenizer.current_token_value:
+            case "let":
+                self.compile_let_statement(statements_element)
+
+    def compile_let_statement(self, parent):
+        """
+        Compiles a let statement.
+        """
+
+        while True:
+            self.write_token(class_var_dec_element)
+            if self.tokenizer.current_token_value == ";":
+                self.tokenizer.advance()
+                break
+            self.tokenizer.advance()
 
     def compile_var_dec(self, parent):
         """
@@ -110,7 +136,6 @@ class CompilationEngine:
                 break
 
             self.tokenizer.advance()
-
 
     def write_token(self, parent_name):
         """

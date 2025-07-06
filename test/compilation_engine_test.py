@@ -218,4 +218,6 @@ def test_statements_brackets(setup_resources):
     compilation = setup_resources["compilation"]
     compilation.compile_class()
 
+    pretty = write_xml(setup_resources)
+
     assert "<statements>" in pretty
