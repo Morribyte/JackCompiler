@@ -119,9 +119,9 @@ def test_compile_first_keyword(setup_resources):
     compilation.compile_class()
 
     code = """<class>
-  <keyword>class</keyword>
-  <identifier>Main</identifier>
-  <symbol>{</symbol>"""
+  <keyword> class </keyword>
+  <identifier> Main </identifier>
+  <symbol> { </symbol>"""
     pretty = write_xml(setup_resources)
 
     assert code in pretty
@@ -135,10 +135,10 @@ def test_compile_class_var_dec(setup_resources):
     compilation.compile_class()
 
     code = """  <classVarDec>
-    <keyword>static</keyword>
-    <keyword>boolean</keyword>
-    <identifier>test</identifier>
-    <symbol>;</symbol>
+    <keyword> static </keyword>
+    <keyword> boolean </keyword>
+    <identifier> test </identifier>
+    <symbol> ; </symbol>
   </classVarDec>"""
     pretty = write_xml(setup_resources)
 
@@ -164,3 +164,20 @@ def test_subroutine_dec(setup_resources):
     assert "<subroutineDec>" in pretty
     assert code in pretty
 
+
+def test_compile_parameter_list(setup_resources):
+    """
+    Test that when we call compile_class, it handles the parameter list.
+    """
+    compilation = setup_resources["compilation"]
+    compilation.compile_class()
+
+    code="""<symbol> ( </symbol>
+    <parameterList>
+    </parameterList>
+    <symbol> ) </symbol>"""
+
+    pretty = write_xml(setup_resources)
+
+    assert "<parameterList>" in pretty
+    assert code in pretty

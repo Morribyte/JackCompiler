@@ -60,7 +60,7 @@ class CompilationEngine:
         subroutine_element = element_tree.SubElement(parent, "subroutineDec")
         while True:
             self.write_token(subroutine_element)
-            if self.tokenizer.current_token_value == "(":
+            if self.tokenizer.current_token_value == ")":
                 self.tokenizer.advance()
                 break
             self.tokenizer.advance()
@@ -71,7 +71,7 @@ class CompilationEngine:
         """
         Writes a token to the XML.
         """
-        element_tree.SubElement(parent_name, self.tokenizer.current_token_type).text = f"{self.tokenizer.current_token_value}"
+        element_tree.SubElement(parent_name, self.tokenizer.current_token_type).text = f" {self.tokenizer.current_token_value} "
 
     def _token_mode(self):
         """
