@@ -242,3 +242,16 @@ def test_let_statements_brackets(setup_resources):
 
     assert "<letStatement>" in pretty
     assert code in pretty
+
+
+def test_compile_expression(setup_resources):
+    """
+    Test that when we run compile, an expression bracket is printed.
+    """
+    compilation = setup_resources["compilation"]
+    compilation.compile_class()
+
+    pretty = write_xml(setup_resources)
+
+    assert "<expression>" in pretty
+    assert "</expression>" in pretty

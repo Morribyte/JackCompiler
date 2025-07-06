@@ -122,7 +122,18 @@ class CompilationEngine:
             if self.tokenizer.current_token_value == ";":
                 self.tokenizer.advance()
                 break
+
+            if self.tokenizer.current_token_value == "=":
+                self.compile_expression(let_statement_element)
             self.tokenizer.advance()
+
+    def compile_expression(self, parent):
+        """
+        Compiles an expression.
+        """
+        expression_element = element_tree.SubElement(parent, "expression")
+
+
 
     def compile_var_dec(self, parent):
         """

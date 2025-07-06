@@ -28,6 +28,7 @@
           <keyword> let </keyword>
           <identifier> game </identifier>
           <symbol> = </symbol>
+          <expression></expression>
           <identifier> SquareGame </identifier>
           <symbol> . </symbol>
           <identifier> new </identifier>
@@ -93,6 +94,7 @@
           <keyword> let </keyword>
           <identifier> s </identifier>
           <symbol> = </symbol>
+          <expression></expression>
           <stringConstant> string constant </stringConstant>
           <symbol> ; </symbol>
         </letStatement>
@@ -110,6 +112,7 @@
           <integerConstant> 1 </integerConstant>
           <symbol> ] </symbol>
           <symbol> = </symbol>
+          <expression></expression>
           <identifier> a </identifier>
           <symbol> [ </symbol>
           <integerConstant> 2 </integerConstant>
