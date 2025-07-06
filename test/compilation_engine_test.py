@@ -209,6 +209,7 @@ def test_var_dec(setup_resources):
 
     assert "<subroutineBody>" in pretty
     assert "</subroutineBody>" in pretty
+    assert code in pretty
 
 
 def test_statements_brackets(setup_resources):
@@ -221,3 +222,23 @@ def test_statements_brackets(setup_resources):
     pretty = write_xml(setup_resources)
 
     assert "<statements>" in pretty
+
+
+def test_let_statements_brackets(setup_resources):
+    """
+    Test that the letStatement prints properly.
+    """
+    compilation = setup_resources["compilation"]
+    compilation.compile_class()
+
+    code="""      </varDec>
+      <statements>
+        <letStatement>
+          <keyword> let </keyword>
+          <identifier> game </identifier>
+"""
+
+    pretty = write_xml(setup_resources)
+
+    assert "<letStatement>" in pretty
+    assert code in pretty

@@ -115,9 +115,10 @@ class CompilationEngine:
         """
         Compiles a let statement.
         """
+        let_statement_element = element_tree.SubElement(parent, "letStatement")
 
         while True:
-            self.write_token(class_var_dec_element)
+            self.write_token(let_statement_element)
             if self.tokenizer.current_token_value == ";":
                 self.tokenizer.advance()
                 break
