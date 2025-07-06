@@ -174,3 +174,17 @@ def test_compile_parameter_list(setup_resources):
 
     assert "<parameterList>" in pretty
     assert code in pretty
+
+
+def test_subroutine_body(setup_resources):
+    """
+    Test that when we call compile_class, it can run the subroutine body
+    """
+    compilation = setup_resources["compilation"]
+    compilation.compile_class()
+
+    pretty = write_xml(setup_resources)
+
+    assert "<subroutineBody>" in pretty
+    assert "</subroutineBody>" in pretty
+

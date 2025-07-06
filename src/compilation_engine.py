@@ -69,6 +69,7 @@ class CompilationEngine:
                 self.write_token(subroutine_element)
                 break
             self.tokenizer.advance()
+        self.compile_subroutine_body(subroutine_element)
 
     def compile_parameter_list(self, parent):
         """
@@ -82,6 +83,17 @@ class CompilationEngine:
 
             self.tokenizer.advance()
             self.write_token(parameter_list_element)
+
+    def compile_subroutine_body(self, parent):
+        """
+        Compiles the body of a subroutine.
+        """
+        subroutine_body_element = element_tree.SubElement(parent, "subroutineBody")
+
+        while self.tokenizer.current_token_value != "}":
+            self.tokenizer.advance()
+            self.write_token(subroutine_body_element)
+
 
     def write_token(self, parent_name):
         """
