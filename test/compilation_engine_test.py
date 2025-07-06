@@ -285,12 +285,15 @@ def test_compile_expression_list(setup_resources):
     compilation = setup_resources["compilation"]
     compilation.compile_class()
 
-    code = """              <symbol> ( </symbol>
+    code = """          <expression>
+            <term>
+              <identifier> SquareGame </identifier>
+              <symbol> . </symbol>
+              <identifier> new </identifier>
+              <symbol> ( </symbol>
               <expressionList></expressionList>
               <symbol> ) </symbol>
-            </term>
-          </expression>
-"""
+              <symbol> ; </symbol>"""
 
     pretty = write_xml(setup_resources)
 

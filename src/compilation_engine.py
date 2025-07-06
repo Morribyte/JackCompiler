@@ -165,9 +165,12 @@ class CompilationEngine:
                                 break
 
                             if self.tokenizer.current_token_value == "(":
-                                self.compile_expression_list(term_element)
                                 self.tokenizer.advance()
+                                self.compile_expression_list(term_element)
+                                self.write_token(term_element)
                             self.tokenizer.advance()
+                    case _:
+                        pass
 
     def compile_expression_list(self, parent):
         """
@@ -176,8 +179,16 @@ class CompilationEngine:
         expression_list_element = element_tree.SubElement(parent, "expressionList")
 
         if self.tokenizer.current_token_value == ")":
-            print("CURRENT TOKEN IS ). RETURNING.")
             return  # Empty list—bail early
+
+        while self.tokenizer.current_token_value != ")":
+
+            self.compile_expression(expression_list_element)
+
+            if self.tokenizer.current_token_value == ",":
+                self.write_token(expression_list_element)
+                self.tokenizer.advance()
+            self.tokenizer.advance()
 
 
     def compile_var_dec(self, parent):
