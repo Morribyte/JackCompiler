@@ -118,13 +118,13 @@ class CompilationEngine:
         let_statement_element = element_tree.SubElement(parent, "letStatement")
 
         while True:
-            self.write_token(let_statement_element)
             if self.tokenizer.current_token_value == ";":
                 self.tokenizer.advance()
                 break
 
             if self.tokenizer.current_token_value == "=":
                 self.compile_expression(let_statement_element)
+            self.write_token(let_statement_element)
             self.tokenizer.advance()
 
     def compile_expression(self, parent):
@@ -133,7 +133,14 @@ class CompilationEngine:
         """
         expression_element = element_tree.SubElement(parent, "expression")
 
+        while True:
+            if self.tokenizer.current_token_value == ";":
+                self.write_token(expression_element)
+                self.tokenizer.advance()
+                break
+            self.write_token(expression_element)
 
+            self.tokenizer.advance()
 
     def compile_var_dec(self, parent):
         """
