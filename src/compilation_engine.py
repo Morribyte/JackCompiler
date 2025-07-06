@@ -136,7 +136,10 @@ class CompilationEngine:
         Compiles an expression.
         """
         expression_element = element_tree.SubElement(parent, "expression")
-        #self.compile_term(expression_element)
+        self.compile_term(expression_element)
+
+    def compile_term(self, parent):
+        term_selement = element_tree.SubElement(parent, "term")
 
 
     def compile_expression_list(self, parent):
