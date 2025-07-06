@@ -60,12 +60,22 @@ class CompilationEngine:
         subroutine_element = element_tree.SubElement(parent, "subroutineDec")
         while True:
             self.write_token(subroutine_element)
-            if self.tokenizer.current_token_value == ")":
+            if self.tokenizer.current_token_value == "(":
                 self.tokenizer.advance()
                 break
             self.tokenizer.advance()
 
-
+    def compile_parameter_list(self, parent):
+        """
+        Compiles the parameter list of a subroutine.
+        """
+        parameter_list_element = element_tree.SubElement(parent, "parameterList")
+        while True:
+            self.write_token(parameter_list_element)
+            if self.tokenizer.current_token_value == ")":
+                self.tokenizer.advance()
+                break
+            self.tokenizer.advance()
 
     def write_token(self, parent_name):
         """
