@@ -44,7 +44,7 @@ def write_xml(setup_resources):
 
     print("XML file parsed and formatted.")
 
-   # return pretty
+    return xml_str
 
 def test_object_creation(setup_resources):
     """
@@ -178,8 +178,7 @@ def test_compile_parameter_list(setup_resources):
     <keyword> void </keyword>
     <identifier> main </identifier>
     <symbol> ( </symbol>
-    <parameterList>
-    </parameterList>
+    <parameterList></parameterList>
     <symbol> ) </symbol>"""
 
     pretty = write_xml(setup_resources)

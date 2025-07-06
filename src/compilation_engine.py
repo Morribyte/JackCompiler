@@ -73,12 +73,11 @@ class CompilationEngine:
         Compiles the parameter list of a subroutine.
         """
         parameter_list_element = element_tree.SubElement(parent, "parameterList")
-
-
         if self.tokenizer.current_token_value == ")":
             return
 
         while self.tokenizer.current_token_value != ")":
+
             self.tokenizer.advance()
             self.write_token(parameter_list_element)
 
