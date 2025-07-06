@@ -146,9 +146,24 @@ class CompilationEngine:
         term_element = element_tree.SubElement(parent, "term")
 
         match self.tokenizer.current_token_type:
+            # identifier can be: className, subroutineName, or varName
             case "identifier":
                 self.write_token(term_element)
                 self.tokenizer.advance()
+
+                # Now that we have an identifier, let's match the token.
+
+                # subrtoutineCall
+                match self.tokenizer.current_token_value:
+                    case ".":
+                        while True:
+                            self.write_token(term_element)
+                            if self.tokenizer.current_token_value == ")":
+                                self.tokenizer.advance()
+                                break
+                            self.tokenizer.advance()
+
+
 
 
     def compile_var_dec(self, parent):

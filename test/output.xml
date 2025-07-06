@@ -31,22 +31,22 @@
           <expression>
             <term>
               <identifier> SquareGame </identifier>
+              <symbol> . </symbol>
+              <identifier> new </identifier>
+              <symbol> ( </symbol>
+              <symbol> ) </symbol>
             </term>
           </expression>
+          <symbol> ; </symbol>
+          <keyword> do </keyword>
+          <identifier> game </identifier>
           <symbol> . </symbol>
-          <identifier> new </identifier>
+          <identifier> run </identifier>
           <symbol> ( </symbol>
           <symbol> ) </symbol>
           <symbol> ; </symbol>
         </letStatement>
       </statements>
-      <symbol> ; </symbol>
-      <keyword> do </keyword>
-      <identifier> game </identifier>
-      <symbol> . </symbol>
-      <identifier> run </identifier>
-      <symbol> ( </symbol>
-      <symbol> ) </symbol>
       <symbol> ; </symbol>
       <keyword> do </keyword>
       <identifier> game </identifier>
