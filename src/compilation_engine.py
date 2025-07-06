@@ -111,8 +111,10 @@ class CompilationEngine:
             case "do":
                 pass
             case _:
-                self.write_token(statements_element)
-                self.tokenizer.advance()
+                pass
+                # self.write_token(statements_element)
+                # self.tokenizer.advance()
+
 
     def compile_let_statement(self, parent):
         """
@@ -161,9 +163,21 @@ class CompilationEngine:
                             if self.tokenizer.current_token_value == ")":
                                 self.tokenizer.advance()
                                 break
+
+                            if self.tokenizer.current_token_value == "(":
+                                self.compile_expression_list(term_element)
+                                self.tokenizer.advance()
                             self.tokenizer.advance()
 
+    def compile_expression_list(self, parent):
+        """
+        Compiles an expression list
+        """
+        expression_list_element = element_tree.SubElement(parent, "expressionList")
 
+        if self.tokenizer.current_token_value == ")":
+            print("CURRENT TOKEN IS ). RETURNING.")
+            return  # Empty list—bail early
 
 
     def compile_var_dec(self, parent):

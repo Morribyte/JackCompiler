@@ -34,67 +34,52 @@
               <symbol> . </symbol>
               <identifier> new </identifier>
               <symbol> ( </symbol>
+              <expressionList></expressionList>
+              <symbol> ; </symbol>
+              <keyword> do </keyword>
+              <identifier> game </identifier>
+              <symbol> . </symbol>
+              <identifier> run </identifier>
+              <symbol> ( </symbol>
+              <expressionList></expressionList>
+              <symbol> ; </symbol>
+              <keyword> do </keyword>
+              <identifier> game </identifier>
+              <symbol> . </symbol>
+              <identifier> dispose </identifier>
+              <symbol> ( </symbol>
+              <expressionList></expressionList>
+              <symbol> ; </symbol>
+              <keyword> return </keyword>
+              <symbol> ; </symbol>
+              <symbol> } </symbol>
+              <keyword> function </keyword>
+              <keyword> void </keyword>
+              <identifier> more </identifier>
+              <symbol> ( </symbol>
+              <expressionList></expressionList>
+              <symbol> { </symbol>
+              <keyword> var </keyword>
+              <keyword> int </keyword>
+              <identifier> i </identifier>
+              <symbol> , </symbol>
+              <identifier> j </identifier>
+              <symbol> ; </symbol>
+              <keyword> var </keyword>
+              <identifier> String </identifier>
+              <identifier> s </identifier>
+              <symbol> ; </symbol>
+              <keyword> var </keyword>
+              <identifier> Array </identifier>
+              <identifier> a </identifier>
+              <symbol> ; </symbol>
+              <keyword> if </keyword>
+              <symbol> ( </symbol>
+              <expressionList></expressionList>
               <symbol> ) </symbol>
             </term>
           </expression>
-          <symbol> ; </symbol>
-          <keyword> do </keyword>
-          <identifier> game </identifier>
-          <symbol> . </symbol>
-          <identifier> run </identifier>
-          <symbol> ( </symbol>
-          <symbol> ) </symbol>
-          <symbol> ; </symbol>
-        </letStatement>
-      </statements>
-      <symbol> ; </symbol>
-      <keyword> do </keyword>
-      <identifier> game </identifier>
-      <symbol> . </symbol>
-      <identifier> dispose </identifier>
-      <symbol> ( </symbol>
-      <symbol> ) </symbol>
-      <symbol> ; </symbol>
-      <keyword> return </keyword>
-      <symbol> ; </symbol>
-      <symbol> } </symbol>
-    </subroutineBody>
-  </subroutineDec>
-  <symbol> } </symbol>
-  <subroutineDec>
-    <keyword> function </keyword>
-    <keyword> void </keyword>
-    <identifier> more </identifier>
-    <symbol> ( </symbol>
-    <parameterList></parameterList>
-    <symbol> ) </symbol>
-    <subroutineBody>
-      <symbol> { </symbol>
-      <varDec>
-        <keyword> var </keyword>
-        <keyword> int </keyword>
-        <identifier> i </identifier>
-        <symbol> , </symbol>
-        <identifier> j </identifier>
-        <symbol> ; </symbol>
-      </varDec>
-      <keyword> var </keyword>
-      <identifier> String </identifier>
-      <identifier> s </identifier>
-      <symbol> ; </symbol>
-      <varDec>
-        <keyword> var </keyword>
-        <identifier> Array </identifier>
-        <identifier> a </identifier>
-        <symbol> ; </symbol>
-      </varDec>
-      <keyword> if </keyword>
-      <symbol> ( </symbol>
-      <keyword> false </keyword>
-      <symbol> ) </symbol>
-      <symbol> { </symbol>
-      <statements>
-        <letStatement>
+          <symbol> { </symbol>
           <keyword> let </keyword>
           <identifier> s </identifier>
           <symbol> = </symbol>

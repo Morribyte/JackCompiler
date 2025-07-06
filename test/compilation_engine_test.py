@@ -259,7 +259,7 @@ def test_compile_expression(setup_resources):
 
 def test_compile_term(setup_resources):
     """
-    Test that when we run compile, an expression list is properly converted.
+    Test that when we run compile, term is written properly
     """
     compilation = setup_resources["compilation"]
     compilation.compile_class()
@@ -277,4 +277,23 @@ def test_compile_term(setup_resources):
     assert "<term>" in pretty
     assert code in pretty
 
+
+def test_compile_expression_list(setup_resources):
+    """
+    Test that when we run compile, an expression list is properly converted.
+    """
+    compilation = setup_resources["compilation"]
+    compilation.compile_class()
+
+    code = """              <symbol> ( </symbol>
+              <expressionList></expressionList>
+              <symbol> ) </symbol>
+            </term>
+          </expression>
+"""
+
+    pretty = write_xml(setup_resources)
+
+    assert "<expressionList>" in pretty
+    assert code in pretty
 
