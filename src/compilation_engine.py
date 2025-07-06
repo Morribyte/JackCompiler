@@ -92,7 +92,24 @@ class CompilationEngine:
 
         while self.tokenizer.current_token_value != "}":
             self.tokenizer.advance()
+            if self.tokenizer.current_token_value == "var":
+                self.compile_var_dec(subroutine_body_element)
             self.write_token(subroutine_body_element)
+
+
+    def compile_var_dec(self, parent):
+        """
+        Compiles the variable declaration of a subroutine.
+        """
+        subroutine_var_dec = element_tree.SubElement(parent, "varDec")
+
+        while True:
+            self.write_token(subroutine_var_dec)
+            if self.tokenizer.current_token_value == ";":
+                self.tokenizer.advance()
+                break
+
+            self.tokenizer.advance()
 
 
     def write_token(self, parent_name):

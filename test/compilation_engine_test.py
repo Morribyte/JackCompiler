@@ -188,3 +188,34 @@ def test_subroutine_body(setup_resources):
     assert "<subroutineBody>" in pretty
     assert "</subroutineBody>" in pretty
 
+
+def test_var_dec(setup_resources):
+    """
+    Test that when we call compile_class, it runs through the variable declarations properly.
+    """
+    compilation = setup_resources["compilation"]
+    compilation.compile_class()
+
+    code="""      <symbol> { </symbol>
+      <varDec>
+        <keyword> var </keyword>
+        <identifier> SquareGame </identifier>
+        <identifier> game </identifier>
+        <symbol> ; </symbol>
+      </varDec>
+    """
+
+    pretty = write_xml(setup_resources)
+
+    assert "<subroutineBody>" in pretty
+    assert "</subroutineBody>" in pretty
+
+
+def test_statements_brackets(setup_resources):
+    """
+    Test that the compile statements brackets print properly
+    """
+    compilation = setup_resources["compilation"]
+    compilation.compile_class()
+
+    assert "<statements>" in pretty

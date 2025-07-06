@@ -17,10 +17,12 @@
     <symbol> ) </symbol>
     <subroutineBody>
       <symbol> { </symbol>
-      <keyword> var </keyword>
-      <identifier> SquareGame </identifier>
-      <identifier> game </identifier>
-      <symbol> ; </symbol>
+      <varDec>
+        <keyword> var </keyword>
+        <identifier> SquareGame </identifier>
+        <identifier> game </identifier>
+        <symbol> ; </symbol>
+      </varDec>
       <keyword> let </keyword>
       <identifier> game </identifier>
       <symbol> = </symbol>
@@ -59,20 +61,24 @@
     <symbol> ) </symbol>
     <subroutineBody>
       <symbol> { </symbol>
-      <keyword> var </keyword>
-      <keyword> int </keyword>
-      <identifier> i </identifier>
-      <symbol> , </symbol>
-      <identifier> j </identifier>
-      <symbol> ; </symbol>
+      <varDec>
+        <keyword> var </keyword>
+        <keyword> int </keyword>
+        <identifier> i </identifier>
+        <symbol> , </symbol>
+        <identifier> j </identifier>
+        <symbol> ; </symbol>
+      </varDec>
       <keyword> var </keyword>
       <identifier> String </identifier>
       <identifier> s </identifier>
       <symbol> ; </symbol>
-      <keyword> var </keyword>
-      <identifier> Array </identifier>
-      <identifier> a </identifier>
-      <symbol> ; </symbol>
+      <varDec>
+        <keyword> var </keyword>
+        <identifier> Array </identifier>
+        <identifier> a </identifier>
+        <symbol> ; </symbol>
+      </varDec>
       <keyword> if </keyword>
       <symbol> ( </symbol>
       <keyword> false </keyword>
