@@ -28,15 +28,11 @@ class CompilationEngine:
 
         self.tokenizer.advance()
 
-        print("\n~*~*~ Compiling class ~*~*~\n")
         while self.tokenizer.has_more_tokens():
-            print(f"Current token: {self.tokenizer.current_token_type} | {self.tokenizer.current_token_value} ")
             match self.tokenizer.current_token_value:
                 case "static" | "field":
-                    print(f"~*~*~ Class variable declaration: {self.tokenizer.current_token_value} ~*~*~")
                     self.compile_class_var_dec(self.root)
                 case "function" | "method" | "constructor":
-                    print(f"~*~*~ Subroutine call: {self.tokenizer.current_token_value} ~*~*~")
                     self.compile_subroutine(self.root)
                 case _:
                     self.write_token(self.root)
@@ -111,9 +107,8 @@ class CompilationEngine:
             case "do":
                 pass
             case _:
-                pass
-                # self.write_token(statements_element)
-                # self.tokenizer.advance()
+                self.write_token(statements_element)
+                self.tokenizer.advance()
 
 
     def compile_let_statement(self, parent):
@@ -123,8 +118,10 @@ class CompilationEngine:
         let_statement_element = element_tree.SubElement(parent, "letStatement")
 
         while True:
+            print(f"let statement token: {self.tokenizer.current_token_value}")
             if self.tokenizer.current_token_value == ";":
                 self.write_token(let_statement_element)
+                self.tokenizer.advance()
                 break
 
             if self.tokenizer.current_token_value == "=":
@@ -139,38 +136,8 @@ class CompilationEngine:
         Compiles an expression.
         """
         expression_element = element_tree.SubElement(parent, "expression")
-        self.compile_term(expression_element)
+        #self.compile_term(expression_element)
 
-    def compile_term(self, parent):
-        """
-        Compiles a term.
-        """
-        term_element = element_tree.SubElement(parent, "term")
-
-        match self.tokenizer.current_token_type:
-            # identifier can be: className, subroutineName, or varName
-            case "identifier":
-                self.write_token(term_element)
-                self.tokenizer.advance()
-
-                # Now that we have an identifier, let's match the token.
-
-                # subrtoutineCall
-                match self.tokenizer.current_token_value:
-                    case ".":
-                        while True:
-                            self.write_token(term_element)
-                            if self.tokenizer.current_token_value == ")":
-                                self.tokenizer.advance()
-                                break
-
-                            if self.tokenizer.current_token_value == "(":
-                                self.tokenizer.advance()
-                                self.compile_expression_list(term_element)
-                                self.write_token(term_element)
-                            self.tokenizer.advance()
-                    case _:
-                        pass
 
     def compile_expression_list(self, parent):
         """
@@ -180,15 +147,15 @@ class CompilationEngine:
 
         if self.tokenizer.current_token_value == ")":
             return  # Empty list—bail early
-
-        while self.tokenizer.current_token_value != ")":
-
-            self.compile_expression(expression_list_element)
-
-            if self.tokenizer.current_token_value == ",":
-                self.write_token(expression_list_element)
-                self.tokenizer.advance()
-            self.tokenizer.advance()
+        #
+        # while self.tokenizer.current_token_value != ")":
+        #
+        #     self.compile_expression(expression_list_element)
+        #
+        #     if self.tokenizer.current_token_value == ",":
+        #         self.write_token(expression_list_element)
+        #         self.tokenizer.advance()
+        #     self.tokenizer.advance()
 
 
     def compile_var_dec(self, parent):

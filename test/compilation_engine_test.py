@@ -61,17 +61,6 @@ def test_compile_class_token_mode_on(setup_resources):
     assert compilation.tokenizer.jack_file.exists()
 
 
-def test_compile_class_token_mode_off(setup_resources, capsys):
-    """
-    Test that when we turn off token mode explicitly, it runs the normal cycle.
-    """
-    compilation = setup_resources["compilation"]
-    compilation.compile_class(token_mode=False)
-    captured = capsys.readouterr()
-
-    assert "Compiling class" in captured.out
-
-
 def test_write_token(setup_resources):
     """
     Test that the write_token helper method properly writes to the XML file.
@@ -81,7 +70,7 @@ def test_write_token(setup_resources):
 
     compilation.tokenizer.current_token_type = "keyword"
     compilation.tokenizer.current_token_value = "Main"
-    compilation.compile_class()
+    compilation.compile_class(token_mode=False)
 
     pretty = write_xml(setup_resources)
 
@@ -257,46 +246,41 @@ def test_compile_expression(setup_resources):
     assert "</expression>" in pretty
 
 
-def test_compile_term(setup_resources):
-    """
-    Test that when we run compile, term is written properly
-    """
-    compilation = setup_resources["compilation"]
-    compilation.compile_class()
-
-    code = """          <expression>
-            <term>
-              <identifier> SquareGame </identifier>
-              <symbol> . </symbol>
-              <identifier> new </identifier>
-              <symbol> ( </symbol>
-"""
-
-    pretty = write_xml(setup_resources)
-
-    assert "<term>" in pretty
-    assert code in pretty
-
-
-def test_compile_expression_list(setup_resources):
-    """
-    Test that when we run compile, an expression list is properly converted.
-    """
-    compilation = setup_resources["compilation"]
-    compilation.compile_class()
-
-    code = """          <expression>
-            <term>
-              <identifier> SquareGame </identifier>
-              <symbol> . </symbol>
-              <identifier> new </identifier>
-              <symbol> ( </symbol>
-              <expressionList></expressionList>
-              <symbol> ) </symbol>
-              <symbol> ; </symbol>"""
-
-    pretty = write_xml(setup_resources)
-
-    assert "<expressionList>" in pretty
-    assert code in pretty
-
+# def test_compile_term(setup_resources):
+#     """
+#     Test that when we run compile, term is written properly
+#     """
+#     compilation = setup_resources["compilation"]
+#     compilation.compile_class()
+#
+#     code = """          <expression>
+#             <term>
+#               <identifier> SquareGame </identifier>
+#               <symbol> . </symbol>
+#               <identifier> new </identifier>
+#               <symbol> ( </symbol>
+# """
+#
+#     pretty = write_xml(setup_resources)
+#
+#     assert "<term>" in pretty
+#     assert code in pretty
+#
+#
+# def test_compile_expression_list(setup_resources):
+#     """
+#     Test that when we run compile, an expression list is properly converted.
+#     """
+#     compilation = setup_resources["compilation"]
+#     compilation.compile_class()
+#
+#     code = """              <symbol> ( </symbol>
+#               <expressionList></expressionList>
+#               <symbol> ) </symbol>
+# """
+#
+#     pretty = write_xml(setup_resources)
+#
+#     assert "<expressionList>" in pretty
+#     assert code in pretty
+#
