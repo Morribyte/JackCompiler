@@ -246,25 +246,37 @@ def test_compile_expression(setup_resources):
     assert "</expression>" in pretty
 
 
-# def test_compile_term(setup_resources):
-#     """
-#     Test that when we run compile, term is written properly
-#     """
-#     compilation = setup_resources["compilation"]
-#     compilation.compile_class()
-#
-#     code = """          <expression>
-#             <term>
-#               <identifier> SquareGame </identifier>
-#               <symbol> . </symbol>
-#               <identifier> new </identifier>
-#               <symbol> ( </symbol>
-# """
-#
-#     pretty = write_xml(setup_resources)
-#
-#     assert "<term>" in pretty
-#     assert code in pretty
+def test_compile_term(setup_resources):
+    """
+    Test that when we run compile, term is written properly
+    """
+    compilation = setup_resources["compilation"]
+    compilation.compile_class()
+
+    pretty = write_xml(setup_resources)
+
+    assert "<term>" in pretty
+
+
+def test_compile_term_full(setup_resources):
+    """
+    Test that when we run compile, the full term and expression are written properly.
+    """
+    compilation = setup_resources["compilation"]
+    compilation.compile_class()
+
+    code = """          <expression>
+                <term>
+                  <identifier> SquareGame </identifier>
+                  <symbol> . </symbol>
+                  <identifier> new </identifier>
+                  <symbol> ( </symbol>
+    """
+
+    pretty = write_xml(setup_resources)
+
+    assert "<term>" in pretty
+    assert code in pretty
 #
 #
 # def test_compile_expression_list(setup_resources):
