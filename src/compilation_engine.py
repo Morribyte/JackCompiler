@@ -101,15 +101,13 @@ class CompilationEngine:
         """
         statements_element = element_tree.SubElement(parent, "statements")
 
-        match self.tokenizer.current_token_value:
-            case "let":
-                self.compile_let_statement(statements_element)
-
-            case "do":
+        while self.tokenizer.current_token_value in ["let", "do", "if", "while", "return"]:
+            match self.tokenizer.current_token_value:
+                case "let":
                     self.compile_let_statement(statements_element)
-                case _:
-                    self.write_token(statements_element)
-                    self.tokenizer.advance()
+                case "do":
+                    self.compile_let_statement(statements_element)
+
 
 
     def compile_let_statement(self, parent):
@@ -132,9 +130,6 @@ class CompilationEngine:
                 self.write_token(let_statement_element)
                 self.tokenizer.advance()
                 break
-
-
-
 
     def compile_expression(self, parent):
         """
