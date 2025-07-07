@@ -120,7 +120,6 @@ class CompilationEngine:
         while True:
             self.write_token(let_statement_element)
             self.tokenizer.advance()
-            print(f"let statement token: {self.tokenizer.current_token_value}")
 
             if self.tokenizer.current_token_value == ";":
                 self.tokenizer.advance()
@@ -146,6 +145,14 @@ class CompilationEngine:
         """
         term_element = element_tree.SubElement(parent, "term")
 
+        match self.tokenizer.current_token_type:
+            case "identifier":
+                print(f"Current token: {self.tokenizer.current_token_value}")
+                next_token_value = self.tokenizer.open_file[
+                                   self.tokenizer.current_index:self.tokenizer.current_index + 1]
+                print(f"Looking ahead. Next token value is: {next_token_value}")
+
+
 
     def compile_expression_list(self, parent) -> int:
         """
@@ -154,7 +161,6 @@ class CompilationEngine:
         expression_list_element = element_tree.SubElement(parent, "expressionList")
 
         if self.tokenizer.current_token_value == ")":
-            print(f"CURRENT TOKEN {self.tokenizer.current_token_value}")
             return 0
         return 0
         #
