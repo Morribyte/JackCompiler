@@ -288,3 +288,27 @@ def test_do_statement(setup_resources):
     pretty = write_xml(setup_resources)
 
     assert "<doStatement>" in pretty
+
+
+def test_full_do_statement(setup_resources):
+    """
+    Test that when we run compile, the doStatement fully compiles
+    """
+    compilation = setup_resources["compilation"]
+    compilation.compile_class()
+
+    code = """        <doStatement>
+          <keyword> do </keyword>
+          <identifier> game </identifier>
+          <symbol> . </symbol>
+          <identifier> dispose </identifier>
+          <symbol> ( </symbol>
+          <expressionList></expressionList>
+          <symbol> ) </symbol>
+          <symbol> ; </symbol>
+        </doStatement>"""
+
+    pretty = write_xml(setup_resources)
+
+    assert "<doStatement>" in pretty
+    assert code in pretty
