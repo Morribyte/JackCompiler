@@ -106,9 +106,9 @@ class CompilationEngine:
                 case "let":
                     self.compile_let_statement(statements_element)
                 case "do":
-                    self.compile_let_statement(statements_element)
-
-
+                    self.compile_do_statement(statements_element)
+                case _:
+                    break
 
     def compile_let_statement(self, parent):
         """
@@ -130,6 +130,12 @@ class CompilationEngine:
                 self.write_token(let_statement_element)
                 self.tokenizer.advance()
                 break
+
+    def compile_do_statement(self, parent):
+        """
+        Compiles a do statement.
+        """
+
 
     def compile_expression(self, parent):
         """
@@ -172,10 +178,13 @@ class CompilationEngine:
         Compiles an expression list
         """
         expression_list_element = element_tree.SubElement(parent, "expressionList")
+        count = 0
 
         if self.tokenizer.current_token_value == ")":
-            return 0
-        return 0
+            return count
+
+        # ... parse expressions as needed ...
+        return count
         #
         # while self.tokenizer.current_token_value != ")":
         #

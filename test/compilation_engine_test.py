@@ -277,22 +277,15 @@ def test_compile_term_full(setup_resources):
 
     assert "<term>" in pretty
     assert code in pretty
-#
-#
-# def test_compile_expression_list(setup_resources):
-#     """
-#     Test that when we run compile, an expression list is properly converted.
-#     """
-#     compilation = setup_resources["compilation"]
-#     compilation.compile_class()
-#
-#     code = """              <symbol> ( </symbol>
-#               <expressionList></expressionList>
-#               <symbol> ) </symbol>
-# """
-#
-#     pretty = write_xml(setup_resources)
-#
-#     assert "<expressionList>" in pretty
-#     assert code in pretty
-#
+
+
+def test_do_statement(setup_resources):
+    """
+    Test that when we run compile, the doStatement tag writes properly
+    """
+    compilation = setup_resources["compilation"]
+    compilation.compile_class()
+
+    pretty = write_xml(setup_resources)
+
+    assert "<doStatement>" in pretty
