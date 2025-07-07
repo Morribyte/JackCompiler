@@ -100,15 +100,16 @@ class CompilationEngine:
         Compiles statements
         """
         statements_element = element_tree.SubElement(parent, "statements")
-        self.compile_let_statement(statements_element)
 
-        # match self.tokenizer.current_token_value:
-        #     case "let":
-        #     case "do":
-        #         self.compile_let_statement(statements_element)
-        #     case _:
-        #         self.write_token(statements_element)
-        #         self.tokenizer.advance()
+        match self.tokenizer.current_token_value:
+            case "let":
+                self.compile_let_statement(statements_element)
+
+            case "do":
+                    self.compile_let_statement(statements_element)
+                case _:
+                    self.write_token(statements_element)
+                    self.tokenizer.advance()
 
 
     def compile_let_statement(self, parent):
