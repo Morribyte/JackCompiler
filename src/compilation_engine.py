@@ -122,6 +122,7 @@ class CompilationEngine:
             self.tokenizer.advance()
 
             if self.tokenizer.current_token_value == ";":
+                self.write_token(let_statement_element)
                 self.tokenizer.advance()
                 break
 
@@ -129,8 +130,6 @@ class CompilationEngine:
                 self.write_token(let_statement_element)
                 self.tokenizer.advance()
                 self.compile_expression(let_statement_element)
-
-            print(f"CURRENT TOKEN {self.tokenizer.current_token_value}")
 
     def compile_expression(self, parent):
         """
@@ -152,7 +151,15 @@ class CompilationEngine:
                                    self.tokenizer.current_index:self.tokenizer.current_index + 1]
                 print(f"Looking ahead. Next token value is: {next_token_value}")
 
+                if next_token_value == ".":
+                    print("Subroutine Call.")
+                    if self.tokenizer.current_token_value == "(":
+                        self.write_token(term_element)  # write '('
+                        self.tokenizer.advance()
+                        self.compile_expression_list(term_element)
 
+                        self.write_token(term_element)  # write ')'
+                        self.tokenizer.advance()
 
     def compile_expression_list(self, parent) -> int:
         """

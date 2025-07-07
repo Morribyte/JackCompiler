@@ -36,6 +36,7 @@
           <identifier> new </identifier>
           <symbol> ( </symbol>
           <symbol> ) </symbol>
+          <symbol> ; </symbol>
         </letStatement>
       </statements>
       <keyword> do </keyword>
@@ -99,6 +100,7 @@
             <term></term>
           </expression>
           <stringConstant> string constant </stringConstant>
+          <symbol> ; </symbol>
         </letStatement>
       </statements>
       <keyword> let </keyword>
@@ -121,6 +123,7 @@
           <symbol> [ </symbol>
           <integerConstant> 2 </integerConstant>
           <symbol> ] </symbol>
+          <symbol> ; </symbol>
         </letStatement>
       </statements>
       <symbol> } </symbol>
