@@ -100,15 +100,15 @@ class CompilationEngine:
         Compiles statements
         """
         statements_element = element_tree.SubElement(parent, "statements")
+        self.compile_let_statement(statements_element)
 
-        match self.tokenizer.current_token_value:
-            case "let":
-                self.compile_let_statement(statements_element)
-            case "do":
-                pass
-            case _:
-                self.write_token(statements_element)
-                self.tokenizer.advance()
+        # match self.tokenizer.current_token_value:
+        #     case "let":
+        #     case "do":
+        #         self.compile_let_statement(statements_element)
+        #     case _:
+        #         self.write_token(statements_element)
+        #         self.tokenizer.advance()
 
 
     def compile_let_statement(self, parent):
@@ -118,9 +118,11 @@ class CompilationEngine:
         let_statement_element = element_tree.SubElement(parent, "letStatement")
 
         while True:
+            self.write_token(let_statement_element)
+            self.tokenizer.advance()
             print(f"let statement token: {self.tokenizer.current_token_value}")
+
             if self.tokenizer.current_token_value == ";":
-                self.write_token(let_statement_element)
                 self.tokenizer.advance()
                 break
 
@@ -128,8 +130,8 @@ class CompilationEngine:
                 self.write_token(let_statement_element)
                 self.tokenizer.advance()
                 self.compile_expression(let_statement_element)
-            self.write_token(let_statement_element)
-            self.tokenizer.advance()
+
+            print(f"CURRENT TOKEN {self.tokenizer.current_token_value}")
 
     def compile_expression(self, parent):
         """
@@ -139,30 +141,10 @@ class CompilationEngine:
         self.compile_term(expression_element)
 
     def compile_term(self, parent):
+        """
+        Compiles a set of terms inside expressions to the specified values.
+        """
         term_element = element_tree.SubElement(parent, "term")
-
-        print(f"Current token: {self.tokenizer.current_token_value}")
-        # Match case for all the types of terms
-
-        match self.tokenizer.current_token_type:
-
-            case "identifier":
-                # Peeking
-                next_token_value = self.tokenizer.open_file[
-                                   self.tokenizer.current_index:self.tokenizer.current_index + 1]
-                print(f"Looking ahead. Next token value is: {next_token_value}")
-
-                if next_token_value == ".":
-                    print("Writing subroutine expression.")
-                    while self.tokenizer.current_token_value != ";":
-                        self.write_token(term_element)
-                        if self.tokenizer.current_token_value == "(":
-                            self.tokenizer.advance()
-                            self.compile_expression_list(term_element)
-                            break
-                        self.tokenizer.advance()
-
-
 
 
     def compile_expression_list(self, parent) -> int:
@@ -172,6 +154,7 @@ class CompilationEngine:
         expression_list_element = element_tree.SubElement(parent, "expressionList")
 
         if self.tokenizer.current_token_value == ")":
+            print(f"CURRENT TOKEN {self.tokenizer.current_token_value}")
             return 0
         return 0
         #
