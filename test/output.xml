@@ -46,17 +46,21 @@
           <symbol> . </symbol>
           <identifier> run </identifier>
           <symbol> ( </symbol>
+          <expressionList></expressionList>
           <symbol> ) </symbol>
+          <symbol> ; </symbol>
+        </doStatement>
+        <doStatement>
+          <keyword> do </keyword>
+          <identifier> game </identifier>
+          <symbol> . </symbol>
+          <identifier> dispose </identifier>
+          <symbol> ( </symbol>
+          <expressionList></expressionList>
+          <symbol> ) </symbol>
+          <symbol> ; </symbol>
         </doStatement>
       </statements>
-      <symbol> ; </symbol>
-      <keyword> do </keyword>
-      <identifier> game </identifier>
-      <symbol> . </symbol>
-      <identifier> dispose </identifier>
-      <symbol> ( </symbol>
-      <symbol> ) </symbol>
-      <symbol> ; </symbol>
       <keyword> return </keyword>
       <symbol> ; </symbol>
       <symbol> } </symbol>
@@ -120,9 +124,6 @@
           <keyword> let </keyword>
           <identifier> a </identifier>
           <symbol> [ </symbol>
-          <expression>
-            <term></term>
-          </expression>
           <integerConstant> 1 </integerConstant>
           <symbol> ] </symbol>
           <symbol> = </symbol>

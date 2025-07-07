@@ -121,11 +121,6 @@ class CompilationEngine:
             self.write_token(let_statement_element)
             self.tokenizer.advance()
 
-            if self.tokenizer.current_token_value == "[":
-                self.write_token(let_statement_element)
-                self.tokenizer.advance()
-                self.compile_expression(let_statement_element)
-
             if self.tokenizer.current_token_value == "=":
                 self.write_token(let_statement_element)
                 self.tokenizer.advance()
@@ -146,6 +141,16 @@ class CompilationEngine:
 
             self.write_token(do_statement_element)
             self.tokenizer.advance()
+
+            if self.tokenizer.current_token_value == "(":
+                self.write_token(do_statement_element)
+                self.compile_expression_list(do_statement_element)
+                self.tokenizer.advance()
+
+            if self.tokenizer.current_token_value == ";":
+                self.write_token(do_statement_element)
+                self.tokenizer.advance()
+                break
 
     def compile_expression(self, parent):
         """

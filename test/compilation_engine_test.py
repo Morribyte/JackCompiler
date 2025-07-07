@@ -270,8 +270,7 @@ def test_compile_term_full(setup_resources):
             </term>
           </expression>
           <symbol> ; </symbol>
-        </letStatement>
-      </statements>"""
+        </letStatement>"""
 
     pretty = write_xml(setup_resources)
 
