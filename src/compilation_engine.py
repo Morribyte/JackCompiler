@@ -121,6 +121,11 @@ class CompilationEngine:
             self.write_token(let_statement_element)
             self.tokenizer.advance()
 
+            if self.tokenizer.current_token_value == "[":
+                self.write_token(let_statement_element)
+                self.tokenizer.advance()
+                self.compile_expression(let_statement_element)
+
             if self.tokenizer.current_token_value == "=":
                 self.write_token(let_statement_element)
                 self.tokenizer.advance()
@@ -135,7 +140,12 @@ class CompilationEngine:
         """
         Compiles a do statement.
         """
+        do_statement_element = element_tree.SubElement(parent, "doStatement")
 
+        while self.tokenizer.current_token_value != ";":
+
+            self.write_token(do_statement_element)
+            self.tokenizer.advance()
 
     def compile_expression(self, parent):
         """
@@ -180,7 +190,7 @@ class CompilationEngine:
         expression_list_element = element_tree.SubElement(parent, "expressionList")
         count = 0
 
-        if self.tokenizer.current_token_value == ")":
+        if self.tokenizer.current_token_value in [")", "]"]:
             return count
 
         # ... parse expressions as needed ...
