@@ -265,13 +265,13 @@ def test_compile_term_full(setup_resources):
     compilation = setup_resources["compilation"]
     compilation.compile_class()
 
-    code = """          <expression>
-                <term>
-                  <identifier> SquareGame </identifier>
-                  <symbol> . </symbol>
-                  <identifier> new </identifier>
-                  <symbol> ( </symbol>
-    """
+    code = """              <expressionList></expressionList>
+              <symbol> ) </symbol>
+            </term>
+          </expression>
+          <symbol> ; </symbol>
+        </letStatement>
+      </statements>"""
 
     pretty = write_xml(setup_resources)
 

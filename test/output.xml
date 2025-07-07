@@ -29,13 +29,15 @@
           <identifier> game </identifier>
           <symbol> = </symbol>
           <expression>
-            <term></term>
+            <term>
+              <identifier> SquareGame </identifier>
+              <symbol> . </symbol>
+              <identifier> new </identifier>
+              <symbol> ( </symbol>
+              <expressionList></expressionList>
+              <symbol> ) </symbol>
+            </term>
           </expression>
-          <identifier> SquareGame </identifier>
-          <symbol> . </symbol>
-          <identifier> new </identifier>
-          <symbol> ( </symbol>
-          <symbol> ) </symbol>
           <symbol> ; </symbol>
         </letStatement>
       </statements>
@@ -119,7 +121,6 @@
           <expression>
             <term></term>
           </expression>
-          <identifier> a </identifier>
           <symbol> [ </symbol>
           <integerConstant> 2 </integerConstant>
           <symbol> ] </symbol>

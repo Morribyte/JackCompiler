@@ -117,19 +117,23 @@ class CompilationEngine:
         """
         let_statement_element = element_tree.SubElement(parent, "letStatement")
 
-        while True:
+        while self.tokenizer.current_token_value != ";":
+
             self.write_token(let_statement_element)
             self.tokenizer.advance()
+
+            if self.tokenizer.current_token_value == "=":
+                self.write_token(let_statement_element)
+                self.tokenizer.advance()
+                self.compile_expression(let_statement_element)
 
             if self.tokenizer.current_token_value == ";":
                 self.write_token(let_statement_element)
                 self.tokenizer.advance()
                 break
 
-            if self.tokenizer.current_token_value == "=":
-                self.write_token(let_statement_element)
-                self.tokenizer.advance()
-                self.compile_expression(let_statement_element)
+
+
 
     def compile_expression(self, parent):
         """
@@ -153,13 +157,19 @@ class CompilationEngine:
 
                 if next_token_value == ".":
                     print("Subroutine Call.")
-                    if self.tokenizer.current_token_value == "(":
-                        self.write_token(term_element)  # write '('
+                    while True:
+                        self.write_token(term_element)
                         self.tokenizer.advance()
-                        self.compile_expression_list(term_element)
+                        if self.tokenizer.current_token_value == "(":
+                            self.write_token(term_element)  # write '('
+                            self.tokenizer.advance()
+                            self.compile_expression_list(term_element)
 
-                        self.write_token(term_element)  # write ')'
-                        self.tokenizer.advance()
+                            if self.tokenizer.current_token_value == ")":
+                                self.write_token(term_element)  # write ')'
+                                break
+                self.tokenizer.advance()
+
 
     def compile_expression_list(self, parent) -> int:
         """
