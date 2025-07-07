@@ -107,6 +107,8 @@ class CompilationEngine:
                     self.compile_let_statement(statements_element)
                 case "do":
                     self.compile_do_statement(statements_element)
+                case "return":
+                    pass
                 case _:
                     break
 
