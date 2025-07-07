@@ -146,21 +146,34 @@ class CompilationEngine:
 
         match self.tokenizer.current_token_type:
 
-            # subroutine call
             case "identifier":
-                self.write_token(term_element)
-                self.tokenizer.advance()
+                # Peeking
+                next_token_value = self.tokenizer.open_file[
+                                   self.tokenizer.current_index:self.tokenizer.current_index + 1]
+                print(f"Looking ahead. Next token value is: {next_token_value}")
+
+                if next_token_value == ".":
+                    print("Writing subroutine expression.")
+                    while self.tokenizer.current_token_value != ";":
+                        self.write_token(term_element)
+                        if self.tokenizer.current_token_value == "(":
+                            self.tokenizer.advance()
+                            self.compile_expression_list(term_element)
+                            break
+                        self.tokenizer.advance()
 
 
 
-    def compile_expression_list(self, parent):
+
+    def compile_expression_list(self, parent) -> int:
         """
         Compiles an expression list
         """
         expression_list_element = element_tree.SubElement(parent, "expressionList")
 
         if self.tokenizer.current_token_value == ")":
-            return  # Empty list—bail early
+            return 0
+        return 0
         #
         # while self.tokenizer.current_token_value != ")":
         #

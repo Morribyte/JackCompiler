@@ -29,23 +29,26 @@
           <identifier> game </identifier>
           <symbol> = </symbol>
           <expression>
-            <term></term>
+            <term>
+              <identifier> SquareGame </identifier>
+              <symbol> . </symbol>
+              <identifier> new </identifier>
+              <symbol> ( </symbol>
+              <expressionList></expressionList>
+              <symbol> ) </symbol>
+              <symbol> ) </symbol>
+            </term>
           </expression>
-          <identifier> SquareGame </identifier>
+          <symbol> ; </symbol>
+          <keyword> do </keyword>
+          <identifier> game </identifier>
           <symbol> . </symbol>
-          <identifier> new </identifier>
+          <identifier> run </identifier>
           <symbol> ( </symbol>
           <symbol> ) </symbol>
           <symbol> ; </symbol>
         </letStatement>
       </statements>
-      <keyword> do </keyword>
-      <identifier> game </identifier>
-      <symbol> . </symbol>
-      <identifier> run </identifier>
-      <symbol> ( </symbol>
-      <symbol> ) </symbol>
-      <symbol> ; </symbol>
       <keyword> do </keyword>
       <identifier> game </identifier>
       <symbol> . </symbol>
