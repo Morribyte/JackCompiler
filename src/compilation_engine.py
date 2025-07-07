@@ -139,8 +139,17 @@ class CompilationEngine:
         self.compile_term(expression_element)
 
     def compile_term(self, parent):
-        term_selement = element_tree.SubElement(parent, "term")
+        term_element = element_tree.SubElement(parent, "term")
 
+        print(f"Current token: {self.tokenizer.current_token_value}")
+        # Match case for all the types of terms
+
+        match self.tokenizer.current_token_type:
+
+            # subroutine call
+            case "identifier":
+                self.write_token(term_element)
+                self.tokenizer.advance()
 
 
 
