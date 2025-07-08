@@ -160,6 +160,11 @@ class CompilationEngine:
         """
         return_statement_element = element_tree.SubElement(parent, "returnStatement")
 
+        while self.tokenizer.current_token_value != ";":
+            self.write_token(return_statement_element)
+            self.tokenizer.advance()
+        self.write_token(return_statement_element)
+
     def compile_expression(self, parent):
         """
         Compiles an expression.
