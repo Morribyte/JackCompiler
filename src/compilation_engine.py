@@ -66,7 +66,6 @@ class CompilationEngine:
         while True:
             self.write_token(subroutine_element)
             if self.tokenizer.current_token_value == "(":
-                self.tokenizer.advance()
                 self.compile_parameter_list(subroutine_element)
                 self.write_token(subroutine_element)  # write ")"
                 break
@@ -78,8 +77,9 @@ class CompilationEngine:
         Compiles the parameter list of a subroutine.
         """
         parameter_list_element = element_tree.SubElement(parent, "parameterList")
-        if self.tokenizer.current_token_value == ")":
-            return
+        assert self.tokenizer.current_token_value == "("
+
+        self.tokenizer.advance()
 
         while self.tokenizer.current_token_value != ")":
 
