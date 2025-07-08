@@ -85,18 +85,32 @@ class CompilationEngine:
         Compiles the body of a subroutine.
         """
         subroutine_body_element = element_tree.SubElement(parent, "subroutineBody")
-
         while self.tokenizer.current_token_value != "}":
             self.tokenizer.advance()
 
             if self.tokenizer.current_token_value == "var":
                 self.compile_var_dec(subroutine_body_element)
+                self.tokenizer.advance()
 
             if self.tokenizer.current_token_value in "let":
                 self.compile_statements(subroutine_body_element)
                 self.tokenizer.advance()
 
             self.write_token(subroutine_body_element)
+
+    def compile_var_dec(self, parent):
+        """
+        Compiles the variable declaration of a subroutine.
+        """
+        subroutine_var_dec = element_tree.SubElement(parent, "varDec")
+
+        while True:
+            self.write_token(subroutine_var_dec)
+            self.tokenizer.advance()
+            if self.tokenizer.current_token_value == ";":
+                self.write_token(subroutine_var_dec)
+                break
+
 
     def compile_statements(self, parent):
         """
@@ -224,20 +238,6 @@ class CompilationEngine:
         #         self.write_token(expression_list_element)
         #         self.tokenizer.advance()
         #     self.tokenizer.advance()
-
-    def compile_var_dec(self, parent):
-        """
-        Compiles the variable declaration of a subroutine.
-        """
-        subroutine_var_dec = element_tree.SubElement(parent, "varDec")
-
-        while True:
-            self.write_token(subroutine_var_dec)
-            if self.tokenizer.current_token_value == ";":
-                self.tokenizer.advance()
-                break
-
-            self.tokenizer.advance()
 
     def write_token(self, parent_name):
         """
