@@ -37,7 +37,6 @@ class CompilationEngine:
                     self.compile_class_var_dec(self.root)
                 case "function" | "method" | "constructor":
                     self.compile_subroutine(self.root)
-                    self.tokenizer.advance()  # Advances tokenizer so we don't repeat the same token twice.
                 case _:
                     self.write_token(self.root)
                     self.tokenizer.advance()
@@ -67,7 +66,7 @@ class CompilationEngine:
             self.write_token(subroutine_element)
             if self.tokenizer.current_token_value == "(":
                 self.compile_parameter_list(subroutine_element)
-                self.write_token(subroutine_element)  # write ")"
+                self.write_token(subroutine_element)
                 break
             self.tokenizer.advance()
         self.compile_subroutine_body(subroutine_element)
@@ -105,6 +104,8 @@ class CompilationEngine:
                 self.tokenizer.advance()
 
         self.write_token(subroutine_body_element)
+        self.tokenizer.advance()
+
 
     def compile_var_dec(self, parent):
         """
