@@ -60,6 +60,7 @@
           <symbol> ) </symbol>
           <symbol> ; </symbol>
         </doStatement>
+        <returnStatement></returnStatement>
       </statements>
       <keyword> return </keyword>
       <symbol> ; </symbol>

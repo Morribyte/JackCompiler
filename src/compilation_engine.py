@@ -108,9 +108,9 @@ class CompilationEngine:
                 case "do":
                     self.compile_do_statement(statements_element)
                 case "return":
+                    self.compile_return_statement(statements_element)
                     break
-                case _:
-                    break
+
 
     def compile_let_statement(self, parent):
         """
@@ -153,6 +153,12 @@ class CompilationEngine:
                 self.write_token(do_statement_element)
                 self.tokenizer.advance()
                 break
+
+    def compile_return_statement(self, parent):
+        """
+        Compiles a return statement.
+        """
+        return_statement_element = element_tree.SubElement(parent, "returnStatement")
 
     def compile_expression(self, parent):
         """
