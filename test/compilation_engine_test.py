@@ -345,3 +345,76 @@ def test_full_return_statement(setup_resources):
 
     assert "<returnStatement>" in pretty
     assert code in pretty
+
+
+def test_full_function_subroutine_dec(setup_resources):
+    """
+    Test that our subroutine properly converts without any extra tokens.
+    """
+    compilation = setup_resources["compilation"]
+    compilation.compile_class()
+
+    code = """  <subroutineDec>
+    <keyword> function </keyword>
+    <keyword> void </keyword>
+    <identifier> main </identifier>
+    <symbol> ( </symbol>
+    <parameterList></parameterList>
+    <symbol> ) </symbol>
+    <subroutineBody>
+      <symbol> { </symbol>
+      <varDec>
+        <keyword> var </keyword>
+        <identifier> SquareGame </identifier>
+        <identifier> game </identifier>
+        <symbol> ; </symbol>
+      </varDec>
+      <statements>
+        <letStatement>
+          <keyword> let </keyword>
+          <identifier> game </identifier>
+          <symbol> = </symbol>
+          <expression>
+            <term>
+              <identifier> SquareGame </identifier>
+              <symbol> . </symbol>
+              <identifier> new </identifier>
+              <symbol> ( </symbol>
+              <expressionList></expressionList>
+              <symbol> ) </symbol>
+            </term>
+          </expression>
+          <symbol> ; </symbol>
+        </letStatement>
+        <doStatement>
+          <keyword> do </keyword>
+          <identifier> game </identifier>
+          <symbol> . </symbol>
+          <identifier> run </identifier>
+          <symbol> ( </symbol>
+          <expressionList></expressionList>
+          <symbol> ) </symbol>
+          <symbol> ; </symbol>
+        </doStatement>
+        <doStatement>
+          <keyword> do </keyword>
+          <identifier> game </identifier>
+          <symbol> . </symbol>
+          <identifier> dispose </identifier>
+          <symbol> ( </symbol>
+          <expressionList></expressionList>
+          <symbol> ) </symbol>
+          <symbol> ; </symbol>
+        </doStatement>
+        <returnStatement>
+          <keyword> return </keyword>
+          <symbol> ; </symbol>
+        </returnStatement>
+      </statements>
+      <symbol> } </symbol>
+    </subroutineBody>
+  </subroutineDec>"""
+    pretty = write_xml(setup_resources)
+
+    assert "<returnStatement>" in pretty
+    assert code in pretty
