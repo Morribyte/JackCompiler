@@ -324,3 +324,24 @@ def test_return_statement(setup_resources):
     pretty = write_xml(setup_resources)
 
     assert "<returnStatement>" in pretty
+
+
+def test_full_return_statement(setup_resources):
+    """
+    Test that when we run compile, it compiles a full return statement
+    """
+    compilation = setup_resources["compilation"]
+    compilation.compile_class()
+
+    code = """        </doStatement>
+        <returnStatement>
+          <keyword> return </keyword>
+          <symbol> ; </symbol>
+        </returnStatement>
+      </statements>
+      <symbol> } </symbol>"""
+
+    pretty = write_xml(setup_resources)
+
+    assert "<returnStatement>" in pretty
+    assert code in pretty
