@@ -130,6 +130,7 @@
           <expression>
             <term></term>
           </expression>
+          <identifier> a </identifier>
           <symbol> [ </symbol>
           <integerConstant> 2 </integerConstant>
           <symbol> ] </symbol>

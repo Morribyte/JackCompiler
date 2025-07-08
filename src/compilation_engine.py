@@ -108,7 +108,7 @@ class CompilationEngine:
                 case "do":
                     self.compile_do_statement(statements_element)
                 case "return":
-                    pass
+                    break
                 case _:
                     break
 
@@ -176,19 +176,18 @@ class CompilationEngine:
 
                 if next_token_value == ".":
                     print("Subroutine Call.")
-                    while True:
+                    while self.tokenizer.current_token_value != ";":
                         self.write_token(term_element)
                         self.tokenizer.advance()
                         if self.tokenizer.current_token_value == "(":
-                            self.write_token(term_element)  # write '('
+                            self.write_token(term_element)
                             self.tokenizer.advance()
                             self.compile_expression_list(term_element)
 
                             if self.tokenizer.current_token_value == ")":
-                                self.write_token(term_element)  # write ')'
+                                self.write_token(term_element)
                                 break
-                self.tokenizer.advance()
-
+                    self.tokenizer.advance()
 
     def compile_expression_list(self, parent) -> int:
         """
@@ -212,7 +211,6 @@ class CompilationEngine:
         #         self.tokenizer.advance()
         #     self.tokenizer.advance()
 
-
     def compile_var_dec(self, parent):
         """
         Compiles the variable declaration of a subroutine.
@@ -232,7 +230,6 @@ class CompilationEngine:
         Writes a token to the XML.
         """
         token_tag = element_tree.SubElement(parent_name, self.tokenizer.current_token_type).text = f" {self.tokenizer.current_token_value} "
-
 
     def _token_mode(self):
         """

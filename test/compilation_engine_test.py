@@ -312,3 +312,15 @@ def test_full_do_statement(setup_resources):
 
     assert "<doStatement>" in pretty
     assert code in pretty
+
+
+def test_return_statement(setup_resources):
+    """
+    Test that when we run compile, it prints the <return> brackets
+    """
+    compilation = setup_resources["compilation"]
+    compilation.compile_class()
+
+    pretty = write_xml(setup_resources)
+
+    assert "<returnStatement>" in pretty
