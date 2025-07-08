@@ -85,21 +85,18 @@
         <identifier> j </identifier>
         <symbol> ; </symbol>
       </varDec>
-      <keyword> var </keyword>
-      <identifier> String </identifier>
-      <identifier> s </identifier>
-      <symbol> ; </symbol>
+      <varDec>
+        <keyword> var </keyword>
+        <identifier> String </identifier>
+        <identifier> s </identifier>
+        <symbol> ; </symbol>
+      </varDec>
       <varDec>
         <keyword> var </keyword>
         <identifier> Array </identifier>
         <identifier> a </identifier>
         <symbol> ; </symbol>
       </varDec>
-      <keyword> if </keyword>
-      <symbol> ( </symbol>
-      <keyword> false </keyword>
-      <symbol> ) </symbol>
-      <symbol> { </symbol>
       <statements>
         <letStatement>
           <keyword> let </keyword>
@@ -138,8 +135,6 @@
           <symbol> ; </symbol>
         </letStatement>
       </statements>
-      <keyword> else </keyword>
-      <symbol> { </symbol>
       <statements>
         <letStatement>
           <keyword> let </keyword>
@@ -184,8 +179,6 @@
           <symbol> ; </symbol>
         </letStatement>
       </statements>
-      <keyword> return </keyword>
-      <symbol> ; </symbol>
       <symbol> } </symbol>
     </subroutineBody>
   </subroutineDec>

@@ -22,11 +22,14 @@ class CompilationEngine:
         Compiles a class and starts the compilation process.
         Token_mode: if True, runs a basic parse in token mode so we can get a handle on the number of tokens.
         """
+
         if token_mode:
             self._token_mode()
             return
 
-        self.tokenizer.advance()
+        # Advance tokenizer and assert first token is in fact class
+        self.tokenizer.advance()  # Starts the token advancing
+        assert self.tokenizer.current_token_value == "class"
 
         while self.tokenizer.has_more_tokens():
             match self.tokenizer.current_token_value:
@@ -44,6 +47,7 @@ class CompilationEngine:
         Compiles the variable declarations for a class.
         """
         class_var_dec_element = element_tree.SubElement(parent, "classVarDec")
+        assert self.tokenizer.current_token_value in ["static", "field"]
 
         while True:
             self.write_token(class_var_dec_element)
@@ -57,6 +61,8 @@ class CompilationEngine:
         Compiles the start of a subroutine.
         """
         subroutine_element = element_tree.SubElement(parent, "subroutineDec")
+        assert self.tokenizer.current_token_value in ["function", "method", "constructor"]
+
         while True:
             self.write_token(subroutine_element)
             if self.tokenizer.current_token_value == "(":
@@ -85,18 +91,20 @@ class CompilationEngine:
         Compiles the body of a subroutine.
         """
         subroutine_body_element = element_tree.SubElement(parent, "subroutineBody")
+        self.tokenizer.advance()
+        self.write_token(subroutine_body_element)
+
         while self.tokenizer.current_token_value != "}":
             self.tokenizer.advance()
 
             if self.tokenizer.current_token_value == "var":
                 self.compile_var_dec(subroutine_body_element)
-                self.tokenizer.advance()
 
             if self.tokenizer.current_token_value in "let":
                 self.compile_statements(subroutine_body_element)
                 self.tokenizer.advance()
 
-            self.write_token(subroutine_body_element)
+        self.write_token(subroutine_body_element)
 
     def compile_var_dec(self, parent):
         """
