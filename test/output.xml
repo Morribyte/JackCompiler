@@ -131,16 +131,25 @@
               <keyword> let </keyword>
               <identifier> a </identifier>
               <symbol> [ </symbol>
-              <integerConstant> 1 </integerConstant>
+              <expression>
+                <term>
+                  <integerConstant> 1 </integerConstant>
+                </term>
+              </expression>
               <symbol> ] </symbol>
               <symbol> = </symbol>
               <expression>
-                <term></term>
+                <term>
+                  <identifier> a </identifier>
+                  <symbol> [ </symbol>
+                  <expression>
+                    <term>
+                      <integerConstant> 2 </integerConstant>
+                    </term>
+                  </expression>
+                  <symbol> ] </symbol>
+                </term>
               </expression>
-              <identifier> a </identifier>
-              <symbol> [ </symbol>
-              <integerConstant> 2 </integerConstant>
-              <symbol> ] </symbol>
               <symbol> ; </symbol>
             </letStatement>
           </statements>

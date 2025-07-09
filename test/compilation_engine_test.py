@@ -502,3 +502,74 @@ def test_keyword_constant(setup_resources):
 
     assert "null" in pretty
 
+
+def test_full_keyword_constant(setup_resources):
+    """
+    Test that when we run the compiler, the keyword Constant part of the term compiles properly.
+    """
+    compilation = setup_resources["compilation"]
+    compilation.compile_class()
+
+    code = """              <expression>
+                <term>
+                  <keyword> null </keyword>
+                </term>
+              </expression>
+              <symbol> ; </symbol>"""
+
+    pretty = write_xml(setup_resources)
+
+    assert "<keyword>" in pretty
+    assert code in pretty
+
+
+def test_integer_constant(setup_resources):
+    """
+    Test that when we compile, stringConstants are handled properly within term.
+    """
+    compilation = setup_resources["compilation"]
+    compilation.compile_class()
+
+    pretty = write_xml(setup_resources)
+
+    assert "<integerConstant>" in pretty
+    assert "2" in pretty
+
+
+def test_full_if(setup_resources):
+    """
+    Test that when we compile, we compile the proper whole letStatement.
+    """
+    compilation = setup_resources["compilation"]
+    compilation.compile_class()
+
+    code="""            <letStatement>
+              <keyword> let </keyword>
+              <identifier> a </identifier>
+              <symbol> [ </symbol>
+              <expression>
+                <term>
+                  <integerConstant> 1 </integerConstant>
+                </term>
+              </expression>
+              <symbol> ] </symbol>
+              <symbol> = </symbol>
+              <expression>
+                <term>
+                  <identifier> a </identifier>
+                  <symbol> [ </symbol>
+                  <expression>
+                    <term>
+                      <integerConstant> 2 </integerConstant>
+                    </term>
+                  </expression>
+                  <symbol> ] </symbol>
+                </term>
+              </expression>
+              <symbol> ; </symbol>
+            </letStatement>
+          </statements>"""
+
+    pretty = write_xml(setup_resources)
+
+    assert code in pretty

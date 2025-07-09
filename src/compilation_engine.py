@@ -164,7 +164,12 @@ class CompilationEngine:
         let_statement_element = element_tree.SubElement(parent, "letStatement")
 
         while self.tokenizer.current_token_value != ";":
-            if self.tokenizer.current_token_value == "=":
+            if self.tokenizer.current_token_value == "[":
+                self.write_token(let_statement_element)
+                self.tokenizer.advance()
+                self.compile_expression(let_statement_element)
+
+            elif self.tokenizer.current_token_value == "=":
                 self.write_token(let_statement_element)
                 self.tokenizer.advance()
                 self.compile_expression(let_statement_element)
@@ -269,6 +274,16 @@ class CompilationEngine:
                                 self.write_token(term_element)
                                 self.tokenizer.advance()
                                 break
+                if next_token_value == "[":
+                    print("varName expression")
+                    while self.tokenizer.current_token_value != ";":
+                        self.write_token(term_element)
+                        self.tokenizer.advance()
+                        if self.tokenizer.current_token_value == "[":
+                            self.write_token(term_element)
+                            self.tokenizer.advance()
+                            self.compile_expression(term_element)
+
             case "stringConstant":
                 self.write_token(term_element)
                 self.tokenizer.advance()
@@ -276,7 +291,9 @@ class CompilationEngine:
                 if self.tokenizer.current_token_value in ["true", "false", "null", "this"]:
                     self.write_token(term_element)
                     self.tokenizer.advance()
-
+            case "integerConstant":
+                self.write_token(term_element)
+                self.tokenizer.advance()
 
 
 
