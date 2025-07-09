@@ -544,6 +544,17 @@ def test_integer_constant(setup_resources):
     assert "2" in pretty
 
 
+def test_symbols(setup_resources):
+    """
+    Test that when we compile, the symbols compile properly.
+    """
+    compilation = setup_resources["compilation"]
+    compilation.compile_class()
+
+    pretty = write_xml(setup_resources)
+
+    assert "<symbol>" in pretty
+
 def test_full_if(setup_resources):
     """
     Test that when we compile, we compile the proper whole letStatement.
