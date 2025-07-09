@@ -551,7 +551,40 @@ def test_full_if(setup_resources):
     compilation = setup_resources["compilation"]
     compilation.compile_class()
 
-    code="""            <letStatement>
+    code="""        <ifStatement>
+          <keyword> if </keyword>
+          <symbol> ( </symbol>
+          <expression>
+            <term>
+              <keyword> false </keyword>
+            </term>
+          </expression>
+          <symbol> ) </symbol>
+          <symbol> { </symbol>
+          <statements>
+            <letStatement>
+              <keyword> let </keyword>
+              <identifier> s </identifier>
+              <symbol> = </symbol>
+              <expression>
+                <term>
+                  <stringConstant> string constant </stringConstant>
+                </term>
+              </expression>
+              <symbol> ; </symbol>
+            </letStatement>
+            <letStatement>
+              <keyword> let </keyword>
+              <identifier> s </identifier>
+              <symbol> = </symbol>
+              <expression>
+                <term>
+                  <keyword> null </keyword>
+                </term>
+              </expression>
+              <symbol> ; </symbol>
+            </letStatement>
+            <letStatement>
               <keyword> let </keyword>
               <identifier> a </identifier>
               <symbol> [ </symbol>
@@ -576,7 +609,77 @@ def test_full_if(setup_resources):
               </expression>
               <symbol> ; </symbol>
             </letStatement>
-          </statements>"""
+          </statements>
+          <symbol> } </symbol>
+          <keyword> else </keyword>
+          <symbol> { </symbol>
+          <statements>
+            <letStatement>
+              <keyword> let </keyword>
+              <identifier> i </identifier>
+              <symbol> = </symbol>
+              <expression>
+                <term>
+                  <identifier> i </identifier>
+                </term>
+                <symbol> * </symbol>
+                <term>
+                  <symbol> ( </symbol>
+                  <expression>
+                    <term>
+                      <symbol> - </symbol>
+                      <term>
+                        <identifier> j </identifier>
+                      </term>
+                    </term>
+                  </expression>
+                  <symbol> ) </symbol>
+                </term>
+              </expression>
+              <symbol> ; </symbol>
+            </letStatement>
+            <letStatement>
+              <keyword> let </keyword>
+              <identifier> j </identifier>
+              <symbol> = </symbol>
+              <expression>
+                <term>
+                  <identifier> j </identifier>
+                </term>
+                <symbol> / </symbol>
+                <term>
+                  <symbol> ( </symbol>
+                  <expression>
+                    <term>
+                      <symbol> - </symbol>
+                      <term>
+                        <integerConstant> 2 </integerConstant>
+                      </term>
+                    </term>
+                  </expression>
+                  <symbol> ) </symbol>
+                </term>
+              </expression>
+              <symbol> ; </symbol>
+            </letStatement>
+            <letStatement>
+              <keyword> let </keyword>
+              <identifier> i </identifier>
+              <symbol> = </symbol>
+              <expression>
+                <term>
+                  <identifier> i </identifier>
+                </term>
+                <symbol> | </symbol>
+                <term>
+                  <identifier> j </identifier>
+                </term>
+              </expression>
+              <symbol> ; </symbol>
+            </letStatement>
+          </statements>
+          <symbol> } </symbol>
+        </ifStatement>"""
 
     pretty = write_xml(setup_resources)
 

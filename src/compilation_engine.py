@@ -246,9 +246,17 @@ class CompilationEngine:
         """
         Compiles an expression.
         term (op term)*
+        op -> '+' | '-' | '*' | '/' | '&' | '|' | '<' | '>' | '='
+
         """
         expression_element = element_tree.SubElement(parent, "expression")
         self.compile_term(expression_element)
+
+        while self.tokenizer.current_token_value in ["+", "-", "*", "/", "&", "|", "<", ">", "="]:
+            self.write_token(expression_element)
+            self.tokenizer.advance()
+
+            self.compile_term(expression_element)
 
     def compile_term(self, parent):
         """
@@ -258,7 +266,6 @@ class CompilationEngine:
         subroutineCall -> subroutineName '('expressionList')' | (className|varName)'.'subroutineName'('expressionList')'
         unaryOpTerm -> '-' | '~'
 
-        op -> '+' | '-' | '*' | '/' | '&' | '|' | '<' | '>' | '='
         keywordConstant -> 'true' | 'false' | 'null' | 'this'
         """
         term_element = element_tree.SubElement(parent, "term")
@@ -270,29 +277,34 @@ class CompilationEngine:
                                    self.tokenizer.current_index:self.tokenizer.current_index + 1]
                 print(f"Looking ahead. Next token value is: {next_token_value}")
 
-                if next_token_value == ".":
-                    print("Subroutine Call.")
-                    while self.tokenizer.current_token_value != ";":
-                        self.write_token(term_element)
-                        self.tokenizer.advance()
-                        if self.tokenizer.current_token_value == "(":
+                match next_token_value:
+                    case ".":
+                        print("Subroutine Call.")
+                        while self.tokenizer.current_token_value != ";":
                             self.write_token(term_element)
                             self.tokenizer.advance()
-                            self.compile_expression_list(term_element)
-
-                            if self.tokenizer.current_token_value == ")":
+                            if self.tokenizer.current_token_value == "(":
                                 self.write_token(term_element)
                                 self.tokenizer.advance()
-                                break
-                if next_token_value == "[":
-                    print("varName expression")
-                    while self.tokenizer.current_token_value != ";":
-                        self.write_token(term_element)
-                        self.tokenizer.advance()
-                        if self.tokenizer.current_token_value == "[":
+                                self.compile_expression_list(term_element)
+
+                                if self.tokenizer.current_token_value == ")":
+                                    self.write_token(term_element)
+                                    self.tokenizer.advance()
+                                    break
+                    case "[":
+                        print("varName expression")
+                        while self.tokenizer.current_token_value != ";":
                             self.write_token(term_element)
                             self.tokenizer.advance()
-                            self.compile_expression(term_element)
+                            if self.tokenizer.current_token_value == "[":
+                                self.write_token(term_element)
+                                self.tokenizer.advance()
+                                self.compile_expression(term_element)
+                    case _:
+                        print("plain varname")
+                        self.write_token(term_element)
+                        self.tokenizer.advance()
 
             case "stringConstant":
                 self.write_token(term_element)

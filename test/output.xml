@@ -166,10 +166,12 @@
               <identifier> i </identifier>
               <symbol> = </symbol>
               <expression>
+                <term>
+                  <identifier> i </identifier>
+                </term>
+                <symbol> * </symbol>
                 <term></term>
               </expression>
-              <identifier> i </identifier>
-              <symbol> * </symbol>
               <symbol> ( </symbol>
               <symbol> - </symbol>
               <identifier> j </identifier>
@@ -181,10 +183,12 @@
               <identifier> j </identifier>
               <symbol> = </symbol>
               <expression>
+                <term>
+                  <identifier> j </identifier>
+                </term>
+                <symbol> / </symbol>
                 <term></term>
               </expression>
-              <identifier> j </identifier>
-              <symbol> / </symbol>
               <symbol> ( </symbol>
               <symbol> - </symbol>
               <integerConstant> 2 </integerConstant>
@@ -196,11 +200,14 @@
               <identifier> i </identifier>
               <symbol> = </symbol>
               <expression>
-                <term></term>
+                <term>
+                  <identifier> i </identifier>
+                </term>
+                <symbol> | </symbol>
+                <term>
+                  <identifier> j </identifier>
+                </term>
               </expression>
-              <identifier> i </identifier>
-              <symbol> | </symbol>
-              <identifier> j </identifier>
               <symbol> ; </symbol>
             </letStatement>
           </statements>
