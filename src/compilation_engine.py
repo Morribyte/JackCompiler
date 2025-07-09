@@ -244,6 +244,7 @@ class CompilationEngine:
         unaryOpTerm -> '-' | '~'
 
         op -> '+' | '-' | '*' | '/' | '&' | '|' | '<' | '>' | '='
+        keywordConstant -> 'true' | 'false' | 'null' | 'this'
         """
         term_element = element_tree.SubElement(parent, "term")
 
@@ -271,6 +272,13 @@ class CompilationEngine:
             case "stringConstant":
                 self.write_token(term_element)
                 self.tokenizer.advance()
+            case "keyword":
+                if self.tokenizer.current_token_type in ["true", "false", "null", "this"]:
+                    # keywordConstant
+                    self.write_token(term_element)
+                    self.tokenizer.advance()
+
+
 
 
     def compile_expression_list(self, parent) -> int:

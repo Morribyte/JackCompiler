@@ -489,3 +489,16 @@ def test_full_string_constant(setup_resources):
 
     assert "<stringConstant>" in pretty
     assert "string constant" in pretty
+
+
+def test_keyword_constant(setup_resources):
+    """
+    Test that when we compile, we see "null" print at the right level.
+    """
+    compilation = setup_resources["compilation"]
+    compilation.compile_class()
+
+    pretty = write_xml(setup_resources)
+
+    assert "null" in pretty
+
