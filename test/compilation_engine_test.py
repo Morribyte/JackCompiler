@@ -417,3 +417,15 @@ def test_full_function_subroutine_dec(setup_resources):
 
     assert "<returnStatement>" in pretty
     assert code in pretty
+
+
+def test_if_statement(setup_resources):
+    """
+    Test that when we compile, it properly handles the ifStatement.
+    """
+    compilation = setup_resources["compilation"]
+    compilation.compile_class()
+
+    pretty = write_xml(setup_resources)
+
+    assert "<ifStatement>" in pretty
