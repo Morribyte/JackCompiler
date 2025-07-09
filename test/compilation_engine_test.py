@@ -442,7 +442,11 @@ def test_full_if_statement(setup_resources):
         <ifStatement>
           <keyword> if </keyword>
           <symbol> ( </symbol>
-          <keyword> false </keyword>
+          <expression>
+            <term>
+              <keyword> false </keyword>
+            </term>
+          </expression>
           <symbol> ) </symbol>
           <symbol> { </symbol>
           <statements>
@@ -450,7 +454,11 @@ def test_full_if_statement(setup_resources):
               <keyword> let </keyword>
               <identifier> s </identifier>
               <symbol> = </symbol>
-              <expression>"""
+              <expression>
+                <term>
+                  <stringConstant> string constant </stringConstant>
+                </term>
+              </expression>"""
 
     pretty = write_xml(setup_resources)
 

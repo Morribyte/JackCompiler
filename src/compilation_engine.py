@@ -211,14 +211,24 @@ class CompilationEngine:
         if_statement_element = element_tree.SubElement(parent, "ifStatement")
 
         while self.tokenizer.current_token_value != "}":
+            if self.tokenizer.current_token_value == "(":
+                self.write_token(if_statement_element)
+                self.tokenizer.advance()
+                self.compile_expression(if_statement_element)
             self.write_token(if_statement_element)
             self.tokenizer.advance()
-
-
             self.compile_statements(if_statement_element)
 
         self.write_token(if_statement_element)
         self.tokenizer.advance()
+
+        if self.tokenizer.current_token_value == "else":
+            while self.tokenizer.current_token_value != "}":
+                self.write_token(if_statement_element)
+                self.tokenizer.advance()
+                self.compile_statements(if_statement_element)
+
+
 
     def compile_return_statement(self, parent):
         """
