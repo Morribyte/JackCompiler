@@ -140,20 +140,21 @@ class CompilationEngine:
         Compiles statements
         statement*
         """
-        statements_element = element_tree.SubElement(parent, "statements")
+        if self.tokenizer.current_token_value in ["let", "do", "if", "while", "return"]:
+            statements_element = element_tree.SubElement(parent, "statements")
 
-        while self.tokenizer.current_token_value in ["let", "do", "if", "while", "return"]:
-            print(f"CURRENT TOKEN: {self.tokenizer.current_token_value}")
-            match self.tokenizer.current_token_value:
-                case "let":
-                    self.compile_let_statement(statements_element)
-                case "do":
-                    self.compile_do_statement(statements_element)
-                case "if":
-                    self.compile_if_statement(statements_element)
-                    print(f"IF STATEMENT: {self.tokenizer.current_token_value}")
-                case "return":
-                    self.compile_return_statement(statements_element)
+            while self.tokenizer.current_token_value in ["let", "do", "if", "while", "return"]:
+                print(f"CURRENT TOKEN: {self.tokenizer.current_token_value}")
+                match self.tokenizer.current_token_value:
+                    case "let":
+                        self.compile_let_statement(statements_element)
+                    case "do":
+                        self.compile_do_statement(statements_element)
+                    case "if":
+                        self.compile_if_statement(statements_element)
+                        print(f"IF STATEMENT: {self.tokenizer.current_token_value}")
+                    case "return":
+                        self.compile_return_statement(statements_element)
 
     def compile_let_statement(self, parent):
         """
@@ -207,6 +208,10 @@ class CompilationEngine:
         while self.tokenizer.current_token_value != "}":
             self.write_token(if_statement_element)
             self.tokenizer.advance()
+
+
+            self.compile_statements(if_statement_element)
+
         self.write_token(if_statement_element)
         self.tokenizer.advance()
 

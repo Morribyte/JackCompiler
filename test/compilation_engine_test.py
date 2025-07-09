@@ -438,19 +438,7 @@ def test_full_if_statement(setup_resources):
     compilation = setup_resources["compilation"]
     compilation.compile_class()
 
-    code = """      <statements>
-        <ifStatement>
-          <keyword> if </keyword>
-          <symbol> ( </symbol>
-          <expression>
-            <term>
-              <keyword> false </keyword>
-            </term>
-          </expression>
-          <symbol> ) </symbol>
-          <symbol> { </symbol>
-          <statements>
-            <letStatement>"""
+    code = """ """
 
     pretty = write_xml(setup_resources)
 

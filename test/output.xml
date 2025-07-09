@@ -104,27 +104,44 @@
           <keyword> false </keyword>
           <symbol> ) </symbol>
           <symbol> { </symbol>
-          <keyword> let </keyword>
-          <identifier> s </identifier>
-          <symbol> = </symbol>
-          <stringConstant> string constant </stringConstant>
-          <symbol> ; </symbol>
-          <keyword> let </keyword>
-          <identifier> s </identifier>
-          <symbol> = </symbol>
-          <keyword> null </keyword>
-          <symbol> ; </symbol>
-          <keyword> let </keyword>
-          <identifier> a </identifier>
-          <symbol> [ </symbol>
-          <integerConstant> 1 </integerConstant>
-          <symbol> ] </symbol>
-          <symbol> = </symbol>
-          <identifier> a </identifier>
-          <symbol> [ </symbol>
-          <integerConstant> 2 </integerConstant>
-          <symbol> ] </symbol>
-          <symbol> ; </symbol>
+          <statements>
+            <letStatement>
+              <keyword> let </keyword>
+              <identifier> s </identifier>
+              <symbol> = </symbol>
+              <expression>
+                <term></term>
+              </expression>
+              <stringConstant> string constant </stringConstant>
+              <symbol> ; </symbol>
+            </letStatement>
+            <letStatement>
+              <keyword> let </keyword>
+              <identifier> s </identifier>
+              <symbol> = </symbol>
+              <expression>
+                <term></term>
+              </expression>
+              <keyword> null </keyword>
+              <symbol> ; </symbol>
+            </letStatement>
+            <letStatement>
+              <keyword> let </keyword>
+              <identifier> a </identifier>
+              <symbol> [ </symbol>
+              <integerConstant> 1 </integerConstant>
+              <symbol> ] </symbol>
+              <symbol> = </symbol>
+              <expression>
+                <term></term>
+              </expression>
+              <identifier> a </identifier>
+              <symbol> [ </symbol>
+              <integerConstant> 2 </integerConstant>
+              <symbol> ] </symbol>
+              <symbol> ; </symbol>
+            </letStatement>
+          </statements>
           <symbol> } </symbol>
         </ifStatement>
       </statements>
