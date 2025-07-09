@@ -117,9 +117,8 @@ class CompilationEngine:
             if self.tokenizer.current_token_value == "var":
                 self.compile_var_dec(subroutine_body_element)
 
-            if self.tokenizer.current_token_value in "let":
+            if self.tokenizer.current_token_value in ["let", "do", "if", "while", "return"]:
                 self.compile_statements(subroutine_body_element)
-                self.tokenizer.advance()
 
         self.write_token(subroutine_body_element)
         self.tokenizer.advance()
@@ -131,12 +130,10 @@ class CompilationEngine:
         """
         subroutine_var_dec = element_tree.SubElement(parent, "varDec")
 
-        while True:
+        while self.tokenizer.current_token_value != ";":
             self.write_token(subroutine_var_dec)
             self.tokenizer.advance()
-            if self.tokenizer.current_token_value == ";":
-                self.write_token(subroutine_var_dec)
-                break
+        self.write_token(subroutine_var_dec)
 
     def compile_statements(self, parent):
         """
@@ -146,17 +143,17 @@ class CompilationEngine:
         statements_element = element_tree.SubElement(parent, "statements")
 
         while self.tokenizer.current_token_value in ["let", "do", "if", "while", "return"]:
+            print(f"CURRENT TOKEN: {self.tokenizer.current_token_value}")
             match self.tokenizer.current_token_value:
                 case "let":
                     self.compile_let_statement(statements_element)
                 case "do":
                     self.compile_do_statement(statements_element)
                 case "if":
+                    self.compile_if_statement(statements_element)
                     print(f"IF STATEMENT: {self.tokenizer.current_token_value}")
                 case "return":
                     self.compile_return_statement(statements_element)
-                    break
-            self.tokenizer.advance()  # Advances tokenizer for next keyword
 
     def compile_let_statement(self, parent):
         """
@@ -177,6 +174,7 @@ class CompilationEngine:
                 self.write_token(let_statement_element)
                 self.tokenizer.advance()
         self.write_token(let_statement_element)  # Writes the ';'
+        self.tokenizer.advance()
 
     def compile_do_statement(self, parent):
         """
@@ -196,6 +194,7 @@ class CompilationEngine:
                 self.write_token(do_statement_element)
                 self.tokenizer.advance()
         self.write_token(do_statement_element)  # Writes the ';'
+        self.tokenizer.advance()
 
 
     def compile_if_statement(self, parent):
@@ -204,6 +203,9 @@ class CompilationEngine:
         'if' '('expression')' '{'statements'}' ('else' '{'statements'}')?
         """
         if_statement_element = element_tree.SubElement(parent, "ifStatement")
+
+        self.write_token(if_statement_element)
+        self.tokenizer.advance()
 
     def compile_return_statement(self, parent):
         """

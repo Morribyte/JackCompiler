@@ -98,6 +98,11 @@
         <symbol> ; </symbol>
       </varDec>
       <statements>
+        <ifStatement>
+          <keyword> if </keyword>
+        </ifStatement>
+      </statements>
+      <statements>
         <letStatement>
           <keyword> let </keyword>
           <identifier> s </identifier>
@@ -135,51 +140,40 @@
           <symbol> ; </symbol>
         </letStatement>
       </statements>
-      <statements>
-        <letStatement>
-          <keyword> let </keyword>
-          <identifier> i </identifier>
-          <symbol> = </symbol>
-          <expression>
-            <term></term>
-          </expression>
-          <identifier> i </identifier>
-          <symbol> * </symbol>
-          <symbol> ( </symbol>
-          <symbol> - </symbol>
-          <identifier> j </identifier>
-          <symbol> ) </symbol>
-          <symbol> ; </symbol>
-        </letStatement>
-        <letStatement>
-          <keyword> let </keyword>
-          <identifier> j </identifier>
-          <symbol> = </symbol>
-          <expression>
-            <term></term>
-          </expression>
-          <identifier> j </identifier>
-          <symbol> / </symbol>
-          <symbol> ( </symbol>
-          <symbol> - </symbol>
-          <integerConstant> 2 </integerConstant>
-          <symbol> ) </symbol>
-          <symbol> ; </symbol>
-        </letStatement>
-        <letStatement>
-          <keyword> let </keyword>
-          <identifier> i </identifier>
-          <symbol> = </symbol>
-          <expression>
-            <term></term>
-          </expression>
-          <identifier> i </identifier>
-          <symbol> | </symbol>
-          <identifier> j </identifier>
-          <symbol> ; </symbol>
-        </letStatement>
-      </statements>
       <symbol> } </symbol>
     </subroutineBody>
   </subroutineDec>
+  <keyword> else </keyword>
+  <symbol> { </symbol>
+  <keyword> let </keyword>
+  <identifier> i </identifier>
+  <symbol> = </symbol>
+  <identifier> i </identifier>
+  <symbol> * </symbol>
+  <symbol> ( </symbol>
+  <symbol> - </symbol>
+  <identifier> j </identifier>
+  <symbol> ) </symbol>
+  <symbol> ; </symbol>
+  <keyword> let </keyword>
+  <identifier> j </identifier>
+  <symbol> = </symbol>
+  <identifier> j </identifier>
+  <symbol> / </symbol>
+  <symbol> ( </symbol>
+  <symbol> - </symbol>
+  <integerConstant> 2 </integerConstant>
+  <symbol> ) </symbol>
+  <symbol> ; </symbol>
+  <keyword> let </keyword>
+  <identifier> i </identifier>
+  <symbol> = </symbol>
+  <identifier> i </identifier>
+  <symbol> | </symbol>
+  <identifier> j </identifier>
+  <symbol> ; </symbol>
+  <symbol> } </symbol>
+  <keyword> return </keyword>
+  <symbol> ; </symbol>
+  <symbol> } </symbol>
 </class>

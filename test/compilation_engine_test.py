@@ -429,3 +429,30 @@ def test_if_statement(setup_resources):
     pretty = write_xml(setup_resources)
 
     assert "<ifStatement>" in pretty
+
+
+def test_full_if_statement(setup_resources):
+    """
+    Test that when we compile, it properly compiles a full ifStatement.
+    """
+    compilation = setup_resources["compilation"]
+    compilation.compile_class()
+
+    code = """      <statements>
+        <ifStatement>
+          <keyword> if </keyword>
+          <symbol> ( </symbol>
+          <expression>
+            <term>
+              <keyword> false </keyword>
+            </term>
+          </expression>
+          <symbol> ) </symbol>
+          <symbol> { </symbol>
+          <statements>
+            <letStatement>"""
+
+    pretty = write_xml(setup_resources)
+
+    assert "<ifStatement>" in pretty
+    assert code in pretty
