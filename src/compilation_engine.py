@@ -188,18 +188,15 @@ class CompilationEngine:
         do_statement_element = element_tree.SubElement(parent, "doStatement")
 
         while self.tokenizer.current_token_value != ";":
-
-            self.write_token(do_statement_element)
-            self.tokenizer.advance()
-
             if self.tokenizer.current_token_value == "(":
                 self.write_token(do_statement_element)
                 self.compile_expression_list(do_statement_element)
                 self.tokenizer.advance()
-
-            if self.tokenizer.current_token_value == ";":
+            else:
                 self.write_token(do_statement_element)
-                break
+                self.tokenizer.advance()
+        self.write_token(do_statement_element)  # Writes the ';'
+
 
     def compile_if_statement(self, parent):
         """
