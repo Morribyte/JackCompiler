@@ -149,16 +149,14 @@ class CompilationEngine:
             match self.tokenizer.current_token_value:
                 case "let":
                     self.compile_let_statement(statements_element)
-                    self.tokenizer.advance()
                 case "do":
                     self.compile_do_statement(statements_element)
-                    self.tokenizer.advance()
                 case "if":
                     print(f"IF STATEMENT: {self.tokenizer.current_token_value}")
                 case "return":
                     self.compile_return_statement(statements_element)
                     break
-
+            self.tokenizer.advance()  # Advances tokenizer for next keyword
 
     def compile_let_statement(self, parent):
         """
@@ -178,6 +176,7 @@ class CompilationEngine:
             else:
                 self.write_token(let_statement_element)
                 self.tokenizer.advance()
+        self.write_token(let_statement_element)  # Writes the ';'
 
     def compile_do_statement(self, parent):
         """
@@ -262,8 +261,7 @@ class CompilationEngine:
                                 self.write_token(term_element)
                                 self.tokenizer.advance()
                                 break
-                    self.write_token(term_element)
-                    self.tokenizer.advance()
+
 
     def compile_expression_list(self, parent) -> int:
         """
