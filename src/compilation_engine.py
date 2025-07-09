@@ -1,12 +1,22 @@
 """
 src/compilation_engine.py
 Handles turning the tokens into XML output and writes them to file.
+
+Jack Language Reference:
+'xxx': An item around quotes means it appears like this literally within the statements.
+xxx: represents names of terminal and non-terminal elements
+(): represents grouping
+x | y: either x or y
+x y: x is followed by y
+x?: x appears 0-1 times
+x*: x appears 0 or more times
 """
 from pathlib import Path
 import xml.etree.ElementTree as element_tree
 import xml.dom.minidom
 
 from src.tokenizer import Tokenizer
+
 
 class CompilationEngine:
     """
@@ -21,6 +31,8 @@ class CompilationEngine:
         """
         Compiles a class and starts the compilation process.
         Token_mode: if True, runs a basic parse in token mode so we can get a handle on the number of tokens.
+        Grammar:
+        'class' className '{' classVarDec* subroutineDec* '}'
         """
 
         if token_mode:
@@ -44,6 +56,7 @@ class CompilationEngine:
     def compile_class_var_dec(self, parent):
         """
         Compiles the variable declarations for a class.
+        ('static'|'field') type varName (',' varName)* ';'
         """
         class_var_dec_element = element_tree.SubElement(parent, "classVarDec")
         assert self.tokenizer.current_token_value in ["static", "field"]
@@ -57,6 +70,7 @@ class CompilationEngine:
     def compile_subroutine(self, parent):
         """
         Compiles the start of a subroutine.
+        ('constructor'|'method'|'function') ('void'|type) subroutineName '('parameterList')' subroutineBody
         """
         subroutine_element = element_tree.SubElement(parent, "subroutineDec")
         assert self.tokenizer.current_token_value in ["function", "method", "constructor"]
@@ -74,6 +88,7 @@ class CompilationEngine:
     def compile_parameter_list(self, parent):
         """
         Compiles the parameter list of a subroutine.
+        ((type varName) (',' type varName)*)?
         """
         parameter_list_element = element_tree.SubElement(parent, "parameterList")
         # Writes the token after the (. If it'
@@ -90,6 +105,7 @@ class CompilationEngine:
     def compile_subroutine_body(self, parent):
         """
         Compiles the body of a subroutine.
+        '{'varDec* statements '}'
         """
         subroutine_body_element = element_tree.SubElement(parent, "subroutineBody")
         self.tokenizer.advance()
@@ -108,10 +124,10 @@ class CompilationEngine:
         self.write_token(subroutine_body_element)
         self.tokenizer.advance()
 
-
     def compile_var_dec(self, parent):
         """
         Compiles the variable declaration of a subroutine.
+        'var' type varName (',' varName)* ';'
         """
         subroutine_var_dec = element_tree.SubElement(parent, "varDec")
 
@@ -122,10 +138,10 @@ class CompilationEngine:
                 self.write_token(subroutine_var_dec)
                 break
 
-
     def compile_statements(self, parent):
         """
         Compiles statements
+        statement*
         """
         statements_element = element_tree.SubElement(parent, "statements")
 
@@ -133,8 +149,12 @@ class CompilationEngine:
             match self.tokenizer.current_token_value:
                 case "let":
                     self.compile_let_statement(statements_element)
+                    self.tokenizer.advance()
                 case "do":
                     self.compile_do_statement(statements_element)
+                    self.tokenizer.advance()
+                case "if":
+                    print(f"IF STATEMENT: {self.tokenizer.current_token_value}")
                 case "return":
                     self.compile_return_statement(statements_element)
                     break
@@ -143,27 +163,28 @@ class CompilationEngine:
     def compile_let_statement(self, parent):
         """
         Compiles a let statement.
+        'let' varName ('['expression']')? '=' expression ';'
         """
         let_statement_element = element_tree.SubElement(parent, "letStatement")
 
         while self.tokenizer.current_token_value != ";":
-
-            self.write_token(let_statement_element)
-            self.tokenizer.advance()
-
             if self.tokenizer.current_token_value == "=":
                 self.write_token(let_statement_element)
                 self.tokenizer.advance()
                 self.compile_expression(let_statement_element)
-
-            if self.tokenizer.current_token_value == ";":
+            elif self.tokenizer.current_token_value == ";":
+                self.write_token(let_statement_element)
+                break
+            else:
                 self.write_token(let_statement_element)
                 self.tokenizer.advance()
-                break
 
     def compile_do_statement(self, parent):
         """
         Compiles a do statement.
+        'do' subroutineCall ';'
+
+        subroutineCall -> subroutineName '('expressionList')' | (className|varName)'.'subroutineName'('expressionList')'
         """
         do_statement_element = element_tree.SubElement(parent, "doStatement")
 
@@ -179,12 +200,19 @@ class CompilationEngine:
 
             if self.tokenizer.current_token_value == ";":
                 self.write_token(do_statement_element)
-                self.tokenizer.advance()
                 break
+
+    def compile_if_statement(self, parent):
+        """
+        Compiles an if statement.
+        'if' '('expression')' '{'statements'}' ('else' '{'statements'}')?
+        """
+        if_statement_element = element_tree.SubElement(parent, "ifStatement")
 
     def compile_return_statement(self, parent):
         """
         Compiles a return statement.
+        'return' expression?';'
         """
         return_statement_element = element_tree.SubElement(parent, "returnStatement")
 
@@ -196,6 +224,7 @@ class CompilationEngine:
     def compile_expression(self, parent):
         """
         Compiles an expression.
+        term (op term)*
         """
         expression_element = element_tree.SubElement(parent, "expression")
         self.compile_term(expression_element)
@@ -203,6 +232,12 @@ class CompilationEngine:
     def compile_term(self, parent):
         """
         Compiles a set of terms inside expressions to the specified values.
+        integerConstant | stringConstant | keywordConstant | varName | varName'['expression']' | '('expression')'|(unaryOpTerm)|subroutineCall
+
+        subroutineCall -> subroutineName '('expressionList')' | (className|varName)'.'subroutineName'('expressionList')'
+        unaryOpTerm -> '-' | '~'
+
+        op -> '+' | '-' | '*' | '/' | '&' | '|' | '<' | '>' | '='
         """
         term_element = element_tree.SubElement(parent, "term")
 
@@ -225,12 +260,15 @@ class CompilationEngine:
 
                             if self.tokenizer.current_token_value == ")":
                                 self.write_token(term_element)
+                                self.tokenizer.advance()
                                 break
+                    self.write_token(term_element)
                     self.tokenizer.advance()
 
     def compile_expression_list(self, parent) -> int:
         """
         Compiles an expression list
+        (expression(',' expression)*)?
         """
         expression_list_element = element_tree.SubElement(parent, "expressionList")
         count = 0

@@ -36,20 +36,16 @@
               <symbol> ( </symbol>
               <expressionList></expressionList>
               <symbol> ) </symbol>
+              <symbol> ; </symbol>
             </term>
           </expression>
-          <symbol> ; </symbol>
-        </letStatement>
-        <doStatement>
           <keyword> do </keyword>
           <identifier> game </identifier>
           <symbol> . </symbol>
           <identifier> run </identifier>
           <symbol> ( </symbol>
-          <expressionList></expressionList>
           <symbol> ) </symbol>
-          <symbol> ; </symbol>
-        </doStatement>
+        </letStatement>
         <doStatement>
           <keyword> do </keyword>
           <identifier> game </identifier>
@@ -106,7 +102,6 @@
             <term></term>
           </expression>
           <stringConstant> string constant </stringConstant>
-          <symbol> ; </symbol>
         </letStatement>
         <letStatement>
           <keyword> let </keyword>
@@ -116,7 +111,6 @@
             <term></term>
           </expression>
           <keyword> null </keyword>
-          <symbol> ; </symbol>
         </letStatement>
         <letStatement>
           <keyword> let </keyword>
@@ -132,7 +126,6 @@
           <symbol> [ </symbol>
           <integerConstant> 2 </integerConstant>
           <symbol> ] </symbol>
-          <symbol> ; </symbol>
         </letStatement>
       </statements>
       <statements>
@@ -149,7 +142,6 @@
           <symbol> - </symbol>
           <identifier> j </identifier>
           <symbol> ) </symbol>
-          <symbol> ; </symbol>
         </letStatement>
         <letStatement>
           <keyword> let </keyword>
@@ -164,7 +156,6 @@
           <symbol> - </symbol>
           <integerConstant> 2 </integerConstant>
           <symbol> ) </symbol>
-          <symbol> ; </symbol>
         </letStatement>
         <letStatement>
           <keyword> let </keyword>
@@ -176,7 +167,6 @@
           <identifier> i </identifier>
           <symbol> | </symbol>
           <identifier> j </identifier>
-          <symbol> ; </symbol>
         </letStatement>
       </statements>
       <symbol> } </symbol>
