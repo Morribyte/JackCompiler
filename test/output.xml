@@ -110,9 +110,10 @@
               <identifier> s </identifier>
               <symbol> = </symbol>
               <expression>
-                <term></term>
+                <term>
+                  <stringConstant> string constant </stringConstant>
+                </term>
               </expression>
-              <stringConstant> string constant </stringConstant>
               <symbol> ; </symbol>
             </letStatement>
             <letStatement>

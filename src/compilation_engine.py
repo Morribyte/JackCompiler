@@ -268,6 +268,9 @@ class CompilationEngine:
                                 self.write_token(term_element)
                                 self.tokenizer.advance()
                                 break
+            case "stringConstant":
+                self.write_token(term_element)
+                self.tokenizer.advance()
 
 
     def compile_expression_list(self, parent) -> int:

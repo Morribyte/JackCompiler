@@ -438,9 +438,34 @@ def test_full_if_statement(setup_resources):
     compilation = setup_resources["compilation"]
     compilation.compile_class()
 
-    code = """ """
+    code = """      <statements>
+        <ifStatement>
+          <keyword> if </keyword>
+          <symbol> ( </symbol>
+          <keyword> false </keyword>
+          <symbol> ) </symbol>
+          <symbol> { </symbol>
+          <statements>
+            <letStatement>
+              <keyword> let </keyword>
+              <identifier> s </identifier>
+              <symbol> = </symbol>
+              <expression>"""
 
     pretty = write_xml(setup_resources)
 
     assert "<ifStatement>" in pretty
     assert code in pretty
+
+
+def test_string_constant(setup_resources):
+    """
+    Test that when we compile, stringConstants are handled properly within term.
+    """
+    compilation = setup_resources["compilation"]
+    compilation.compile_class()
+
+    pretty = write_xml(setup_resources)
+
+    assert "<stringConstant>" in pretty
+    assert "string constant" in pretty
