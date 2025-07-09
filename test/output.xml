@@ -100,79 +100,81 @@
       <statements>
         <ifStatement>
           <keyword> if </keyword>
-        </ifStatement>
-      </statements>
-      <statements>
-        <letStatement>
+          <symbol> ( </symbol>
+          <keyword> false </keyword>
+          <symbol> ) </symbol>
+          <symbol> { </symbol>
           <keyword> let </keyword>
           <identifier> s </identifier>
           <symbol> = </symbol>
-          <expression>
-            <term></term>
-          </expression>
           <stringConstant> string constant </stringConstant>
           <symbol> ; </symbol>
-        </letStatement>
-        <letStatement>
           <keyword> let </keyword>
           <identifier> s </identifier>
           <symbol> = </symbol>
-          <expression>
-            <term></term>
-          </expression>
           <keyword> null </keyword>
           <symbol> ; </symbol>
-        </letStatement>
-        <letStatement>
           <keyword> let </keyword>
           <identifier> a </identifier>
           <symbol> [ </symbol>
           <integerConstant> 1 </integerConstant>
           <symbol> ] </symbol>
           <symbol> = </symbol>
-          <expression>
-            <term></term>
-          </expression>
           <identifier> a </identifier>
           <symbol> [ </symbol>
           <integerConstant> 2 </integerConstant>
           <symbol> ] </symbol>
+          <symbol> ; </symbol>
+          <symbol> } </symbol>
+        </ifStatement>
+      </statements>
+      <statements>
+        <letStatement>
+          <keyword> let </keyword>
+          <identifier> i </identifier>
+          <symbol> = </symbol>
+          <expression>
+            <term></term>
+          </expression>
+          <identifier> i </identifier>
+          <symbol> * </symbol>
+          <symbol> ( </symbol>
+          <symbol> - </symbol>
+          <identifier> j </identifier>
+          <symbol> ) </symbol>
+          <symbol> ; </symbol>
+        </letStatement>
+        <letStatement>
+          <keyword> let </keyword>
+          <identifier> j </identifier>
+          <symbol> = </symbol>
+          <expression>
+            <term></term>
+          </expression>
+          <identifier> j </identifier>
+          <symbol> / </symbol>
+          <symbol> ( </symbol>
+          <symbol> - </symbol>
+          <integerConstant> 2 </integerConstant>
+          <symbol> ) </symbol>
+          <symbol> ; </symbol>
+        </letStatement>
+        <letStatement>
+          <keyword> let </keyword>
+          <identifier> i </identifier>
+          <symbol> = </symbol>
+          <expression>
+            <term></term>
+          </expression>
+          <identifier> i </identifier>
+          <symbol> | </symbol>
+          <identifier> j </identifier>
           <symbol> ; </symbol>
         </letStatement>
       </statements>
       <symbol> } </symbol>
     </subroutineBody>
   </subroutineDec>
-  <keyword> else </keyword>
-  <symbol> { </symbol>
-  <keyword> let </keyword>
-  <identifier> i </identifier>
-  <symbol> = </symbol>
-  <identifier> i </identifier>
-  <symbol> * </symbol>
-  <symbol> ( </symbol>
-  <symbol> - </symbol>
-  <identifier> j </identifier>
-  <symbol> ) </symbol>
-  <symbol> ; </symbol>
-  <keyword> let </keyword>
-  <identifier> j </identifier>
-  <symbol> = </symbol>
-  <identifier> j </identifier>
-  <symbol> / </symbol>
-  <symbol> ( </symbol>
-  <symbol> - </symbol>
-  <integerConstant> 2 </integerConstant>
-  <symbol> ) </symbol>
-  <symbol> ; </symbol>
-  <keyword> let </keyword>
-  <identifier> i </identifier>
-  <symbol> = </symbol>
-  <identifier> i </identifier>
-  <symbol> | </symbol>
-  <identifier> j </identifier>
-  <symbol> ; </symbol>
-  <symbol> } </symbol>
   <keyword> return </keyword>
   <symbol> ; </symbol>
   <symbol> } </symbol>

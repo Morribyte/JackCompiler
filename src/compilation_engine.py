@@ -204,6 +204,9 @@ class CompilationEngine:
         """
         if_statement_element = element_tree.SubElement(parent, "ifStatement")
 
+        while self.tokenizer.current_token_value != "}":
+            self.write_token(if_statement_element)
+            self.tokenizer.advance()
         self.write_token(if_statement_element)
         self.tokenizer.advance()
 
