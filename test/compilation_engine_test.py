@@ -165,255 +165,255 @@ def test_compile_parameter_list(setup_resources):
     assert code in pretty
 
 
-# def test_subroutine_body(setup_resources):
-#     """
-#     Test that when we call compile_class, it can run the subroutine body
-#     """
-#     compilation = setup_resources["compilation"]
-#     compilation.compile_class()
-#
-#     pretty = write_xml(setup_resources)
-#
-#     assert "<subroutineBody>" in pretty
-#     assert "</subroutineBody>" in pretty
-#
-#
-# def test_var_dec(setup_resources):
-#     """
-#     Test that when we call compile_class, it runs through the variable declarations properly.
-#     """
-#     compilation = setup_resources["compilation"]
-#     compilation.compile_class()
-#
-#     code="""      <symbol> { </symbol>
-#       <varDec>
-#         <keyword> var </keyword>
-#         <identifier> SquareGame </identifier>
-#         <identifier> game </identifier>
-#         <symbol> ; </symbol>
-#       </varDec>"""
-#
-#     pretty = write_xml(setup_resources)
-#
-#     assert "<subroutineBody>" in pretty
-#     assert "</subroutineBody>" in pretty
-#     assert code in pretty
-#
-#
-# def test_statements_brackets(setup_resources):
-#     """
-#     Test that the compile statements brackets print properly
-#     """
-#     compilation = setup_resources["compilation"]
-#     compilation.compile_class()
-#
-#     pretty = write_xml(setup_resources)
-#
-#     assert "<statements>" in pretty
-#
-#
-# def test_let_statements_brackets(setup_resources):
-#     """
-#     Test that the letStatement prints properly.
-#     """
-#     compilation = setup_resources["compilation"]
-#     compilation.compile_class()
-#
-#     code="""      </varDec>
-#       <statements>
-#         <letStatement>
-#           <keyword> let </keyword>
-#           <identifier> game </identifier>
-# """
-#
-#     pretty = write_xml(setup_resources)
-#
-#     assert "<letStatement>" in pretty
-#     assert code in pretty
-#
-#
-# def test_compile_expression(setup_resources):
-#     """
-#     Test that when we run compile, an expression bracket is printed.
-#     """
-#     compilation = setup_resources["compilation"]
-#     compilation.compile_class()
-#
-#     pretty = write_xml(setup_resources)
-#
-#     assert "<expression>" in pretty
-#     assert "</expression>" in pretty
-#
-#
-# def test_compile_term(setup_resources):
-#     """
-#     Test that when we run compile, term is written properly
-#     """
-#     compilation = setup_resources["compilation"]
-#     compilation.compile_class()
-#
-#     pretty = write_xml(setup_resources)
-#
-#     assert "<term>" in pretty
-#
-#
-# def test_compile_term_full(setup_resources):
-#     """
-#     Test that when we run compile, the full term and expression are written properly.
-#     """
-#     compilation = setup_resources["compilation"]
-#     compilation.compile_class()
-#
-#     code = """              <expressionList></expressionList>
-#               <symbol> ) </symbol>
-#             </term>
-#           </expression>
-#           <symbol> ; </symbol>
-#         </letStatement>"""
-#
-#     pretty = write_xml(setup_resources)
-#
-#     assert "<term>" in pretty
-#     assert code in pretty
-#
-#
-# def test_do_statement(setup_resources):
-#     """
-#     Test that when we run compile, the doStatement tag writes properly
-#     """
-#     compilation = setup_resources["compilation"]
-#     compilation.compile_class()
-#
-#     pretty = write_xml(setup_resources)
-#
-#     assert "<doStatement>" in pretty
-#
-#
-# def test_full_do_statement(setup_resources):
-#     """
-#     Test that when we run compile, the doStatement fully compiles
-#     """
-#     compilation = setup_resources["compilation"]
-#     compilation.compile_class()
-#
-#     code = """        <doStatement>
-#           <keyword> do </keyword>
-#           <identifier> game </identifier>
-#           <symbol> . </symbol>
-#           <identifier> dispose </identifier>
-#           <symbol> ( </symbol>
-#           <expressionList></expressionList>
-#           <symbol> ) </symbol>
-#           <symbol> ; </symbol>
-#         </doStatement>"""
-#
-#     pretty = write_xml(setup_resources)
-#
-#     assert "<doStatement>" in pretty
-#     assert code in pretty
-#
-#
-# def test_return_statement(setup_resources):
-#     """
-#     Test that when we run compile, it prints the <return> brackets
-#     """
-#     compilation = setup_resources["compilation"]
-#     compilation.compile_class()
-#
-#     pretty = write_xml(setup_resources)
-#
-#     assert "<returnStatement>" in pretty
-#
-#
-# def test_full_return_statement(setup_resources):
-#     """
-#     Test that when we run compile, it compiles a full return statement
-#     """
-#     compilation = setup_resources["compilation"]
-#     compilation.compile_class()
-#
-#     code = """        </doStatement>
-#         <returnStatement>
-#           <keyword> return </keyword>
-#           <symbol> ; </symbol>
-#         </returnStatement>
-#       </statements>
-#       <symbol> } </symbol>"""
-#
-#     pretty = write_xml(setup_resources)
-#
-#     assert "<returnStatement>" in pretty
-#     assert code in pretty
-#
-#
-# def test_full_function_subroutine_dec(setup_resources):
-#     """
-#     Test that our subroutine properly converts without any extra tokens.
-#     """
-#     compilation = setup_resources["compilation"]
-#     compilation.compile_class()
-#
-#     code = """  <subroutineDec>
-#     <keyword> function </keyword>
-#     <keyword> void </keyword>
-#     <identifier> main </identifier>
-#     <symbol> ( </symbol>
-#     <parameterList></parameterList>
-#     <symbol> ) </symbol>
-#     <subroutineBody>
-#       <symbol> { </symbol>
-#       <varDec>
-#         <keyword> var </keyword>
-#         <identifier> SquareGame </identifier>
-#         <identifier> game </identifier>
-#         <symbol> ; </symbol>
-#       </varDec>
-#       <statements>
-#         <letStatement>
-#           <keyword> let </keyword>
-#           <identifier> game </identifier>
-#           <symbol> = </symbol>
-#           <expression>
-#             <term>
-#               <identifier> SquareGame </identifier>
-#               <symbol> . </symbol>
-#               <identifier> new </identifier>
-#               <symbol> ( </symbol>
-#               <expressionList></expressionList>
-#               <symbol> ) </symbol>
-#             </term>
-#           </expression>
-#           <symbol> ; </symbol>
-#         </letStatement>
-#         <doStatement>
-#           <keyword> do </keyword>
-#           <identifier> game </identifier>
-#           <symbol> . </symbol>
-#           <identifier> run </identifier>
-#           <symbol> ( </symbol>
-#           <expressionList></expressionList>
-#           <symbol> ) </symbol>
-#           <symbol> ; </symbol>
-#         </doStatement>
-#         <doStatement>
-#           <keyword> do </keyword>
-#           <identifier> game </identifier>
-#           <symbol> . </symbol>
-#           <identifier> dispose </identifier>
-#           <symbol> ( </symbol>
-#           <expressionList></expressionList>
-#           <symbol> ) </symbol>
-#           <symbol> ; </symbol>
-#         </doStatement>
-#         <returnStatement>
-#           <keyword> return </keyword>
-#           <symbol> ; </symbol>
-#         </returnStatement>
-#       </statements>
-#       <symbol> } </symbol>
-#     </subroutineBody>
-#   </subroutineDec>"""
-#     pretty = write_xml(setup_resources)
-#
-#     assert "<returnStatement>" in pretty
-#     assert code in pretty
+def test_subroutine_body(setup_resources):
+    """
+    Test that when we call compile_class, it can run the subroutine body
+    """
+    compilation = setup_resources["compilation"]
+    compilation.compile_class()
+
+    pretty = write_xml(setup_resources)
+
+    assert "<subroutineBody>" in pretty
+    assert "</subroutineBody>" in pretty
+
+
+def test_var_dec(setup_resources):
+    """
+    Test that when we call compile_class, it runs through the variable declarations properly.
+    """
+    compilation = setup_resources["compilation"]
+    compilation.compile_class()
+
+    code="""      <symbol> { </symbol>
+      <varDec>
+        <keyword> var </keyword>
+        <identifier> SquareGame </identifier>
+        <identifier> game </identifier>
+        <symbol> ; </symbol>
+      </varDec>"""
+
+    pretty = write_xml(setup_resources)
+
+    assert "<subroutineBody>" in pretty
+    assert "</subroutineBody>" in pretty
+    assert code in pretty
+
+
+def test_statements_brackets(setup_resources):
+    """
+    Test that the compile statements brackets print properly
+    """
+    compilation = setup_resources["compilation"]
+    compilation.compile_class()
+
+    pretty = write_xml(setup_resources)
+
+    assert "<statements>" in pretty
+
+
+def test_let_statements_brackets(setup_resources):
+    """
+    Test that the letStatement prints properly.
+    """
+    compilation = setup_resources["compilation"]
+    compilation.compile_class()
+
+    code="""      </varDec>
+      <statements>
+        <letStatement>
+          <keyword> let </keyword>
+          <identifier> game </identifier>
+"""
+
+    pretty = write_xml(setup_resources)
+
+    assert "<letStatement>" in pretty
+    assert code in pretty
+
+
+def test_compile_expression(setup_resources):
+    """
+    Test that when we run compile, an expression bracket is printed.
+    """
+    compilation = setup_resources["compilation"]
+    compilation.compile_class()
+
+    pretty = write_xml(setup_resources)
+
+    assert "<expression>" in pretty
+    assert "</expression>" in pretty
+
+
+def test_compile_term(setup_resources):
+    """
+    Test that when we run compile, term is written properly
+    """
+    compilation = setup_resources["compilation"]
+    compilation.compile_class()
+
+    pretty = write_xml(setup_resources)
+
+    assert "<term>" in pretty
+
+
+def test_compile_term_full(setup_resources):
+    """
+    Test that when we run compile, the full term and expression are written properly.
+    """
+    compilation = setup_resources["compilation"]
+    compilation.compile_class()
+
+    code = """              <expressionList></expressionList>
+              <symbol> ) </symbol>
+            </term>
+          </expression>
+          <symbol> ; </symbol>
+        </letStatement>"""
+
+    pretty = write_xml(setup_resources)
+
+    assert "<term>" in pretty
+    assert code in pretty
+
+
+def test_do_statement(setup_resources):
+    """
+    Test that when we run compile, the doStatement tag writes properly
+    """
+    compilation = setup_resources["compilation"]
+    compilation.compile_class()
+
+    pretty = write_xml(setup_resources)
+
+    assert "<doStatement>" in pretty
+
+
+def test_full_do_statement(setup_resources):
+    """
+    Test that when we run compile, the doStatement fully compiles
+    """
+    compilation = setup_resources["compilation"]
+    compilation.compile_class()
+
+    code = """        <doStatement>
+          <keyword> do </keyword>
+          <identifier> game </identifier>
+          <symbol> . </symbol>
+          <identifier> dispose </identifier>
+          <symbol> ( </symbol>
+          <expressionList></expressionList>
+          <symbol> ) </symbol>
+          <symbol> ; </symbol>
+        </doStatement>"""
+
+    pretty = write_xml(setup_resources)
+
+    assert "<doStatement>" in pretty
+    assert code in pretty
+
+
+def test_return_statement(setup_resources):
+    """
+    Test that when we run compile, it prints the <return> brackets
+    """
+    compilation = setup_resources["compilation"]
+    compilation.compile_class()
+
+    pretty = write_xml(setup_resources)
+
+    assert "<returnStatement>" in pretty
+
+
+def test_full_return_statement(setup_resources):
+    """
+    Test that when we run compile, it compiles a full return statement
+    """
+    compilation = setup_resources["compilation"]
+    compilation.compile_class()
+
+    code = """        </doStatement>
+        <returnStatement>
+          <keyword> return </keyword>
+          <symbol> ; </symbol>
+        </returnStatement>
+      </statements>
+      <symbol> } </symbol>"""
+
+    pretty = write_xml(setup_resources)
+
+    assert "<returnStatement>" in pretty
+    assert code in pretty
+
+
+def test_full_function_subroutine_dec(setup_resources):
+    """
+    Test that our subroutine properly converts without any extra tokens.
+    """
+    compilation = setup_resources["compilation"]
+    compilation.compile_class()
+
+    code = """  <subroutineDec>
+    <keyword> function </keyword>
+    <keyword> void </keyword>
+    <identifier> main </identifier>
+    <symbol> ( </symbol>
+    <parameterList></parameterList>
+    <symbol> ) </symbol>
+    <subroutineBody>
+      <symbol> { </symbol>
+      <varDec>
+        <keyword> var </keyword>
+        <identifier> SquareGame </identifier>
+        <identifier> game </identifier>
+        <symbol> ; </symbol>
+      </varDec>
+      <statements>
+        <letStatement>
+          <keyword> let </keyword>
+          <identifier> game </identifier>
+          <symbol> = </symbol>
+          <expression>
+            <term>
+              <identifier> SquareGame </identifier>
+              <symbol> . </symbol>
+              <identifier> new </identifier>
+              <symbol> ( </symbol>
+              <expressionList></expressionList>
+              <symbol> ) </symbol>
+            </term>
+          </expression>
+          <symbol> ; </symbol>
+        </letStatement>
+        <doStatement>
+          <keyword> do </keyword>
+          <identifier> game </identifier>
+          <symbol> . </symbol>
+          <identifier> run </identifier>
+          <symbol> ( </symbol>
+          <expressionList></expressionList>
+          <symbol> ) </symbol>
+          <symbol> ; </symbol>
+        </doStatement>
+        <doStatement>
+          <keyword> do </keyword>
+          <identifier> game </identifier>
+          <symbol> . </symbol>
+          <identifier> dispose </identifier>
+          <symbol> ( </symbol>
+          <expressionList></expressionList>
+          <symbol> ) </symbol>
+          <symbol> ; </symbol>
+        </doStatement>
+        <returnStatement>
+          <keyword> return </keyword>
+          <symbol> ; </symbol>
+        </returnStatement>
+      </statements>
+      <symbol> } </symbol>
+    </subroutineBody>
+  </subroutineDec>"""
+    pretty = write_xml(setup_resources)
+
+    assert "<returnStatement>" in pretty
+    assert code in pretty
