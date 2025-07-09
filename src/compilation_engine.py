@@ -316,8 +316,17 @@ class CompilationEngine:
             case "integerConstant":
                 self.write_token(term_element)
                 self.tokenizer.advance()
-
-
+            case "symbol":
+                if self.tokenizer.current_token_value == "(":
+                    self.write_token(term_element)
+                    self.tokenizer.advance()
+                    self.compile_expression(term_element)
+                    self.write_token(term_element)  # write ')'
+                    self.tokenizer.advance()
+                elif self.tokenizer.current_token_value in ["-", "~"]:
+                    self.write_token(term_element)  # Write the unary symbol
+                    self.tokenizer.advance()
+                    self.compile_term(term_element)  # Nest the next term inside
 
     def compile_expression_list(self, parent) -> int:
         """

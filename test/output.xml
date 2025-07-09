@@ -170,12 +170,19 @@
                   <identifier> i </identifier>
                 </term>
                 <symbol> * </symbol>
-                <term></term>
+                <term>
+                  <symbol> ( </symbol>
+                  <expression>
+                    <term>
+                      <symbol> - </symbol>
+                      <term>
+                        <identifier> j </identifier>
+                      </term>
+                    </term>
+                  </expression>
+                  <symbol> ) </symbol>
+                </term>
               </expression>
-              <symbol> ( </symbol>
-              <symbol> - </symbol>
-              <identifier> j </identifier>
-              <symbol> ) </symbol>
               <symbol> ; </symbol>
             </letStatement>
             <letStatement>
@@ -187,12 +194,19 @@
                   <identifier> j </identifier>
                 </term>
                 <symbol> / </symbol>
-                <term></term>
+                <term>
+                  <symbol> ( </symbol>
+                  <expression>
+                    <term>
+                      <symbol> - </symbol>
+                      <term>
+                        <integerConstant> 2 </integerConstant>
+                      </term>
+                    </term>
+                  </expression>
+                  <symbol> ) </symbol>
+                </term>
               </expression>
-              <symbol> ( </symbol>
-              <symbol> - </symbol>
-              <integerConstant> 2 </integerConstant>
-              <symbol> ) </symbol>
               <symbol> ; </symbol>
             </letStatement>
             <letStatement>
