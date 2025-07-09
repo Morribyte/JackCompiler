@@ -125,46 +125,46 @@ def test_compile_class_var_dec(setup_resources):
     assert code in pretty
 
 
-# def test_subroutine_dec(setup_resources):
-#     """
-#     Test that when we call compile_class, it handles subroutine declarations.
-#     """
-#     compilation = setup_resources["compilation"]
-#     compilation.compile_class()
-#
-#     code = """  </classVarDec>
-#   <subroutineDec>
-#     <keyword> function </keyword>
-#     <keyword> void </keyword>
-#     <identifier> main </identifier>
-#     <symbol> ( </symbol>"""
-#     pretty = write_xml(setup_resources)
-#
-#     assert "<subroutineDec>" in pretty
-#     assert code in pretty
+def test_subroutine_dec(setup_resources):
+    """
+    Test that when we call compile_class, it handles subroutine declarations.
+    """
+    compilation = setup_resources["compilation"]
+    compilation.compile_class()
 
-#
-# def test_compile_parameter_list(setup_resources):
-#     """
-#     Test that when we call compile_class, it handles the parameter list.
-#     """
-#     compilation = setup_resources["compilation"]
-#     compilation.compile_class()
-#
-#     code="""  <subroutineDec>
-#     <keyword> function </keyword>
-#     <keyword> void </keyword>
-#     <identifier> main </identifier>
-#     <symbol> ( </symbol>
-#     <parameterList></parameterList>
-#     <symbol> ) </symbol>"""
-#
-#     pretty = write_xml(setup_resources)
-#
-#     assert "<parameterList>" in pretty
-#     assert code in pretty
-#
-#
+    code = """  </classVarDec>
+  <subroutineDec>
+    <keyword> function </keyword>
+    <keyword> void </keyword>
+    <identifier> main </identifier>
+    <symbol> ( </symbol>"""
+    pretty = write_xml(setup_resources)
+
+    assert "<subroutineDec>" in pretty
+    assert code in pretty
+
+
+def test_compile_parameter_list(setup_resources):
+    """
+    Test that when we call compile_class, it handles the parameter list.
+    """
+    compilation = setup_resources["compilation"]
+    compilation.compile_class()
+
+    code="""  <subroutineDec>
+    <keyword> function </keyword>
+    <keyword> void </keyword>
+    <identifier> main </identifier>
+    <symbol> ( </symbol>
+    <parameterList></parameterList>
+    <symbol> ) </symbol>"""
+
+    pretty = write_xml(setup_resources)
+
+    assert "<parameterList>" in pretty
+    assert code in pretty
+
+
 # def test_subroutine_body(setup_resources):
 #     """
 #     Test that when we call compile_class, it can run the subroutine body
