@@ -48,12 +48,11 @@ class CompilationEngine:
         class_var_dec_element = element_tree.SubElement(parent, "classVarDec")
         assert self.tokenizer.current_token_value in ["static", "field"]
 
-        while True:
+        while self.tokenizer.current_token_value != ";":
             self.write_token(class_var_dec_element)
-            if self.tokenizer.current_token_value == ";":
-                self.tokenizer.advance()
-                break
             self.tokenizer.advance()
+        self.write_token(class_var_dec_element)
+        self.tokenizer.advance()
 
     def compile_subroutine(self, parent):
         """
@@ -62,12 +61,13 @@ class CompilationEngine:
         subroutine_element = element_tree.SubElement(parent, "subroutineDec")
         assert self.tokenizer.current_token_value in ["function", "method", "constructor"]
 
-        while True:
-            self.write_token(subroutine_element)
+        while self.tokenizer.current_token_value != ")":
             if self.tokenizer.current_token_value == "(":
+                self.write_token(subroutine_element)
                 self.compile_parameter_list(subroutine_element)
                 self.write_token(subroutine_element)
                 break
+            self.write_token(subroutine_element)
             self.tokenizer.advance()
         self.compile_subroutine_body(subroutine_element)
 
@@ -76,14 +76,10 @@ class CompilationEngine:
         Compiles the parameter list of a subroutine.
         """
         parameter_list_element = element_tree.SubElement(parent, "parameterList")
-        assert self.tokenizer.current_token_value == "("
-
-        self.tokenizer.advance()
-
         while self.tokenizer.current_token_value != ")":
-
             self.tokenizer.advance()
             self.write_token(parameter_list_element)
+        self.tokenizer.advance()
 
     def compile_subroutine_body(self, parent):
         """

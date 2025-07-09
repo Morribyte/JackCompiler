@@ -13,16 +13,12 @@
     <keyword> void </keyword>
     <identifier> main </identifier>
     <symbol> ( </symbol>
-    <parameterList></parameterList>
-    <symbol> ) </symbol>
+    <parameterList>
+      <symbol> ) </symbol>
+    </parameterList>
+    <symbol> { </symbol>
     <subroutineBody>
-      <symbol> { </symbol>
-      <varDec>
-        <keyword> var </keyword>
-        <identifier> SquareGame </identifier>
-        <identifier> game </identifier>
-        <symbol> ; </symbol>
-      </varDec>
+      <keyword> var </keyword>
       <statements>
         <letStatement>
           <keyword> let </keyword>
@@ -73,18 +69,12 @@
     <keyword> void </keyword>
     <identifier> more </identifier>
     <symbol> ( </symbol>
-    <parameterList></parameterList>
-    <symbol> ) </symbol>
+    <parameterList>
+      <symbol> ) </symbol>
+    </parameterList>
+    <symbol> { </symbol>
     <subroutineBody>
-      <symbol> { </symbol>
-      <varDec>
-        <keyword> var </keyword>
-        <keyword> int </keyword>
-        <identifier> i </identifier>
-        <symbol> , </symbol>
-        <identifier> j </identifier>
-        <symbol> ; </symbol>
-      </varDec>
+      <keyword> var </keyword>
       <varDec>
         <keyword> var </keyword>
         <identifier> String </identifier>
