@@ -469,3 +469,23 @@ def test_string_constant(setup_resources):
 
     assert "<stringConstant>" in pretty
     assert "string constant" in pretty
+
+
+def test_full_string_constant(setup_resources):
+    """
+    Test that when we compile, the full string constants are printed at the right level.
+    """
+    compilation = setup_resources["compilation"]
+    compilation.compile_class()
+
+    code = """              <expression>
+                <term>
+                  <stringConstant> string constant </stringConstant>
+                </term>
+              </expression>
+              <symbol> ; </symbol>"""
+
+    pretty = write_xml(setup_resources)
+
+    assert "<stringConstant>" in pretty
+    assert "string constant" in pretty
