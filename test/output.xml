@@ -121,9 +121,10 @@
               <identifier> s </identifier>
               <symbol> = </symbol>
               <expression>
-                <term></term>
+                <term>
+                  <keyword> null </keyword>
+                </term>
               </expression>
-              <keyword> null </keyword>
               <symbol> ; </symbol>
             </letStatement>
             <letStatement>

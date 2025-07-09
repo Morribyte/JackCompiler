@@ -273,7 +273,7 @@ class CompilationEngine:
                 self.write_token(term_element)
                 self.tokenizer.advance()
             case "keyword":
-                if self.tokenizer.current_token_type in ["true", "false", "null", "this"]:
+                if self.tokenizer.current_token_value in ["true", "false", "null", "this"]:
                     self.write_token(term_element)
                     self.tokenizer.advance()
 
