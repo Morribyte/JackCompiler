@@ -242,6 +242,10 @@ class CompilationEngine:
         """
         while_statement_element = element_tree.SubElement(parent, "whileStatement")
 
+        while self.tokenizer.current_token_value != "}":
+            self.write_token(while_statement_element)
+            self.tokenizer.advance()
+
     def compile_return_statement(self, parent):
         """
         Compiles a return statement.

@@ -5,8 +5,6 @@ from pathlib import Path
 import pytest
 
 import xml.etree.ElementTree as element_tree
-
-
 from src.compilation_engine import CompilationEngine
 from src.tokenizer import Tokenizer
 
@@ -318,12 +316,19 @@ def test_while_statement(setup_resources):
     Test that when we run compile, it prints the while statement brackets
     """
     jack_file: Path = Path(r"F:\Programming\Hack and ASM Projects\JackCompiler\input\ArrayTest\Main.jack")
-    compilation = setup_resources["compilation"]
+    tokenizer = Tokenizer(jack_file)
+    compilation = CompilationEngine(tokenizer)
     compilation.compile_class()
 
-    pretty = write_xml(setup_resources)
+    tree = element_tree.ElementTree(compilation.root)
+    element_tree.indent(tree)
+    tree.write("output.xml", encoding="utf-8", short_empty_elements=False)
+    xml_str = element_tree.tostring(compilation.root, encoding="unicode", method="html")
 
-    assert "<whileStatement>" in pretty
+    print("XML file parsed and formatted.")
+
+
+    assert "<whileStatement>" in xml_str
 
 
 
