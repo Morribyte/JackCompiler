@@ -152,7 +152,6 @@ class CompilationEngine:
                         self.compile_do_statement(statements_element)
                     case "if":
                         self.compile_if_statement(statements_element)
-                        print(f"IF STATEMENT: {self.tokenizer.current_token_value}")
                     case "return":
                         self.compile_return_statement(statements_element)
 
@@ -228,7 +227,8 @@ class CompilationEngine:
                 self.tokenizer.advance()
                 self.compile_statements(if_statement_element)
 
-
+            self.write_token(if_statement_element)
+            self.tokenizer.advance()
 
     def compile_return_statement(self, parent):
         """
