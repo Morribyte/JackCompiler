@@ -53,6 +53,8 @@ class CompilationEngine:
                     self.write_token(self.root)
                     self.tokenizer.advance()
 
+        # Final token write
+        self.write_token(self.root)
 
     def compile_class_var_dec(self, parent):
         """
