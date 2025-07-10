@@ -155,6 +155,8 @@ class CompilationEngine:
                         self.compile_do_statement(statements_element)
                     case "if":
                         self.compile_if_statement(statements_element)
+                    case "while":
+                        self.compile_while_statement(statements_element)
                     case "return":
                         self.compile_return_statement(statements_element)
 
@@ -232,6 +234,13 @@ class CompilationEngine:
 
             self.write_token(if_statement_element)
             self.tokenizer.advance()
+
+    def compile_while_statement(self, parent):
+        """
+        Compiles a while statement
+        'while' '('expression')' '{'statements'}'
+        """
+        while_statement_element = element_tree.SubElement(parent, "whileStatement")
 
     def compile_return_statement(self, parent):
         """
