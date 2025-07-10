@@ -242,6 +242,7 @@ class CompilationEngine:
         """
         while_statement_element = element_tree.SubElement(parent, "whileStatement")
         while_element = element_tree.SubElement(parent, "whileStatement")
+        print(f"CURRENT TOKEN WHILE {self.tokenizer.current_token_value}")
 
         while self.tokenizer.current_token_value != "}":
             if self.tokenizer.current_token_value == "(":
@@ -256,6 +257,7 @@ class CompilationEngine:
                 self.tokenizer.advance()
             self.write_token(while_statement_element)
             self.tokenizer.advance()
+
     def compile_return_statement(self, parent):
         """
         Compiles a return statement.
@@ -344,10 +346,10 @@ class CompilationEngine:
                 self.tokenizer.advance()
             case "symbol":
                 if self.tokenizer.current_token_value == "(":
-                    self.write_token(term_element)
+                    self.write_token(term_element)  # write (
                     self.tokenizer.advance()
                     self.compile_expression(term_element)
-                    self.write_token(term_element)  # write ')'
+                    self.write_token(term_element)  # write )
                     self.tokenizer.advance()
                 elif self.tokenizer.current_token_value in ["-", "~"]:
                     self.write_token(term_element)  # Write the unary symbol
@@ -361,21 +363,11 @@ class CompilationEngine:
         """
         expression_list_element = element_tree.SubElement(parent, "expressionList")
         count = 0
-
+        print(f"EXPR LIST ENTRY TOKEN: {self.tokenizer.current_token_value}")
         if self.tokenizer.current_token_value in [")", "]"]:
             return count
 
-        # ... parse expressions as needed ...
         return count
-        #
-        # while self.tokenizer.current_token_value != ")":
-        #
-        #     self.compile_expression(expression_list_element)
-        #
-        #     if self.tokenizer.current_token_value == ",":
-        #         self.write_token(expression_list_element)
-        #         self.tokenizer.advance()
-        #     self.tokenizer.advance()
 
     def write_token(self, parent_name):
         """
