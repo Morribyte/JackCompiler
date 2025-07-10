@@ -53,6 +53,7 @@ class CompilationEngine:
                     self.write_token(self.root)
                     self.tokenizer.advance()
 
+
     def compile_class_var_dec(self, parent):
         """
         Compiles the variable declarations for a class.

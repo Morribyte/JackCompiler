@@ -942,9 +942,7 @@ def test_full_compilation_square(setup_resources):
       <symbol> } </symbol>
     </subroutineBody>
   </subroutineDec>
-  <symbol> } </symbol>
-</class>
-"""
+</class>"""
 
     pretty = write_xml(setup_resources)
 
