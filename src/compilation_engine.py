@@ -241,11 +241,21 @@ class CompilationEngine:
         'while' '('expression')' '{'statements'}'
         """
         while_statement_element = element_tree.SubElement(parent, "whileStatement")
+        while_element = element_tree.SubElement(parent, "whileStatement")
 
         while self.tokenizer.current_token_value != "}":
+            if self.tokenizer.current_token_value == "(":
+                self.write_token(while_statement_element)
+                self.tokenizer.advance()
+                self.compile_expression(while_statement_element)
+            if self.tokenizer.current_token_value == "{":
+                self.write_token(while_element)  # '{'
+                self.tokenizer.advance()
+                self.compile_statements(while_element)
+                self.write_token(while_element)  # '}'
+                self.tokenizer.advance()
             self.write_token(while_statement_element)
             self.tokenizer.advance()
-
     def compile_return_statement(self, parent):
         """
         Compiles a return statement.
