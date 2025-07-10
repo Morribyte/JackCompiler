@@ -327,10 +327,90 @@ def test_while_statement(setup_resources):
 
     print("XML file parsed and formatted.")
 
-
     assert "<whileStatement>" in xml_str
 
 
+def test_full_while_statement(setup_resources):
+    """
+    Test that when we run compile, it prints the entire while statement
+    """
+    jack_file: Path = Path(r"F:\Programming\Hack and ASM Projects\JackCompiler\input\ArrayTest\Main.jack")
+    tokenizer = Tokenizer(jack_file)
+    compilation = CompilationEngine(tokenizer)
+    compilation.compile_class()
+
+    tree = element_tree.ElementTree(compilation.root)
+    element_tree.indent(tree)
+    tree.write("output.xml", encoding="utf-8", short_empty_elements=False)
+    xml_str = element_tree.tostring(compilation.root, encoding="unicode", method="html")
+
+    code = """        <whileStatement>
+          <keyword> while </keyword>
+          <symbol> ( </symbol>
+          <expression>
+            <term>
+              <identifier> i </identifier>
+            </term>
+            <symbol> &lt; </symbol>
+            <term>
+              <identifier> length </identifier>
+            </term>
+          </expression>
+          <symbol> ) </symbol>
+          <symbol> { </symbol>
+          <statements>
+            <letStatement>
+              <keyword> let </keyword>
+              <identifier> a </identifier>
+              <symbol> [ </symbol>
+              <expression>
+                <term>
+                  <identifier> i </identifier>
+                </term>
+              </expression>
+              <symbol> ] </symbol>
+              <symbol> = </symbol>
+              <expression>
+                <term>
+                  <identifier> Keyboard </identifier>
+                  <symbol> . </symbol>
+                  <identifier> readInt </identifier>
+                  <symbol> ( </symbol>
+                  <expressionList>
+                    <expression>
+                      <term>
+                        <stringConstant> ENTER THE NEXT NUMBER:  </stringConstant>
+                      </term>
+                    </expression>
+                  </expressionList>
+                  <symbol> ) </symbol>
+                </term>
+              </expression>
+              <symbol> ; </symbol>
+            </letStatement>
+            <letStatement>
+              <keyword> let </keyword>
+              <identifier> i </identifier>
+              <symbol> = </symbol>
+              <expression>
+                <term>
+                  <identifier> i </identifier>
+                </term>
+                <symbol> + </symbol>
+                <term>
+                  <integerConstant> 1 </integerConstant>
+                </term>
+              </expression>
+              <symbol> ; </symbol>
+            </letStatement>
+          </statements>
+          <symbol> } </symbol>
+        </whileStatement>"""
+
+    print("XML file parsed and formatted.")
+
+    assert "<whileStatement>" in xml_str
+    assert code in xml_str
 
 def test_return_statement(setup_resources):
     """
