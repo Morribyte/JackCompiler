@@ -242,8 +242,6 @@ class CompilationEngine:
         """
 
         while_statement_element = element_tree.SubElement(parent, "whileStatement")
-        print("COMPILING WHILE")
-        print(f"CURRENT TOKEN WHILE {self.tokenizer.current_token_value}")
 
         while self.tokenizer.current_token_value != "}":
             if self.tokenizer.current_token_value == "(":
