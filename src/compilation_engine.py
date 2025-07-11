@@ -198,8 +198,8 @@ class CompilationEngine:
         while self.tokenizer.current_token_value != ";":
             if self.tokenizer.current_token_value == "(":
                 self.write_token(do_statement_element)
-                self.compile_expression_list(do_statement_element)
                 self.tokenizer.advance()
+                self.compile_expression_list(do_statement_element)
             else:
                 self.write_token(do_statement_element)
                 self.tokenizer.advance()
@@ -252,10 +252,10 @@ class CompilationEngine:
                 self.write_token(while_statement_element)  # '{'
                 self.tokenizer.advance()
                 self.compile_statements(while_statement_element)
-                self.write_token(while_statement_element)  # '}'
-                self.tokenizer.advance()
             self.write_token(while_statement_element)
             self.tokenizer.advance()
+        self.write_token(while_statement_element)
+        self.tokenizer.advance()
 
 
     def compile_return_statement(self, parent):
@@ -367,6 +367,8 @@ class CompilationEngine:
         print(f"EXPR LIST ENTRY TOKEN: {self.tokenizer.current_token_value}")
         if self.tokenizer.current_token_value in [")", "]"]:
             return count
+        self.compile_expression(expression_list_element)
+        count += 1
         return count
 
     def write_token(self, parent_name):

@@ -42,8 +42,13 @@
               <symbol> . </symbol>
               <identifier> readInt </identifier>
               <symbol> ( </symbol>
-              <expressionList></expressionList>
-              <stringConstant> HOW MANY NUMBERS? </stringConstant>
+              <expressionList>
+                <expression>
+                  <term>
+                    <stringConstant> HOW MANY NUMBERS?  </stringConstant>
+                  </term>
+                </expression>
+              </expressionList>
               <symbol> ) </symbol>
             </term>
           </expression>
@@ -59,8 +64,13 @@
               <symbol> . </symbol>
               <identifier> new </identifier>
               <symbol> ( </symbol>
-              <expressionList></expressionList>
-              <identifier> length </identifier>
+              <expressionList>
+                <expression>
+                  <term>
+                    <identifier> length </identifier>
+                  </term>
+                </expression>
+              </expressionList>
               <symbol> ) </symbol>
             </term>
           </expression>
@@ -109,8 +119,13 @@
                   <symbol> . </symbol>
                   <identifier> readInt </identifier>
                   <symbol> ( </symbol>
-                  <expressionList></expressionList>
-                  <stringConstant> ENTER THE NEXT NUMBER: </stringConstant>
+                  <expressionList>
+                    <expression>
+                      <term>
+                        <stringConstant> ENTER THE NEXT NUMBER:  </stringConstant>
+                      </term>
+                    </expression>
+                  </expressionList>
                   <symbol> ) </symbol>
                 </term>
               </expression>
@@ -203,7 +218,7 @@
           <symbol> ( </symbol>
           <expression>
             <term>
-              <stringConstant> THE AVERAGE IS: </stringConstant>
+              <stringConstant> THE AVERAGE IS:  </stringConstant>
             </term>
           </expression>
           <symbol> ) </symbol>
@@ -236,6 +251,7 @@
           <symbol> ; </symbol>
           <keyword> return </keyword>
           <symbol> ; </symbol>
+          <symbol> } </symbol>
         </whileStatement>
       </statements>
       <symbol> } </symbol>
