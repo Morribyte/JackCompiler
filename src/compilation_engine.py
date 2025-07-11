@@ -115,12 +115,15 @@ class CompilationEngine:
         """
         subroutine_body_element = element_tree.SubElement(parent, "subroutineBody")
         while self.tokenizer.current_token_value != "}":
+
             if self.tokenizer.current_token_value == "var":
                 self.compile_var_dec(subroutine_body_element)
-            if self.tokenizer.current_token_value in ["let", "do", "if", "while", "return"]:
+            elif self.tokenizer.current_token_value in ["let", "do", "if", "while", "return"]:
                 self.compile_statements(subroutine_body_element)
-            self.write_token(subroutine_body_element)
-            self.tokenizer.advance()
+            else:
+                self.write_token(subroutine_body_element)
+                self.tokenizer.advance()
+        print(f"END OF STATEMENT {self.tokenizer.current_token_value}")
         self.write_token(subroutine_body_element)
         self.tokenizer.advance()
 
@@ -273,6 +276,7 @@ class CompilationEngine:
             self.write_token(return_statement_element)
             self.tokenizer.advance()
         self.write_token(return_statement_element)
+        self.tokenizer.advance()
 
     def compile_expression(self, parent):
         """

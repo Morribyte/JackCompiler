@@ -65,7 +65,6 @@
           <symbol> ; </symbol>
         </returnStatement>
       </statements>
-      <symbol> ; </symbol>
       <symbol> } </symbol>
     </subroutineBody>
   </subroutineDec>
@@ -86,10 +85,12 @@
         <identifier> j </identifier>
         <symbol> ; </symbol>
       </varDec>
-      <keyword> var </keyword>
-      <identifier> String </identifier>
-      <identifier> s </identifier>
-      <symbol> ; </symbol>
+      <varDec>
+        <keyword> var </keyword>
+        <identifier> String </identifier>
+        <identifier> s </identifier>
+        <symbol> ; </symbol>
+      </varDec>
       <varDec>
         <keyword> var </keyword>
         <identifier> Array </identifier>
@@ -231,7 +232,6 @@
           <symbol> ; </symbol>
         </returnStatement>
       </statements>
-      <symbol> ; </symbol>
       <symbol> } </symbol>
     </subroutineBody>
   </subroutineDec>

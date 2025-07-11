@@ -17,10 +17,12 @@
         <identifier> a </identifier>
         <symbol> ; </symbol>
       </varDec>
-      <keyword> var </keyword>
-      <keyword> int </keyword>
-      <identifier> length </identifier>
-      <symbol> ; </symbol>
+      <varDec>
+        <keyword> var </keyword>
+        <keyword> int </keyword>
+        <identifier> length </identifier>
+        <symbol> ; </symbol>
+      </varDec>
       <varDec>
         <keyword> var </keyword>
         <keyword> int </keyword>
@@ -275,7 +277,6 @@
           <symbol> ; </symbol>
         </returnStatement>
       </statements>
-      <symbol> ; </symbol>
       <symbol> } </symbol>
     </subroutineBody>
   </subroutineDec>
