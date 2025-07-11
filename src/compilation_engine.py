@@ -115,7 +115,7 @@ class CompilationEngine:
         """
         subroutine_body_element = element_tree.SubElement(parent, "subroutineBody")
         while self.tokenizer.current_token_value != "}":
-
+            # Match case won't work here because case doesn't support finding items within a list like if statements do.
             if self.tokenizer.current_token_value == "var":
                 self.compile_var_dec(subroutine_body_element)
             elif self.tokenizer.current_token_value in ["let", "do", "if", "while", "return"]:
