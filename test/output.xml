@@ -46,8 +46,9 @@
           <symbol> . </symbol>
           <identifier> run </identifier>
           <symbol> ( </symbol>
-          <expressionList></expressionList>
-          <symbol> ) </symbol>
+          <expressionList>
+            <symbol> ) </symbol>
+          </expressionList>
           <symbol> ; </symbol>
         </doStatement>
         <doStatement>
@@ -56,8 +57,9 @@
           <symbol> . </symbol>
           <identifier> dispose </identifier>
           <symbol> ( </symbol>
-          <expressionList></expressionList>
-          <symbol> ) </symbol>
+          <expressionList>
+            <symbol> ) </symbol>
+          </expressionList>
           <symbol> ; </symbol>
         </doStatement>
         <returnStatement>

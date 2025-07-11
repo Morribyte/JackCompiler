@@ -364,6 +364,7 @@ class CompilationEngine:
         expression_list_element = element_tree.SubElement(parent, "expressionList")
         count = 0
         print(f"EXPR LIST ENTRY TOKEN: {self.tokenizer.current_token_value}")
+        self.tokenizer.advance()
         if self.tokenizer.current_token_value in [")", "]"]:
             return count
 
