@@ -170,6 +170,7 @@ def test_subroutine_body(setup_resources):
     compilation = setup_resources["compilation"]
     compilation.compile_class()
 
+
     pretty = write_xml(setup_resources)
 
     assert "<subroutineBody>" in pretty
@@ -183,13 +184,15 @@ def test_var_dec(setup_resources):
     compilation = setup_resources["compilation"]
     compilation.compile_class()
 
-    code="""      <symbol> { </symbol>
+    code="""    <subroutineBody>
+      <symbol> { </symbol>
       <varDec>
         <keyword> var </keyword>
         <identifier> SquareGame </identifier>
         <identifier> game </identifier>
         <symbol> ; </symbol>
-      </varDec>"""
+      </varDec>
+      <statements>"""
 
     pretty = write_xml(setup_resources)
 

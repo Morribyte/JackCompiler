@@ -11,17 +11,16 @@
     <symbol> ) </symbol>
     <subroutineBody>
       <symbol> { </symbol>
-      <keyword> var </keyword>
       <varDec>
         <keyword> var </keyword>
         <identifier> Array </identifier>
         <identifier> a </identifier>
         <symbol> ; </symbol>
       </varDec>
+      <keyword> var </keyword>
       <keyword> int </keyword>
       <identifier> length </identifier>
       <symbol> ; </symbol>
-      <keyword> var </keyword>
       <varDec>
         <keyword> var </keyword>
         <keyword> int </keyword>
@@ -276,7 +275,7 @@
           <symbol> ; </symbol>
         </returnStatement>
       </statements>
-      <symbol> } </symbol>
+      <symbol> ; </symbol>
       <symbol> } </symbol>
     </subroutineBody>
   </subroutineDec>

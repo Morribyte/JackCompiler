@@ -81,11 +81,15 @@ class CompilationEngine:
         while self.tokenizer.current_token_value != ")":
             if self.tokenizer.current_token_value == "(":
                 self.write_token(subroutine_element)  # Writes (
+                self.tokenizer.advance()
                 self.compile_parameter_list(subroutine_element)
                 self.write_token(subroutine_element)  # Writes ) once parameters are dealt with
+                self.tokenizer.advance()
+
                 break
             self.write_token(subroutine_element)
             self.tokenizer.advance()
+        print(self.tokenizer.current_token_value)
         self.compile_subroutine_body(subroutine_element)
 
     def compile_parameter_list(self, parent):
@@ -95,15 +99,14 @@ class CompilationEngine:
         """
         parameter_list_element = element_tree.SubElement(parent, "parameterList")
         # Writes the token after the (. If it'
-        self.tokenizer.advance()
 
         if self.tokenizer.current_token_value == ")":
             return  # Parent method will handle writing the closing ")"
 
         while self.tokenizer.current_token_value != ")":
-            self.tokenizer.advance()
             self.write_token(parameter_list_element)
-        self.tokenizer.advance()
+            self.tokenizer.advance()
+
 
     def compile_subroutine_body(self, parent):
         """
@@ -111,17 +114,13 @@ class CompilationEngine:
         '{'varDec* statements '}'
         """
         subroutine_body_element = element_tree.SubElement(parent, "subroutineBody")
-        self.tokenizer.advance()
-        self.write_token(subroutine_body_element)
-
         while self.tokenizer.current_token_value != "}":
             if self.tokenizer.current_token_value == "var":
                 self.compile_var_dec(subroutine_body_element)
-
             if self.tokenizer.current_token_value in ["let", "do", "if", "while", "return"]:
                 self.compile_statements(subroutine_body_element)
-            self.tokenizer.advance()
             self.write_token(subroutine_body_element)
+            self.tokenizer.advance()
         self.write_token(subroutine_body_element)
         self.tokenizer.advance()
 
@@ -132,6 +131,7 @@ class CompilationEngine:
         """
         subroutine_var_dec = element_tree.SubElement(parent, "varDec")
 
+        assert self.tokenizer.current_token_value == "var"
         while self.tokenizer.current_token_value != ";":
             self.write_token(subroutine_var_dec)
             self.tokenizer.advance()

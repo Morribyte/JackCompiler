@@ -17,7 +17,6 @@
     <symbol> ) </symbol>
     <subroutineBody>
       <symbol> { </symbol>
-      <keyword> var </keyword>
       <varDec>
         <keyword> var </keyword>
         <identifier> SquareGame </identifier>
@@ -66,7 +65,7 @@
           <symbol> ; </symbol>
         </returnStatement>
       </statements>
-      <symbol> } </symbol>
+      <symbol> ; </symbol>
       <symbol> } </symbol>
     </subroutineBody>
   </subroutineDec>
@@ -79,7 +78,6 @@
     <symbol> ) </symbol>
     <subroutineBody>
       <symbol> { </symbol>
-      <keyword> var </keyword>
       <varDec>
         <keyword> var </keyword>
         <keyword> int </keyword>
@@ -88,10 +86,10 @@
         <identifier> j </identifier>
         <symbol> ; </symbol>
       </varDec>
+      <keyword> var </keyword>
       <identifier> String </identifier>
       <identifier> s </identifier>
       <symbol> ; </symbol>
-      <keyword> var </keyword>
       <varDec>
         <keyword> var </keyword>
         <identifier> Array </identifier>
@@ -233,7 +231,7 @@
           <symbol> ; </symbol>
         </returnStatement>
       </statements>
-      <symbol> } </symbol>
+      <symbol> ; </symbol>
       <symbol> } </symbol>
     </subroutineBody>
   </subroutineDec>
