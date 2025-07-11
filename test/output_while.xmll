@@ -42,9 +42,8 @@
               <symbol> . </symbol>
               <identifier> readInt </identifier>
               <symbol> ( </symbol>
-              <expressionList>
-                <symbol> ) </symbol>
-              </expressionList>
+              <expressionList></expressionList>
+              <stringConstant> HOW MANY NUMBERS? </stringConstant>
               <symbol> ) </symbol>
             </term>
           </expression>
@@ -60,9 +59,8 @@
               <symbol> . </symbol>
               <identifier> new </identifier>
               <symbol> ( </symbol>
-              <expressionList>
-                <symbol> ) </symbol>
-              </expressionList>
+              <expressionList></expressionList>
+              <identifier> length </identifier>
               <symbol> ) </symbol>
             </term>
           </expression>
@@ -111,9 +109,8 @@
                   <symbol> . </symbol>
                   <identifier> readInt </identifier>
                   <symbol> ( </symbol>
-                  <expressionList>
-                    <symbol> ) </symbol>
-                  </expressionList>
+                  <expressionList></expressionList>
+                  <stringConstant> ENTER THE NEXT NUMBER: </stringConstant>
                   <symbol> ) </symbol>
                 </term>
               </expression>
