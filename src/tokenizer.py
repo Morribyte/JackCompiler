@@ -63,6 +63,7 @@ class Tokenizer:
             self.current_index += 1
             self.current_token_type = "symbol"
             self.current_token_value = ch
+            print(f"TOKENIZER: {self.current_token_type} | {self.current_token_value}")
             return self.current_token_type, self.current_token_value
 
         # Keywords and Identifiers
@@ -73,6 +74,7 @@ class Tokenizer:
                 self.current_index += 1
             self.current_token_value = self.open_file[start:self.current_index]
             self.current_token_type = "keyword" if self.current_token_value in KEYWORD_LIST else "identifier"
+            print(f"TOKENIZER: {self.current_token_type} | {self.current_token_value}")
             return self.current_token_type, self.current_token_value
 
         # Ints / digits
@@ -82,6 +84,7 @@ class Tokenizer:
                 self.current_index += 1
             self.current_token_value = self.open_file[start:self.current_index]
             self.current_token_type = "integerConstant"
+            print(f"TOKENIZER: {self.current_token_type} | {self.current_token_value}")
             return self.current_token_type, self.current_token_value
 
         # String constant
@@ -94,6 +97,7 @@ class Tokenizer:
             self.current_token_value = self.open_file[start:self.current_index].rstrip()
             self.current_token_type = "stringConstant"
             self.current_index += 1
+            print(f"TOKENIZER: {self.current_token_type} | {self.current_token_value}")
             return self.current_token_type, self.current_token_value
 
         return None  # pragma: no cover

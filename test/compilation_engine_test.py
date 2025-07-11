@@ -330,6 +330,41 @@ def test_while_statement(setup_resources):
     assert "<whileStatement>" in xml_str
 
 
+def test_basic_while_statement(setup_resources):
+    """
+    Test that when we run compile, it prints a basic while statement until the <statements> bracket
+    """
+    jack_file: Path = Path(r"F:\Programming\Hack and ASM Projects\JackCompiler\input\ArrayTest\Main.jack")
+    tokenizer = Tokenizer(jack_file)
+    compilation = CompilationEngine(tokenizer)
+    compilation.compile_class()
+
+    tree = element_tree.ElementTree(compilation.root)
+    element_tree.indent(tree)
+    tree.write("output_while.xmll", encoding="utf-8", short_empty_elements=False)
+    xml_str = element_tree.tostring(compilation.root, encoding="unicode", method="html")
+
+    code = """        <whileStatement>
+          <keyword> while </keyword>
+          <symbol> ( </symbol>
+          <expression>
+            <term>
+              <identifier> i </identifier>
+            </term>
+            <symbol> &lt; </symbol>
+            <term>
+              <identifier> length </identifier>
+            </term>
+          </expression>
+          <symbol> ) </symbol>
+          <symbol> { </symbol>
+          <statements>"""
+    print("XML file parsed and formatted.")
+
+    assert "<whileStatement>" in xml_str
+    assert code in xml_str
+
+
 def test_full_while_statement(setup_resources):
     """
     Test that when we run compile, it prints the entire while statement

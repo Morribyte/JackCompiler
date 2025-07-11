@@ -90,70 +90,6 @@
             </term>
           </expression>
           <symbol> ) </symbol>
-          <keyword> let </keyword>
-          <identifier> i </identifier>
-          <symbol> = </symbol>
-          <integerConstant> 0 </integerConstant>
-          <symbol> ; </symbol>
-          <keyword> let </keyword>
-          <identifier> sum </identifier>
-          <symbol> = </symbol>
-          <integerConstant> 0 </integerConstant>
-          <symbol> ; </symbol>
-          <keyword> while </keyword>
-          <symbol> ( </symbol>
-          <expression>
-            <term>
-              <identifier> i </identifier>
-            </term>
-            <symbol> &lt; </symbol>
-            <term>
-              <identifier> length </identifier>
-            </term>
-          </expression>
-          <symbol> ) </symbol>
-          <keyword> do </keyword>
-          <identifier> Output </identifier>
-          <symbol> . </symbol>
-          <identifier> printString </identifier>
-          <symbol> ( </symbol>
-          <expression>
-            <term>
-              <stringConstant> THE AVERAGE IS: </stringConstant>
-            </term>
-          </expression>
-          <symbol> ) </symbol>
-          <symbol> ; </symbol>
-          <keyword> do </keyword>
-          <identifier> Output </identifier>
-          <symbol> . </symbol>
-          <identifier> printInt </identifier>
-          <symbol> ( </symbol>
-          <expression>
-            <term>
-              <identifier> sum </identifier>
-            </term>
-            <symbol> / </symbol>
-            <term>
-              <identifier> length </identifier>
-            </term>
-          </expression>
-          <symbol> ) </symbol>
-          <symbol> ; </symbol>
-          <keyword> do </keyword>
-          <identifier> Output </identifier>
-          <symbol> . </symbol>
-          <identifier> println </identifier>
-          <symbol> ( </symbol>
-          <expression>
-            <term></term>
-          </expression>
-          <symbol> ) </symbol>
-          <symbol> ; </symbol>
-          <keyword> return </keyword>
-          <symbol> ; </symbol>
-        </whileStatement>
-        <whileStatement>
           <symbol> { </symbol>
           <statements>
             <letStatement>
@@ -197,6 +133,28 @@
             </letStatement>
           </statements>
           <symbol> } </symbol>
+          <keyword> let </keyword>
+          <identifier> i </identifier>
+          <symbol> = </symbol>
+          <integerConstant> 0 </integerConstant>
+          <symbol> ; </symbol>
+          <keyword> let </keyword>
+          <identifier> sum </identifier>
+          <symbol> = </symbol>
+          <integerConstant> 0 </integerConstant>
+          <symbol> ; </symbol>
+          <keyword> while </keyword>
+          <symbol> ( </symbol>
+          <expression>
+            <term>
+              <identifier> i </identifier>
+            </term>
+            <symbol> &lt; </symbol>
+            <term>
+              <identifier> length </identifier>
+            </term>
+          </expression>
+          <symbol> ) </symbol>
           <symbol> { </symbol>
           <statements>
             <letStatement>
@@ -238,6 +196,46 @@
             </letStatement>
           </statements>
           <symbol> } </symbol>
+          <keyword> do </keyword>
+          <identifier> Output </identifier>
+          <symbol> . </symbol>
+          <identifier> printString </identifier>
+          <symbol> ( </symbol>
+          <expression>
+            <term>
+              <stringConstant> THE AVERAGE IS: </stringConstant>
+            </term>
+          </expression>
+          <symbol> ) </symbol>
+          <symbol> ; </symbol>
+          <keyword> do </keyword>
+          <identifier> Output </identifier>
+          <symbol> . </symbol>
+          <identifier> printInt </identifier>
+          <symbol> ( </symbol>
+          <expression>
+            <term>
+              <identifier> sum </identifier>
+            </term>
+            <symbol> / </symbol>
+            <term>
+              <identifier> length </identifier>
+            </term>
+          </expression>
+          <symbol> ) </symbol>
+          <symbol> ; </symbol>
+          <keyword> do </keyword>
+          <identifier> Output </identifier>
+          <symbol> . </symbol>
+          <identifier> println </identifier>
+          <symbol> ( </symbol>
+          <expression>
+            <term></term>
+          </expression>
+          <symbol> ) </symbol>
+          <symbol> ; </symbol>
+          <keyword> return </keyword>
+          <symbol> ; </symbol>
         </whileStatement>
       </statements>
       <symbol> } </symbol>

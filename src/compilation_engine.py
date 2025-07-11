@@ -240,8 +240,9 @@ class CompilationEngine:
         Compiles a while statement
         'while' '('expression')' '{'statements'}'
         """
+
         while_statement_element = element_tree.SubElement(parent, "whileStatement")
-        while_element = element_tree.SubElement(parent, "whileStatement")
+        print("COMPILING WHILE")
         print(f"CURRENT TOKEN WHILE {self.tokenizer.current_token_value}")
 
         while self.tokenizer.current_token_value != "}":
@@ -250,13 +251,14 @@ class CompilationEngine:
                 self.tokenizer.advance()
                 self.compile_expression(while_statement_element)
             if self.tokenizer.current_token_value == "{":
-                self.write_token(while_element)  # '{'
+                self.write_token(while_statement_element)  # '{'
                 self.tokenizer.advance()
-                self.compile_statements(while_element)
-                self.write_token(while_element)  # '}'
+                self.compile_statements(while_statement_element)
+                self.write_token(while_statement_element)  # '}'
                 self.tokenizer.advance()
             self.write_token(while_statement_element)
             self.tokenizer.advance()
+
 
     def compile_return_statement(self, parent):
         """
