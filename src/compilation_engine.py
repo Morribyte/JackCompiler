@@ -115,14 +115,13 @@ class CompilationEngine:
         self.write_token(subroutine_body_element)
 
         while self.tokenizer.current_token_value != "}":
-            self.tokenizer.advance()
-
             if self.tokenizer.current_token_value == "var":
                 self.compile_var_dec(subroutine_body_element)
 
             if self.tokenizer.current_token_value in ["let", "do", "if", "while", "return"]:
                 self.compile_statements(subroutine_body_element)
-
+            self.tokenizer.advance()
+            self.write_token(subroutine_body_element)
         self.write_token(subroutine_body_element)
         self.tokenizer.advance()
 
@@ -137,6 +136,7 @@ class CompilationEngine:
             self.write_token(subroutine_var_dec)
             self.tokenizer.advance()
         self.write_token(subroutine_var_dec)
+        self.tokenizer.advance()
 
     def compile_statements(self, parent):
         """
@@ -168,21 +168,22 @@ class CompilationEngine:
         let_statement_element = element_tree.SubElement(parent, "letStatement")
 
         while self.tokenizer.current_token_value != ";":
-            if self.tokenizer.current_token_value == "[":
-                self.write_token(let_statement_element)
-                self.tokenizer.advance()
-                self.compile_expression(let_statement_element)
+            match self.tokenizer.current_token_value:
+                case "[":
+                    self.write_token(let_statement_element)
+                    self.tokenizer.advance()
+                    self.compile_expression(let_statement_element)
 
-            elif self.tokenizer.current_token_value == "=":
-                self.write_token(let_statement_element)
-                self.tokenizer.advance()
-                self.compile_expression(let_statement_element)
-            elif self.tokenizer.current_token_value == ";":
-                self.write_token(let_statement_element)
-                break
-            else:
-                self.write_token(let_statement_element)
-                self.tokenizer.advance()
+                case "=":
+                    self.write_token(let_statement_element)
+                    self.tokenizer.advance()
+                    self.compile_expression(let_statement_element)
+                case ";":
+                    self.write_token(let_statement_element)
+                    break
+                case _:
+                    self.write_token(let_statement_element)
+                    self.tokenizer.advance()
         self.write_token(let_statement_element)  # Writes the ';'
         self.tokenizer.advance()
 
@@ -196,13 +197,14 @@ class CompilationEngine:
         do_statement_element = element_tree.SubElement(parent, "doStatement")
 
         while self.tokenizer.current_token_value != ";":
-            if self.tokenizer.current_token_value == "(":
-                self.write_token(do_statement_element)
-                self.tokenizer.advance()
-                self.compile_expression_list(do_statement_element)
-            else:
-                self.write_token(do_statement_element)
-                self.tokenizer.advance()
+            match self.tokenizer.current_token_value:
+                case "(":
+                    self.write_token(do_statement_element)
+                    self.tokenizer.advance()
+                    self.compile_expression_list(do_statement_element)
+                case _:
+                    self.write_token(do_statement_element)
+                    self.tokenizer.advance()
         self.write_token(do_statement_element)  # Writes the ';'
         self.tokenizer.advance()
 
@@ -215,14 +217,14 @@ class CompilationEngine:
         if_statement_element = element_tree.SubElement(parent, "ifStatement")
 
         while self.tokenizer.current_token_value != "}":
-            if self.tokenizer.current_token_value == "(":
-                self.write_token(if_statement_element)
-                self.tokenizer.advance()
-                self.compile_expression(if_statement_element)
-            self.write_token(if_statement_element)
+            match self.tokenizer.current_token_value:
+                case "(":
+                    self.write_token(if_statement_element)
+                    self.tokenizer.advance()
+                    self.compile_expression(if_statement_element)
+            self.write_token(if_statement_element) # ')'
             self.tokenizer.advance()
             self.compile_statements(if_statement_element)
-
         self.write_token(if_statement_element)
         self.tokenizer.advance()
 
@@ -244,16 +246,18 @@ class CompilationEngine:
         while_statement_element = element_tree.SubElement(parent, "whileStatement")
 
         while self.tokenizer.current_token_value != "}":
-            if self.tokenizer.current_token_value == "(":
-                self.write_token(while_statement_element)
-                self.tokenizer.advance()
-                self.compile_expression(while_statement_element)
-            if self.tokenizer.current_token_value == "{":
-                self.write_token(while_statement_element)  # '{'
-                self.tokenizer.advance()
-                self.compile_statements(while_statement_element)
-            self.write_token(while_statement_element)
-            self.tokenizer.advance()
+            match self.tokenizer.current_token_value:
+                case "(":
+                    self.write_token(while_statement_element)
+                    self.tokenizer.advance()
+                    self.compile_expression(while_statement_element)
+                case "{":
+                    self.write_token(while_statement_element)
+                    self.tokenizer.advance()
+                    self.compile_statements(while_statement_element)
+                case _:
+                    self.write_token(while_statement_element)
+                    self.tokenizer.advance()
         self.write_token(while_statement_element)
         self.tokenizer.advance()
 
@@ -320,7 +324,6 @@ class CompilationEngine:
                                     self.write_token(term_element)
                                     self.tokenizer.advance()
                                     break
-
                     case "[":
                         print("varName expression")
                         while self.tokenizer.current_token_value != ";":
@@ -331,9 +334,10 @@ class CompilationEngine:
                                 self.tokenizer.advance()
                                 self.compile_expression(term_element)
                     case _:
-                        print("plain varname")
-                        self.write_token(term_element)
-                        self.tokenizer.advance()
+                        if self.tokenizer.current_token_value != "}":
+                            print("plain varname")
+                            self.write_token(term_element)
+                            self.tokenizer.advance()
 
             case "stringConstant":
                 self.write_token(term_element)

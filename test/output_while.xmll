@@ -11,18 +11,17 @@
     <symbol> ) </symbol>
     <subroutineBody>
       <symbol> { </symbol>
+      <keyword> var </keyword>
       <varDec>
         <keyword> var </keyword>
         <identifier> Array </identifier>
         <identifier> a </identifier>
         <symbol> ; </symbol>
       </varDec>
-      <varDec>
-        <keyword> var </keyword>
-        <keyword> int </keyword>
-        <identifier> length </identifier>
-        <symbol> ; </symbol>
-      </varDec>
+      <keyword> int </keyword>
+      <identifier> length </identifier>
+      <symbol> ; </symbol>
+      <keyword> var </keyword>
       <varDec>
         <keyword> var </keyword>
         <keyword> int </keyword>
@@ -148,16 +147,30 @@
             </letStatement>
           </statements>
           <symbol> } </symbol>
+        </whileStatement>
+        <letStatement>
           <keyword> let </keyword>
           <identifier> i </identifier>
           <symbol> = </symbol>
-          <integerConstant> 0 </integerConstant>
+          <expression>
+            <term>
+              <integerConstant> 0 </integerConstant>
+            </term>
+          </expression>
           <symbol> ; </symbol>
+        </letStatement>
+        <letStatement>
           <keyword> let </keyword>
           <identifier> sum </identifier>
           <symbol> = </symbol>
-          <integerConstant> 0 </integerConstant>
+          <expression>
+            <term>
+              <integerConstant> 0 </integerConstant>
+            </term>
+          </expression>
           <symbol> ; </symbol>
+        </letStatement>
+        <whileStatement>
           <keyword> while </keyword>
           <symbol> ( </symbol>
           <expression>
@@ -211,49 +224,59 @@
             </letStatement>
           </statements>
           <symbol> } </symbol>
+        </whileStatement>
+        <doStatement>
           <keyword> do </keyword>
           <identifier> Output </identifier>
           <symbol> . </symbol>
           <identifier> printString </identifier>
           <symbol> ( </symbol>
-          <expression>
-            <term>
-              <stringConstant> THE AVERAGE IS:  </stringConstant>
-            </term>
-          </expression>
+          <expressionList>
+            <expression>
+              <term>
+                <stringConstant> THE AVERAGE IS:  </stringConstant>
+              </term>
+            </expression>
+          </expressionList>
           <symbol> ) </symbol>
           <symbol> ; </symbol>
+        </doStatement>
+        <doStatement>
           <keyword> do </keyword>
           <identifier> Output </identifier>
           <symbol> . </symbol>
           <identifier> printInt </identifier>
           <symbol> ( </symbol>
-          <expression>
-            <term>
-              <identifier> sum </identifier>
-            </term>
-            <symbol> / </symbol>
-            <term>
-              <identifier> length </identifier>
-            </term>
-          </expression>
+          <expressionList>
+            <expression>
+              <term>
+                <identifier> sum </identifier>
+              </term>
+              <symbol> / </symbol>
+              <term>
+                <identifier> length </identifier>
+              </term>
+            </expression>
+          </expressionList>
           <symbol> ) </symbol>
           <symbol> ; </symbol>
+        </doStatement>
+        <doStatement>
           <keyword> do </keyword>
           <identifier> Output </identifier>
           <symbol> . </symbol>
           <identifier> println </identifier>
           <symbol> ( </symbol>
-          <expression>
-            <term></term>
-          </expression>
+          <expressionList></expressionList>
           <symbol> ) </symbol>
           <symbol> ; </symbol>
+        </doStatement>
+        <returnStatement>
           <keyword> return </keyword>
           <symbol> ; </symbol>
-          <symbol> } </symbol>
-        </whileStatement>
+        </returnStatement>
       </statements>
+      <symbol> } </symbol>
       <symbol> } </symbol>
     </subroutineBody>
   </subroutineDec>
