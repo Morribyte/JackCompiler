@@ -322,7 +322,7 @@ def test_while_statement(setup_resources):
 
     tree = element_tree.ElementTree(compilation.root)
     element_tree.indent(tree)
-    tree.write("output_while.xmll", encoding="utf-8", short_empty_elements=False)
+    tree.write("output_while.xml", encoding="utf-8", short_empty_elements=False)
     xml_str = element_tree.tostring(compilation.root, encoding="unicode", method="html")
 
     print("XML file parsed and formatted.")
