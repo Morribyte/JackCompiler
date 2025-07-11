@@ -2,6 +2,8 @@
 Testing document for the compilation engine
 """
 from pathlib import Path
+from tokenize import TokenError
+
 import pytest
 
 import xml.etree.ElementTree as element_tree
@@ -22,11 +24,11 @@ def setup_resources():
         "compilation": compilation,
     }
 
-def write_xml(setup_resources):
+def write_xml(setup_resources, filename=None):
     compilation = setup_resources["compilation"]
     tree = element_tree.ElementTree(compilation.root)
     element_tree.indent(tree)
-    tree.write("output.xml", encoding="utf-8", short_empty_elements=False)
+    tree.write(filename if filename else "output.xml", encoding="utf-8", short_empty_elements=False)
     xml_str = element_tree.tostring(compilation.root, encoding="unicode", method="html")
 
     print("XML file parsed and formatted.")
@@ -48,7 +50,6 @@ def test_tokenizer_variable(setup_resources):
     compilation = setup_resources["compilation"]
     print(compilation.tokenizer.jack_file)
     assert str(compilation.tokenizer.jack_file) == r"F:\Programming\Hack and ASM Projects\JackCompiler\input\10\Square\Main.jack"
-
 
 def test_compile_class_token_mode_on(setup_resources):
     """
@@ -1085,3 +1086,24 @@ def test_full_compilation_square(setup_resources):
     pretty = write_xml(setup_resources)
 
     assert code in pretty
+
+@pytest.mark.parametrize("compile_tests", [r"F:\Programming\Hack and ASM Projects\JackCompiler\input\10\Square\Main.jack"])
+def test_compile_all(setup_resources, compile_tests):
+    """
+    Test that when I input multiple files, all of them properly compile one after another and match the xml file.
+    """
+    jack_code = Path(compile_tests)
+    print(jack_code.stem)
+    tokenizer = Tokenizer(jack_code)
+    compiler = CompilationEngine(tokenizer)
+
+
+    with open(Path(compile_tests), "r") as file:
+        memory = file.read()
+        print(memory)
+
+        compiler.compile_class()
+
+        xml_file = write_xml(setup_resources, jack_code.stem)
+
+
