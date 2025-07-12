@@ -6,6 +6,9 @@ Opens and writes XML files for the compiler.
 import os
 import sys
 
+from src.tokenizer import Tokenizer
+from src.compilation_engine import CompilationEngine
+
 
 def check_args():
     if len(sys.argv) < 2:
