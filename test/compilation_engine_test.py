@@ -1087,8 +1087,10 @@ def test_full_compilation_square(setup_resources):
 
     assert code in pretty
 
-@pytest.mark.parametrize("compile_tests", [r"F:\Programming\Hack and ASM Projects\JackCompiler\input\10\Square\Main.jack"])
-def test_compile_all(setup_resources, compile_tests):
+@pytest.mark.parametrize(("compile_tests", "base_xml"),
+                         [(r"F:\Programming\Hack and ASM Projects\JackCompiler\input\10\Square\Main.jack",
+                         r"F:\Programming\Hack and ASM Projects\JackCompiler\input\10\Square\Main.xml")])
+def test_compile_all(setup_resources, compile_tests, base_xml):
     """
     Test that when I input multiple files, all of them properly compile one after another and match the xml file.
     """
@@ -1096,7 +1098,6 @@ def test_compile_all(setup_resources, compile_tests):
     print(jack_code.stem)
     tokenizer = Tokenizer(jack_code)
     compiler = CompilationEngine(tokenizer)
-
 
     with open(Path(compile_tests), "r") as file:
         memory = file.read()
@@ -1106,4 +1107,7 @@ def test_compile_all(setup_resources, compile_tests):
 
         xml_file = write_xml(setup_resources, jack_code.stem)
 
+    with open(Path(base_xml), "r") as file:
+        read_file = file.read()
 
+    assert xml_file == read_file
