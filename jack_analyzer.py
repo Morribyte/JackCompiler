@@ -19,9 +19,13 @@ def main():
     print(f"Current path: {path}")
 
     if os.path.isdir(path):
+        print("Found directory:")
         files = [os.path.join(path, f) for f in os.listdir(path) if f.endswith(".jack")]
+        print(files)
     elif path.endswith(".jack"):
+        print("Found file.")
         files = [path]
+        print(files)
     else:
         raise ValueError("Invalid input: must be .jack file or directory.")
 if __name__ == "__main__":
