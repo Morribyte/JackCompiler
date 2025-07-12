@@ -13,8 +13,7 @@
     <keyword> void </keyword>
     <identifier> main </identifier>
     <symbol> ( </symbol>
-    <parameterList>
-    </parameterList>
+    <parameterList></parameterList>
     <symbol> ) </symbol>
     <subroutineBody>
       <symbol> { </symbol>
@@ -53,8 +52,7 @@
           <symbol> . </symbol>
           <identifier> dispose </identifier>
           <symbol> ( </symbol>
-          <expressionList>
-          </expressionList>
+          <expressionList></expressionList>
           <symbol> ) </symbol>
           <symbol> ; </symbol>
         </doStatement>
@@ -71,8 +69,7 @@
     <keyword> void </keyword>
     <identifier> more </identifier>
     <symbol> ( </symbol>
-    <parameterList>
-    </parameterList>
+    <parameterList></parameterList>
     <symbol> ) </symbol>
     <subroutineBody>
       <symbol> { </symbol>
@@ -93,8 +90,7 @@
           </expression>
           <symbol> ) </symbol>
           <symbol> { </symbol>
-          <statements>
-          </statements>
+          <statements></statements>
           <symbol> } </symbol>
           <keyword> else </keyword>
           <symbol> { </symbol>

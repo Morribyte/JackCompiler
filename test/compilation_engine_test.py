@@ -24,11 +24,11 @@ def setup_resources():
         "compilation": compilation,
     }
 
-def write_xml(setup_resources, filename=None):
-    compilation = setup_resources["compilation"]
+def write_xml(setup_resources, compilation_engine=None, filename=None):
+    compilation = compilation_engine if compilation_engine else setup_resources["compilation"]
     tree = element_tree.ElementTree(compilation.root)
     element_tree.indent(tree)
-    tree.write(filename if filename else "output.xml", encoding="utf-8", short_empty_elements=False)
+    tree.write(fr"{filename}.xml" if filename else "output.xml", encoding="utf-8", short_empty_elements=False)
     xml_str = element_tree.tostring(compilation.root, encoding="unicode", method="html")
 
     print("XML file parsed and formatted.")
@@ -345,7 +345,7 @@ def test_basic_while_statement(setup_resources):
 
     tree = element_tree.ElementTree(compilation.root)
     element_tree.indent(tree)
-    tree.write("output_while.xmll", encoding="utf-8", short_empty_elements=False)
+    tree.write("output_while2.xml", encoding="utf-8", short_empty_elements=False)
     xml_str = element_tree.tostring(compilation.root, encoding="unicode", method="html")
 
     code = """        <whileStatement>
@@ -1088,8 +1088,18 @@ def test_full_compilation_square(setup_resources):
     assert code in pretty
 
 @pytest.mark.parametrize(("compile_tests", "base_xml"),
-                         [(r"F:\Programming\Hack and ASM Projects\JackCompiler\input\10\Square\Main.jack",
-                         r"F:\Programming\Hack and ASM Projects\JackCompiler\input\10\Square\Main.xml")])
+                         [(r"F:\Programming\Hack and ASM Projects\JackCompiler\input\full_tests\ExpressionLessSquare\Main.jack",
+                           r"F:\Programming\Hack and ASM Projects\JackCompiler\input\full_tests\ExpressionLessSquare\Main.xml"),
+                          (r"F:\Programming\Hack and ASM Projects\JackCompiler\input\full_tests\ExpressionLessSquare\Square.jack",
+                           r"F:\Programming\Hack and ASM Projects\JackCompiler\input\full_tests\ExpressionLessSquare\Square.xml"),
+                          (r"F:\Programming\Hack and ASM Projects\JackCompiler\input\full_tests\ExpressionLessSquare\SquareGame.jack",
+                           r"F:\Programming\Hack and ASM Projects\JackCompiler\input\full_tests\ExpressionLessSquare\SquareGame.xml"),
+                          (r"F:\Programming\Hack and ASM Projects\JackCompiler\input\full_tests\square\Main.jack",
+                           r"F:\Programming\Hack and ASM Projects\JackCompiler\input\full_tests\square\Main.xml"),
+                          (r"F:\Programming\Hack and ASM Projects\JackCompiler\input\full_tests\square\Square.jack",
+                           r"F:\Programming\Hack and ASM Projects\JackCompiler\input\full_tests\square\Square.xml"),
+                          (r"F:\Programming\Hack and ASM Projects\JackCompiler\input\full_tests\square\SquareGame.jack",
+                           r"F:\Programming\Hack and ASM Projects\JackCompiler\input\full_tests\square\SquareGame.xml")])
 def test_compile_all(setup_resources, compile_tests, base_xml):
     """
     Test that when I input multiple files, all of them properly compile one after another and match the xml file.
@@ -1099,13 +1109,11 @@ def test_compile_all(setup_resources, compile_tests, base_xml):
     tokenizer = Tokenizer(jack_code)
     compiler = CompilationEngine(tokenizer)
 
-    with open(Path(compile_tests), "r") as file:
-        memory = file.read()
-        print(memory)
+    print(f"Token stream start: {tokenizer.current_token_value}")
+    compiler.compile_class(token_mode=False)
+    print(element_tree.tostring(compiler.root))
 
-        compiler.compile_class()
-
-        xml_file = write_xml(setup_resources, jack_code.stem)
+    xml_file = write_xml(setup_resources, compiler, fr"{jack_code.parent}_{jack_code.stem}")
 
     with open(Path(base_xml), "r") as file:
         read_file = file.read()
