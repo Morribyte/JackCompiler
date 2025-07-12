@@ -164,8 +164,6 @@ class CompilationEngine:
                     case "return":
                         self.compile_return_statement(statements_element)
 
-
-
     def compile_let_statement(self, parent):
         """
         Compiles a let statement.
