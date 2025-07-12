@@ -274,8 +274,12 @@ class CompilationEngine:
         return_statement_element = element_tree.SubElement(parent, "returnStatement")
 
         while self.tokenizer.current_token_value != ";":
-            self.write_token(return_statement_element)
-            self.tokenizer.advance()
+            if self.tokenizer.current_token_value not in ["return"]:
+                self.compile_expression(return_statement_element)
+                break  # Stop here — compile_expression advances tokenizer internally
+            else:
+                self.write_token(return_statement_element)
+                self.tokenizer.advance()
         self.write_token(return_statement_element)
         self.tokenizer.advance()
 

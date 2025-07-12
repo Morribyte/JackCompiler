@@ -63,7 +63,11 @@
         </letStatement>
         <returnStatement>
           <keyword> return </keyword>
-          <keyword> this </keyword>
+          <expression>
+            <term>
+              <keyword> this </keyword>
+            </term>
+          </expression>
           <symbol> ; </symbol>
         </returnStatement>
       </statements>
