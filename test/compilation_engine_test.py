@@ -1093,7 +1093,9 @@ def test_full_compilation_square(setup_resources):
                           (r"F:\Programming\Hack and ASM Projects\JackCompiler\input\full_tests\square\Square.jack",
                            r"F:\Programming\Hack and ASM Projects\JackCompiler\input\full_tests\square\Square.xml"),
                           (r"F:\Programming\Hack and ASM Projects\JackCompiler\input\full_tests\square\SquareGame.jack",
-                           r"F:\Programming\Hack and ASM Projects\JackCompiler\input\full_tests\square\SquareGame.xml")])
+                           r"F:\Programming\Hack and ASM Projects\JackCompiler\input\full_tests\square\SquareGame.xml"),
+                          (r"F:\Programming\Hack and ASM Projects\JackCompiler\input\full_tests\ArrayTest\Main.jack",
+                           r"F:\Programming\Hack and ASM Projects\JackCompiler\input\full_tests\ArrayTest\Main.jack")])
 def test_compile_all(setup_resources, compile_tests, base_xml):
     """
     Test that when I input multiple files, all of them properly compile one after another and match the xml file.
