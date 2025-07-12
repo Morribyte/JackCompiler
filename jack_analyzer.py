@@ -16,8 +16,13 @@ def main():
 
     path = sys.argv[1]
 
+    print(f"Current path: {path}")
 
-
-
+    if os.path.isdir(path):
+        files = [os.path.join(path, f) for f in os.listdir(path) if f.endswith(".jack")]
+    elif path.endswith(".jack"):
+        files = [path]
+    else:
+        raise ValueError("Invalid input: must be .jack file or directory.")
 if __name__ == "__main__":
     main()
