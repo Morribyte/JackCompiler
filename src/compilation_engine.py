@@ -381,7 +381,13 @@ class CompilationEngine:
         if self.tokenizer.current_token_value in [")", "]"]:
             return count
         self.compile_expression(expression_list_element)
-        count += 1
+
+        while self.tokenizer.current_token_value == ",":
+            self.write_token(expression_list_element)
+            self.tokenizer.advance()
+
+            self.compile_expression(expression_list_element)
+            count += 1
         return count
 
     def write_token(self, parent_name):
