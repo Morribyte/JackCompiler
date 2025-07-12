@@ -55,6 +55,7 @@ class CompilationEngine:
 
         # Final token write
         self.write_token(self.root)
+        self.root.tail = "\n"
 
     def compile_class_var_dec(self, parent):
         """
