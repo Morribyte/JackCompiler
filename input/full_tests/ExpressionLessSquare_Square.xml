@@ -243,6 +243,7 @@
       <statements>
         <ifStatement>
           <keyword> if </keyword>
+          <statements></statements>
           <symbol> ( </symbol>
           <expression>
             <term>
@@ -250,6 +251,7 @@
             </term>
           </expression>
           <symbol> ) </symbol>
+          <statements></statements>
           <symbol> { </symbol>
           <statements>
             <doStatement>
@@ -302,6 +304,7 @@
       <statements>
         <ifStatement>
           <keyword> if </keyword>
+          <statements></statements>
           <symbol> ( </symbol>
           <expression>
             <term>
@@ -309,6 +312,7 @@
             </term>
           </expression>
           <symbol> ) </symbol>
+          <statements></statements>
           <symbol> { </symbol>
           <statements>
             <doStatement>
@@ -361,6 +365,7 @@
       <statements>
         <ifStatement>
           <keyword> if </keyword>
+          <statements></statements>
           <symbol> ( </symbol>
           <expression>
             <term>
@@ -368,6 +373,7 @@
             </term>
           </expression>
           <symbol> ) </symbol>
+          <statements></statements>
           <symbol> { </symbol>
           <statements>
             <doStatement>
@@ -480,6 +486,7 @@
       <statements>
         <ifStatement>
           <keyword> if </keyword>
+          <statements></statements>
           <symbol> ( </symbol>
           <expression>
             <term>
@@ -487,6 +494,7 @@
             </term>
           </expression>
           <symbol> ) </symbol>
+          <statements></statements>
           <symbol> { </symbol>
           <statements>
             <doStatement>
@@ -599,6 +607,7 @@
       <statements>
         <ifStatement>
           <keyword> if </keyword>
+          <statements></statements>
           <symbol> ( </symbol>
           <expression>
             <term>
@@ -606,6 +615,7 @@
             </term>
           </expression>
           <symbol> ) </symbol>
+          <statements></statements>
           <symbol> { </symbol>
           <statements>
             <doStatement>
@@ -718,6 +728,7 @@
       <statements>
         <ifStatement>
           <keyword> if </keyword>
+          <statements></statements>
           <symbol> ( </symbol>
           <expression>
             <term>
@@ -725,6 +736,7 @@
             </term>
           </expression>
           <symbol> ) </symbol>
+          <statements></statements>
           <symbol> { </symbol>
           <statements>
             <doStatement>

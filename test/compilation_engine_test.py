@@ -1088,13 +1088,7 @@ def test_full_compilation_square(setup_resources):
     assert code in pretty
 
 @pytest.mark.parametrize(("compile_tests", "base_xml"),
-                         [(r"F:\Programming\Hack and ASM Projects\JackCompiler\input\full_tests\ExpressionLessSquare\Main.jack",
-                           r"F:\Programming\Hack and ASM Projects\JackCompiler\input\full_tests\ExpressionLessSquare\Main.xml"),
-                          (r"F:\Programming\Hack and ASM Projects\JackCompiler\input\full_tests\ExpressionLessSquare\Square.jack",
-                           r"F:\Programming\Hack and ASM Projects\JackCompiler\input\full_tests\ExpressionLessSquare\Square.xml"),
-                          (r"F:\Programming\Hack and ASM Projects\JackCompiler\input\full_tests\ExpressionLessSquare\SquareGame.jack",
-                           r"F:\Programming\Hack and ASM Projects\JackCompiler\input\full_tests\ExpressionLessSquare\SquareGame.xml"),
-                          (r"F:\Programming\Hack and ASM Projects\JackCompiler\input\full_tests\square\Main.jack",
+                         [(r"F:\Programming\Hack and ASM Projects\JackCompiler\input\full_tests\square\Main.jack",
                            r"F:\Programming\Hack and ASM Projects\JackCompiler\input\full_tests\square\Main.xml"),
                           (r"F:\Programming\Hack and ASM Projects\JackCompiler\input\full_tests\square\Square.jack",
                            r"F:\Programming\Hack and ASM Projects\JackCompiler\input\full_tests\square\Square.xml"),

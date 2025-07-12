@@ -89,7 +89,6 @@ class CompilationEngine:
                 break
             self.write_token(subroutine_element)
             self.tokenizer.advance()
-        print(self.tokenizer.current_token_value)
         self.compile_subroutine_body(subroutine_element)
 
     def compile_parameter_list(self, parent):
@@ -146,10 +145,11 @@ class CompilationEngine:
         Compiles statements
         statement*
         """
-        if self.tokenizer.current_token_value in ["let", "do", "if", "while", "return"]:
+        statements_list: list[str] = ["let", "do", "if", "while", "return"]
+        if self.tokenizer.current_token_value in statements_list:
             statements_element = element_tree.SubElement(parent, "statements")
 
-            while self.tokenizer.current_token_value in ["let", "do", "if", "while", "return"]:
+            while self.tokenizer.current_token_value in statements_list:
                 print(f"CURRENT TOKEN: {self.tokenizer.current_token_value}")
                 match self.tokenizer.current_token_value:
                     case "let":
@@ -162,6 +162,8 @@ class CompilationEngine:
                         self.compile_while_statement(statements_element)
                     case "return":
                         self.compile_return_statement(statements_element)
+
+
 
     def compile_let_statement(self, parent):
         """
@@ -176,7 +178,6 @@ class CompilationEngine:
                     self.write_token(let_statement_element)
                     self.tokenizer.advance()
                     self.compile_expression(let_statement_element)
-
                 case "=":
                     self.write_token(let_statement_element)
                     self.tokenizer.advance()
@@ -383,7 +384,7 @@ class CompilationEngine:
         """
         Writes a token to the XML.
         """
-        token_tag = element_tree.SubElement(parent_name, self.tokenizer.current_token_type).text = f" {self.tokenizer.current_token_value} "
+        element_tree.SubElement(parent_name, self.tokenizer.current_token_type).text = f" {self.tokenizer.current_token_value} "
 
     def _token_mode(self):
         """

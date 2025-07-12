@@ -18,8 +18,7 @@ class Main {
 
     function void more() {  // Added to test Jack syntax that is not used in
         var boolean b;      // the Square files.
-        if (b) {
-        }
+        if (b) {}
         else {              // There is no else keyword in the Square files.
         }
         return;
