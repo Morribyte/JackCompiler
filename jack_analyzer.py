@@ -15,12 +15,12 @@ def check_args():
     if len(sys.argv) < 2:
         print("Usage: python jack_analyzer.py <input path>")
         sys.exit(1)
-    path = sys.argv[1]
+    path = Path(sys.argv[1])
     print(f"Current path: {path}")
     return path
 
 
-def check_files(path) -> list[Path]:
+def check_files(path) -> list[str]:
     if path.is_dir():
         print("Found directory:")
         files = [f for f in path.glob("*.jack")]
@@ -40,11 +40,14 @@ def main():
     Handles the main compiler loop.
     """
 
-    path = Path(check_args())
-    files: list[Path] = check_files(path)
+    path = check_args()
+    files = check_files(path)
 
     for jack_files in files:
-        print(jack_files)
+        file_path = Path(jack_files)
+        starting_path = fr"{file_path.parent.parent}"
+        output_path = Path(fr"output\{file_path.parent.name}")
+        print(starting_path)
         tokenizer = Tokenizer(jack_files)
         compiler = CompilationEngine(tokenizer)
 
@@ -52,7 +55,8 @@ def main():
 
         tree = element_tree.ElementTree(compiler.root)
         element_tree.indent(tree)
-        tree.write(fr"{filename}.xml" if filename else "output.xml", encoding="utf-8", short_empty_elements=False)
+        output_path.mkdir(parents=True, exist_ok=True)
+        tree.write(fr"{output_path}\{file_path.stem}.xml", encoding="utf-8", short_empty_elements=False)
         xml_str = element_tree.tostring(compiler.root, encoding="unicode", method="html")
 
         print("XML file parsed and formatted.")
